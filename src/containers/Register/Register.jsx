@@ -246,12 +246,12 @@ const Register = () => {
 
        try{
             let res = await axios.post(("http://localhost:3005/customer"), user);   
-            console.log(res.data);
+            console.log("REs.data: ", res.data);
         
             notification.success({message:'Usuario registrado.',description: "Te hemos enviado un email para activar la cuenta." });
 
         
-                // history.push('/login');
+                history.push('/login');
         
         }catch(err){
            console.log(err.response.data.message);
