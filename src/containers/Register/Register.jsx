@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useHistory} from "react-router";
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {Input, notification} from 'antd';
+import {notification} from 'antd';
 
 const Register = () => {
     let history = useHistory();
@@ -22,9 +22,11 @@ const Register = () => {
             address: '',
             country: '',
             city: '',
+            postalCode: '',
             dni: '',
-            telephone: '',
-            subscription: 'Mensual',
+            phone: '',
+            subscription: 'Mensual'
+            
     });
 
     const [errors, setErrors] = useState({
@@ -38,7 +40,8 @@ const Register = () => {
         eCountry: '',
         eCity: '',
         eDni: '',
-        eTelephone: '',
+        ePhone: '',
+        ePostalCode: ''
         
     });
 
@@ -60,7 +63,7 @@ const Register = () => {
                     setErrors({...errors, eName: 'El campo nombre no puede estar vacío.'});
                 }else if(datosUser.name.length < 2){
                     setErrors({...errors, eName: 'El nombre debe de tener al menos 2 caracteres'});
-                }else if (! /^[a-z ,.'-]+$/i.test(datosUser.name) ) {
+                }else if (! /^[a-z AZ ñÑ,.'-]+$/i.test(datosUser.name) ) {
                     setErrors({...errors, eName: 'Introduce el formato de nombre valido'}); 
                 }else{
                     setErrors({...errors, eName: ''});
@@ -77,7 +80,7 @@ const Register = () => {
                     setErrors({...errors, eLastName1: 'El campo Apellido no puede estar vacío.'});
                 }else if (datosUser.lastName1.length < 2){
                     setErrors({...errors, eLastName1: 'El apellido debe de tener al menos 2 caracteres'});
-                }else if (! /^[a-z ,.'-]+$/i.test(datosUser.lastName1) ) {
+                }else if (! /^[a-z ´ ,.'-]+$/i.test(datosUser.lastName1) ) {
                     setErrors({...errors, eLastName1: 'Introduce el formato de apellido valido'});     
                 }else{
                     setErrors({...errors, eLastName1: ''});
@@ -157,6 +160,14 @@ const Register = () => {
                 }
                 
             break;
+            case 'postalCode':
+                if(datosUser.dni.length < 1){
+                    setErrors({...errors, eDni: 'El campo de código postal no puede estar vacío.'});
+                }else if  (! /^\d{5,5}/.test(datosUser.dni) ){
+                    setErrors({...errors, eDni: 'Introduzca un codigo p.'});
+                }else{
+                    setErrors({...errors, eDni: ''});
+                }
 
             case 'dni':
                 if(datosUser.dni.length < 1){
@@ -169,15 +180,15 @@ const Register = () => {
             
 
             break;
-            case 'telephone':
-                if(datosUser.telephone.length < 1){
-                    setErrors({...errors, eTelephone: 'El campo telefono no puede estar vacío.'});
-                }else if (datosUser.telephone.length < 9){
-                    setErrors({...errors, eTelephone: 'El campo telefono debe de tener 9 números'});
-                }else if (! /[\d()+-]{9}/g.test(datosUser.telephone)) {
-                    setErrors({...errors, eTelephone: 'Introduce el formato de teléfono valido 999999999'});                        
+            case 'phone':
+                if(datosUser.phone.length < 1){
+                    setErrors({...errors, phone: 'El campo telefono no puede estar vacío.'});
+                }else if (datosUser.phone.length < 9){
+                    setErrors({...errors, ePhone: 'El campo telefono debe de tener 9 números'});
+                }else if (! /[\d()+-]{9}/g.test(datosUser.phone)) {
+                    setErrors({...errors, ePhone: 'Introduce el formato de teléfono valido 999999999'});                        
                 }else{
-                    setErrors({...errors, eTelephone: ''});
+                    setErrors({...errors, ePhone: ''});
                 }
           
 
@@ -213,49 +224,50 @@ const Register = () => {
             address: datosUser.address,
             country: datosUser.country,
             city: datosUser.city,
+            postalCode: datosUser.postalCode,
             dni: datosUser.dni,
-            telephone: datosUser.telephone,
+            phone: datosUser.phone,
             subscription: datosUser.subscription,
         }
+        console.log("Datos datosUser: ", datosUser);
+        console.log("Datos variable user: ", user);
 
-        var  array = Object.entries(user);
-        var num = array.length;
+                // var num = array.length;
 
-        for (let x = 0; x < num; x++){
-            if(array[x][1] === ''){
-                let campoVacio = ("El campo " + array[x][0] + " no puede estar vacío.");
-                return setNewMessage(campoVacio);
-            }
+        // for (let x = 0; x < num; x++){
+        //     if(array[x][1] === ''){
+        //         let campoVacio = ("El campo " + array[x][0] + " no puede estar vacío.");
+        //         return setNewMessage(campoVacio);
+        //     }
 
-        }
-
+        // }
 
         
 
-       
-         axios.post(("http://localhost:3005/user"), user)        
-        .then(res => {
+       try{
+            let res = await axios.post(("http://localhost:3005/customer"), user);   
+            console.log(res.data);
+        
             notification.success({message:'Usuario registrado.',description: "Te hemos enviado un email para activar la cuenta." });
 
-            setTimeout(()=> {
-                history.push('/login');
-            }, 5000);     
-        }).catch(err => {
-           
-            var errorText = err.response.data.message;
-            if (errorText.includes("email")){
-                setNewMessage(JSON.stringify("El email ya existe en la base de datos."));
+        
+                // history.push('/login');
+        
+        }catch(err){
+           console.log(err.response.data.message);
+            // var errorText = err.response.data.message;
+            // if (errorText.includes("email")){
+            //     setNewMessage(JSON.stringify("El email ya existe en la base de datos."));
 
-            }else if (errorText.includes("dni")){
-                setNewMessage(JSON.stringify("El dni ya existe en la base de datos."));
+            // }else if (errorText.includes("dni")){
+            //     setNewMessage(JSON.stringify("El dni ya existe en la base de datos."));
 
-            }else if (errorText.includes("telephone")){
-                setNewMessage(JSON.stringify("El teléfono ya existe en la base de datos."));
-            }else{
-                setNewMessage(JSON.stringify(err.response.data.message));            
-            }
-            
-        });     
+            // }else if (errorText.includes("phone")){
+            //     setNewMessage(JSON.stringify("El teléfono ya existe en la base de datos."));
+            // }else{
+            //     setNewMessage(JSON.stringify(err.response.data.message));            
+            // }            
+        };     
       
    
     }    
@@ -280,17 +292,14 @@ const Register = () => {
                 <div>{errors.eCity}</div>
                 <input className="inputBase" type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")} placeholder="Pais" size="34" lenght='30'></input>
                 <div>{errors.eCountry}</div>
+                <input className="inputBase" type="text" name="postalCode" onChange={updateFormulario} onBlur={()=>checkError("postalCode")} placeholder="Código postal" size="34" maxlenght='5' ></input>
+                <div>{errors.postalcode}</div>
                 <input className="inputBase" type="text" name="dni" onChange={updateFormulario} onBlur={()=>checkError("dni")} placeholder="DNI" size="34" maxlenght='9' ></input>
                 <div>{errors.eDni}</div>
-                <input className="inputBase" type="text" name="telephone" onChange={updateFormulario} onBlur={()=>checkError("telephone")} placeholder="Teléfono" size="34" lenght='9'></input>
-                <div>{errors.eTelephone}</div>
+                <input className="inputBase" type="text" name="phone" onChange={updateFormulario} onBlur={()=>checkError("phone")} placeholder="Teléfono" size="34" lenght='9'></input>
+                <div>{errors.phone}</div>
                 <input className="inputBase" type="date" name="birthday" onChange={updateFormulario} onBlur={()=>checkError("birthday")} placeholder="Fecha de nacimiento :" onchange="this.className=(this.value!=''?'has-value':'')"></input>
-                <div>{errors.eBirthday}</div>
-                <select id="op" className="inputBase" type="select" name="subscription" onChange={updateFormulario} required="true" placeholder="Abono"  lenght='30'>
-                        <option value="Mensual">Mensual</option>
-                        <option value="Anual">Anual</option>
-                        <option value="Premium">Premium</option>
-                </select>          
+                <div>{errors.eBirthday}</div>        
                                  
                 <div id = "newText"></div>    
                 <div id = "Botom"className="newUserBoton" onClick={()=>ejecutaRegistro()}>Enviar</div>    

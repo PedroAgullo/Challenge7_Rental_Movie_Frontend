@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import "./Login.css";
-import {Input, notification} from 'antd';
+import {notification} from 'antd';
 import {connect} from 'react-redux';
 import {LOGIN} from '../../redux/types'
 
