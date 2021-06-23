@@ -1,14 +1,14 @@
 
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-import './Latest.css';
+import './Popular.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
 
 
 
-const Latest = (props) => {
+const Popular = (props) => {
 
     //hooks
     const [movieData, setMovieData] = useState([]);  
@@ -40,8 +40,8 @@ const Latest = (props) => {
     try{
       //GET TOP RATED MOVIES
       let res = await axios.get('http://localhost:3005/movies/latest');
-      console.log('Datos de películas devuelto: ', res.data.results);
-      setMovieData(res.data.results); 
+      console.log('Datos de películas devuelto: ', res.data);
+      setMovieData(res.data); 
   }catch (err){      
   }
   
@@ -78,4 +78,4 @@ const Latest = (props) => {
 export default connect((state) => ({
 //   credentials:state.credentials, 
 //   getroomusers:state.getroomusers
-  }))(Latest);
+  }))(Popular);
