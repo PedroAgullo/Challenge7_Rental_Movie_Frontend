@@ -5,10 +5,13 @@ import './Popular.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
+import {useHistory} from "react-router";
+
 
 
 
 const Popular = (props) => {
+  let history = useHistory();
 
     //hooks
     const [movieData, setMovieData] = useState([]);  
@@ -28,6 +31,8 @@ const Popular = (props) => {
 
 
         props.dispatch({type:GETMOVIE,payload: movie});
+        history.push('/movie');
+
 
 
     }catch (err){
@@ -41,15 +46,12 @@ const Popular = (props) => {
       //GET TOP RATED MOVIES
       
       let res = await axios.get('http://localhost:3005/movies/popular');
-      console.log(res);
-      console.log('Datos de películas devuelto: ', res.data);
+     
       setMovieData(res.data.results); 
   }catch (err){      
   }
   
 }
-  console.log("Contenido del Hook movieData : ", movieData);
-
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w200"
 

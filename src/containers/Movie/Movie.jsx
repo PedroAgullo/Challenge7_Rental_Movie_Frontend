@@ -1,24 +1,19 @@
-
-//Nos muestra las clases activas a las que está apuntado el usuario.
-import React, { useEffect, useState } from "react";
-import {useHistory} from "react-router";
-import './TopRated.css';
-import axios from "axios";
-// import { Popconfirm, message, Button } from 'antd';
+import './Movie.css';
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
-const TopRated = (props) => {
-  
-  let history = useHistory();
+const Movie = (props) => {
+
+
     //hooks
     const [movieData, setMovieData] = useState([]);  
   
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
-        findTopRated();
+        findMovie();
     }, []);
   
     //Equivalente a componentDidUpdate en componentes de clase
@@ -26,28 +21,36 @@ const TopRated = (props) => {
     });
   
     //Guarda la movie en redux y nos lleva a la vista de película.
-    const selectMovie = async (movie) => {
-      try{
+    // const selectMovie = async (movie) => {
+    //   try{
 
-        props.dispatch({type:GETMOVIE,payload: movie});
-        history.push('/movie');
+    //     props.dispatch({type:GETMOVIE,payload: movie});
+    //     history.push('/movie');
 
 
-    }catch (err){
-         console.log(err);      
-         }      
+    // }catch (err){
+    //      console.log(err);      
+    //      }      
 
+    // }
+  
+    const findMovie = async () => {  
+        try{
+            console.log("Entra en findMovie");
+            //GET TOP RATED MOVIES
+            let body = {
+                id: props.movie.id
+            }
+
+            let res = await axios.post('http://localhost:3005/movies/id',body);
+            
+            console.log("Resultado de la busqueda de pelicula por id: ", res);
+            
+            setMovieData(res); 
+        }catch (err){      
+        }
+  
     }
-  
-    const findTopRated = async () => {  
-    try{
-      //GET TOP RATED MOVIES
-      let res = await axios.get('http://localhost:3005/movies/');
-      setMovieData(res.data.results); 
-  }catch (err){      
-  }
-  
-}
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w200"
@@ -59,7 +62,7 @@ const TopRated = (props) => {
         <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
             <div className="boxCard">
               {movieData.map((act, index) => (
-                <div className="card" onClick={()=> selectMovie(act)} key={index}>
+                <div className="card" key={index}>
                     <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
                   {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
                   <p className="datosCard">Entrenador: {act.nameCoach}</p>
@@ -72,11 +75,12 @@ const TopRated = (props) => {
       );
     } else {
       return <div>
-          TOP RATED - CARGANDO DATOS</div>;
-    }
-};
+         ESTAMOS EN MOVIE CONTAINER - CARGANDO DATOS</div>;
 
+    }
+}
 export default connect((state) => ({
-//   credentials:state.credentials, 
-//   getroomusers:state.getroomusers
-  }))(TopRated);
+      credentials:state.credentials, 
+      movie:state.movie
+      }))(Movie);
+      

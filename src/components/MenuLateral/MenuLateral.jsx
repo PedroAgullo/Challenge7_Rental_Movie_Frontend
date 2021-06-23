@@ -75,35 +75,19 @@ const Menulateral = (props) => {
   };
 
   //IFS PARA MOSTRAR UN MENU SEGUN EL TIPO DE USUARIO QUE ACCEDE A LA APLICACIÓN
-  if (props?.credentials?.user?.isAdmin === false && props?.credentials?.perfil === "user") 
+  if (props?.credentials?.user?.admin === false) 
   {
     return (
       <div className="boxLateral">
         <div className="lateralMenu">
           <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Perfil</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("useroom")}>Mis clases</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinuser")}>Reservar</div>
-          <div className="botomMenuLateral">Taquilla</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("payment")}>Suscripción</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("codeqr")}>Acceso GYM</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("useroom")}>Mis pedidos</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinuser")}>Mis películas</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("payment")}>Suscripción</div>          
         </div>
       </div>
     );
-  } else if (props?.credentials?.user?.isAdmin === false && props?.credentials?.perfil === "monitor"  ) 
-    {
-    return (
-      <div className="boxLateral">
-        <div className="lateralMenu">
-          <div className="botomMenuLateral" onClick={() => cambiaDatos("profile")}>Perfil</div>
-          <div className="botomMenuLateral" onClick={() => cambiaDatos("monitoroom")}>Mis clases</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinmonitor")}>Reservar</div>
-          <div className="botomMenuLateral">Taquilla</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("newroom")}>Crear sala</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("codeqr")}>Acceso GYM</div>
-        </div>
-      </div>
-    );
-  } else {
+  }  else {
     return (
       <div className="boxLateral">
         <div className="lateralMenu">
