@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import TopRated from '../../components/TopRated/TopRated';
+import Latest from '../../components/Latest/Latest';
 
 
 
@@ -14,6 +15,7 @@ const Home = () => {
            Estoy en Home
            <div className="carrusel1">
                <TopRated/>
+               <Latest/>
            </div>
            
         </div>
