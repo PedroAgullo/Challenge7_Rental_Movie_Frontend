@@ -2,10 +2,11 @@ import React from 'react';
 import "./Navbar.css";
 import { NavLink } from 'react-router-dom';
 import Logo from '../../images/Logo1.jpg';
+import Avatar from '../../images/Avatar1.jpg';
 import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';
 import { useHistory } from 'react-router-dom';
-import {Input, notification} from 'antd';
+import {notification} from 'antd';
 
 const Navbar = (props) => {
 
@@ -49,11 +50,11 @@ const Navbar = (props) => {
 
 
 
-  if (props.credentials?.token == '') {
+  if (props.credentials?.token === '') {
     return (
       <div className="nav">
         <div className="logo">
-          <NavLink to="/"><img className="img" src={Logo} /></NavLink>
+          <NavLink to="/"><img className="img" src={Logo} alt="logo"/></NavLink>
         </div>
 
         <div className="blank"></div>
@@ -73,7 +74,7 @@ const Navbar = (props) => {
     return (
       <div className="nav">
         <div className="logo">
-          <NavLink to="/"><img className="img" src={Logo} /></NavLink>
+          <NavLink to="/"><img className="img" src={Logo} alt="Logo" /></NavLink>
         </div>
         <div className="blank"></div>
         <div className="NavMenu">
@@ -85,7 +86,7 @@ const Navbar = (props) => {
 
             {/* to="/profile" */}
 
-              <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/profile" ><div className="fotoUser"><img id="fotoNavBar" src={props?.credentials?.user?.photo} onClick={() => cambiaDatos("profile")} alt="Profile photo" /></div>
+              <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/profile" ><div className="fotoUser"><img id="fotoNavBar" src={Avatar} onClick={() => cambiaDatos("profile")} alt="Profile photo" /></div>
               </NavLink>
             </div>
           </div>
