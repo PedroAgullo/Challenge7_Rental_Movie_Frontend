@@ -1,5 +1,7 @@
 import React from 'react';
 import './Home.css';
+import TopRated from '../../components/TopRated/TopRated';
+
 
 
 
@@ -10,6 +12,9 @@ const Home = () => {
     return (
         <div className="HomeDiv">
            Estoy en Home
+           <div className="carrusel1">
+               <TopRated/>
+           </div>
            
         </div>
     );

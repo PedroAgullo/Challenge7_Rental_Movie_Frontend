@@ -1,0 +1,44 @@
+.TopRatedBoxMovies{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.card {
+    height: 12vh;
+    width: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.2em solid yellow;    
+    border-radius: 1em;
+    transition: 0.3s;
+    font-size: 0.8em;
+    box-shadow:  5px 5px 5px 2px grey;
+    margin-right: 1em;
+    background-color: darkgreen;
+    overflow: hidden;
+
+}
+
+.card:hover{
+    background-color: #ededf4;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 5px 5px 5px 2px grey, 8px 8px 8px 5px grey;
+}
+
+
+.boxCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;  
+    height: auto;
+    width: auto;
+}
