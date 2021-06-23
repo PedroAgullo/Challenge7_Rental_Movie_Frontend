@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './containers/Login/Login';
 import Home from './containers/Home/Home';
 import Register from './containers/Register/Register';
+import Profile from './containers/Profile/Profile';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={Home}/>
               <Route path="/login" exact component={Login}/>
-              {/* <Route path="/profile" exact component={Profile}/> */}
+              <Route path="/profile" exact component={Profile}/>
               <Route path="/register" exact component={Register}/>
             </Switch>
 

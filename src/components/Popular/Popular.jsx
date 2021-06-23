@@ -40,7 +40,7 @@ const Popular = (props) => {
     try{
       //GET TOP RATED MOVIES
       
-      let res = await axios.get('http://localhost:3005/movies/latest');
+      let res = await axios.get('http://localhost:3005/movies/popular');
       console.log(res);
       console.log('Datos de películas devuelto: ', res.data);
       setMovieData(res.data.results); 
@@ -57,7 +57,7 @@ const Popular = (props) => {
     if (movieData[0]?.id) {
 
       return (
-        <div className="TopRatedBoxMovies"> <h1>NOVEDADES</h1>
+        <div className="TopRatedBoxMovies"> <h1>POPULARES</h1>
             <div className="boxCard">
               {movieData.map((act, index) => (
                 <div className="card" onClick={()=> selectMovie(act)} key={index}>
