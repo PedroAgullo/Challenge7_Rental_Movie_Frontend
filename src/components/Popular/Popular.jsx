@@ -15,7 +15,7 @@ const Popular = (props) => {
   
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
-        findTopRated();
+      findPopular();
     }, []);
   
     //Equivalente a componentDidUpdate en componentes de clase
@@ -36,12 +36,14 @@ const Popular = (props) => {
 
     }
   
-    const findTopRated = async () => {  
+    const findPopular = async () => {  
     try{
       //GET TOP RATED MOVIES
+      
       let res = await axios.get('http://localhost:3005/movies/latest');
+      console.log(res);
       console.log('Datos de películas devuelto: ', res.data);
-      setMovieData(res.data); 
+      setMovieData(res.data.results); 
   }catch (err){      
   }
   
@@ -71,7 +73,7 @@ const Popular = (props) => {
       );
     } else {
       return <div>
-          NOVEDADES - CARGANDO DATOS</div>;
+          POPULAR - CARGANDO DATOS</div>;
     }
 };
 

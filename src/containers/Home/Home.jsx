@@ -12,7 +12,6 @@ const Home = () => {
     // console.log(res.data);
     return (
         <div className="HomeDiv">
-           Estoy en Home
            <div className="carrusel1">
                <TopRated/>
                <Popular/>

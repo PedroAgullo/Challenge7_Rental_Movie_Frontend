@@ -27,7 +27,7 @@ const TopRated = (props) => {
     const selectMovie = async (movie) => {
       try{
 
-
+        console.log("He hecho click en la pelicula: ", movie);
         props.dispatch({type:GETMOVIE,payload: movie});
 
 
