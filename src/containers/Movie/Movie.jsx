@@ -54,28 +54,32 @@ const Movie = (props) => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w200"
-
+    console.log(props.movie.id);
   // if (props.getroomusers[0]?._id) {
-    if (movieData[0]?.id) {
+    if (props.movie?.id) {
 
       return (
-        <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
-            <div className="boxCard">
-              {movieData.map((act, index) => (
-                <div className="card" key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
-                  {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                  <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                  <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
+        <div className="boxMovie"> <h1></h1>
+            <div className="boxLeft">
+                <div className="posterMovie">
+                    <img src={`${baseImgUrl}/${size}${props.movie.poster_path}`}  alt="poster" className="posterMovie"/>
                 </div>
-                   ))}
+                <div className="buttonMovieBox">
+                    <div clasname="buttonMovie">Favoritos</div>                 
+                    <div clasname="buttonMovie">Comprar</div>                 
+                    <div clasname="buttonMovie">Reproducir</div>                 
+
+                </div>
 
             </div>
+
+            <div className="boxRight"></div>
         </div>  
       );
     } else {
       return <div>
-         ESTAMOS EN MOVIE CONTAINER - CARGANDO DATOS</div>;
+            ESTAMOS EN MOVIE CONTAINER - CARGANDO DATOS
+         </div>;
 
     }
 }
