@@ -11,4 +11,4 @@ export const CAMBIADATOS = 'cambiadatos';
 export const GETMOVIE = "getmovie";
 export const DELETE = 'delete';
 export const CLASES = 'clases';
-
+export const GETORDER = 'getorder';

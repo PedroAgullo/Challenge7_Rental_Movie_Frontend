@@ -53,40 +53,32 @@ const Login = (props) => {
                                
                 //Mensaje de bienvenida
                 let description = ("Bienvenido " + res.data.user.name + " " + res.data.user.lastName1 + ".");
-                notification.success({message:'Login correcto.',description: description});
+                // notification.success({message:'Login correcto.',description: description});
                 
                 //Redireccion           
                 history.push("/");
 
-            } catch (err) {
-                
+            } catch (err) {                
                     notification.warning({message:'Atencion.',description: "Usuario o password incorrecto."});              
-                
             }
-
- 
-
     }
 
     return (
 
         <div>          
 
-            <div className = "vistaLogin">
-        
+            <div className = "vistaLogin">        
                 <div className = "loginCard"> 
                     <div className = "cardLogin">
                         <input className="input" type="email" name="email" placeholder="email" onChange={updateCredentials} size="40" lenght='30'></input>
                     </div>
                     <div className = "cardLogin">
-                        <input className="input" type="password" name="password" placeholder="password" onChange={updateCredentials} size="40" lenght='30'></input>
-                        
+                        <input className="input" type="password" name="password" placeholder="password" onChange={updateCredentials} size="40" lenght='30'></input>                        
                     </div>
 
                     <div className = "sendButton" onClick={()=>logeame()}>Login</div>
                     <div>{msgError}</div>
-                </div>
-        
+                </div>        
             </div>   
         </div>
     )

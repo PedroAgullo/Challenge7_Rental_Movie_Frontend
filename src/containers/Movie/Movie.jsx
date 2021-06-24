@@ -2,6 +2,8 @@ import './Movie.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { GETORDER } from '../../redux/types';
+import {notification} from 'antd';
 
 
 
@@ -34,9 +36,43 @@ const Movie = (props) => {
 
     // }
   
+    const compraPeli = async () => {
+        console.log("Entramos a comprar la peli");
+
+
+        try{
+
+            let idUser = props.credentials.idUser;
+            let token = props.credentials.token;
+          
+            let body = {
+              idUser : idUser,
+              customerId : idUser,
+              movieId : props.movie.id,
+              photoMovie: props.movie.poster_path,
+              title: props.movie.title,
+              precio: 5,
+            }
+            console.log("datos que le pasamos a axios",body);
+            let res = await axios.post('http://localhost:3005/order',body,{headers:{'authorization':'Bearer ' + token}});
+           console.log("Resultado de la compra: ", res.data);
+      
+            // props.dispatch({type:GETORDER,payload: res.data});
+      
+            // setTimeout(() => {
+            //   setOrders(res.data);;
+            // }, 0)
+        
+           
+       
+        }catch (err){      
+          notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+        }
+    }
+
+
     const findMovie = async () => {  
         try{
-            console.log("Entra en findMovie");
             //GET TOP RATED MOVIES
             let body = {
                 id: props.movie.id
@@ -52,9 +88,10 @@ const Movie = (props) => {
   
     }
 
+
+
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w200"
-    console.log(props.movie.id);
   // if (props.getroomusers[0]?._id) {
     if (props.movie?.id) {
 
@@ -66,7 +103,7 @@ const Movie = (props) => {
                 </div>
                 <div className="buttonMovieBox">
                     <div clasname="buttonMovie">Favoritos</div>                 
-                    <div clasname="buttonMovie">Comprar</div>                 
+                    <div clasname="buttonMovie" onClick={()=>compraPeli()}>Comprar</div>                 
                     <div clasname="buttonMovie">Reproducir</div>
                 </div>
 

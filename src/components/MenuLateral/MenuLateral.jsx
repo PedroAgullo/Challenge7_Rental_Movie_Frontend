@@ -34,7 +34,7 @@ const Menulateral = (props) => {
 
         break;
 
-      case "payment":
+      case "subscription":
         props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
@@ -55,7 +55,7 @@ const Menulateral = (props) => {
           <div className="botomMenuLateral"onClick={() => cambiaDatos("misPedidos")}>Mis pedidos</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("myMovies")}>Mis películas</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("favoritos")}>Favoritos</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("payment")}>Suscripción</div>          
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("subscription")}>Suscripción</div>          
         </div>
       </div>
     );

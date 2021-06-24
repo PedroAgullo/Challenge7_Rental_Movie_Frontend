@@ -77,6 +77,7 @@ const DataProfile = (props) => {
                     setErrors({...errors, eName: ''});
                 }
             break;
+            
 
 
          

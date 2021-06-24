@@ -4,19 +4,20 @@ import './Profile.css';
 import MenuLateral from '../../components/MenuLateral/MenuLateral';
 import { connect } from 'react-redux';
 import DataProfile from '../../components/DataProfile/DataProfile';
+import DataOrder from '../../components/DataOrder/DataOrder';
 
 
 const Profile = (props) => {
 
     const traeDatos = () => {
-        switch (props.vista) {
+        switch (props.tipodatos) {
             case 'profile':
 
                 return <DataProfile />
 
-            // case 'useroom':
+            case 'misPedidos':
 
-            //     return <DataRoom />
+                return <DataOrder />
            
             // case 'joinuser':
 
@@ -47,5 +48,5 @@ const Profile = (props) => {
 
 export default connect((state) => ({
     user: state.credentials.user,
-    tipodatos: state.vista
+    tipodatos: state.tipodatos
 }))(Profile);
