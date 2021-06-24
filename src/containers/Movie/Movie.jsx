@@ -51,7 +51,7 @@ const Movie = (props) => {
               movieId : props.movie.id,
               photoMovie: props.movie.poster_path,
               title: props.movie.title,
-              precio: 5,
+              precio: 5
             }
             console.log("datos que le pasamos a axios",body);
             let res = await axios.post('http://localhost:3005/order',body,{headers:{'authorization':'Bearer ' + token}});

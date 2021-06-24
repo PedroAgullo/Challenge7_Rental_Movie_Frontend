@@ -59,21 +59,19 @@ const DataOrder = (props) => {
       let token = props.credentials.token;
     
       let body = {
-        customerId : idUser
+        customerId : idUser,
+        idUser: idUser        
       }
 
       let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
       console.log("Datos devueltos del backend: ", res.data);
-      props.dispatch({type:GETORDER,payload: res.data});
+    //   props.dispatch({type:GETORDER,payload: res.data});
 
-      setTimeout(() => {
-        setOrders(res.data);;
-      }, 0)
-  
-     
- 
-    }catch (err){      
+    
+        setOrders(res.data);; 
+    }catch (err){     
+        console.log(err) ;
         notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
     }
   
@@ -95,7 +93,7 @@ const DataOrder = (props) => {
                     <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
                     <p className="datosCard">Entrenador: {act.nameCoach}</p>
                     <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
-                    <img src={`${baseImgUrl}/${size}${props.movie.poster_path}`}  alt="poster" className="posterMovie"/>
+                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie"/>
 
                   <div clasName="botonCardJoinUser">
                         <div className="demo">
