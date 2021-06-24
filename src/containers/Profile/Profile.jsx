@@ -5,6 +5,7 @@ import MenuLateral from '../../components/MenuLateral/MenuLateral';
 import { connect } from 'react-redux';
 import DataProfile from '../../components/DataProfile/DataProfile';
 import DataOrder from '../../components/DataOrder/DataOrder';
+import DataMyMovies from '../../components/DataMyMovies/DataMyMovies';
 
 
 const Profile = (props) => {
@@ -19,9 +20,9 @@ const Profile = (props) => {
 
                 return <DataOrder />
            
-            // case 'joinuser':
+            case 'myMovies':
 
-            //     return <DataJoin />
+                return <DataMyMovies/>
 
             default:
 
