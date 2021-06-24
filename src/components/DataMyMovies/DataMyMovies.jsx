@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from "react";
 import './DataMyMovies.css';
 import axios from "axios";
-import moment from "moment";
-import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
-import { GETORDER } from '../../redux/types';
 import {notification} from 'antd';
+import {useHistory} from "react-router";
+import { GETMOVIE } from '../../redux/types';
 
 
 const DataMyMovies = (props) => {
-
+    let history = useHistory();
     //hooks
     const [orders, setOrders] = useState([]);  
   
@@ -25,36 +24,32 @@ const DataMyMovies = (props) => {
     });
   
     //CANCELA LA CLASE
-    const cancelClass = async (roomId) => {
-      try{
-        message.info('Clase cancelada.');
+    const playMovie = async (movieId) => {
+      try {
+          console.log("Entro en playMovie:");
+          let token = props.credentials.token
+          let body={
+            id : movieId,
+            customerId : props.credentials.user.id
+          }
 
-      let token = props.credentials.token;
-      let idUser = props.credentials.idUser;
 
+        let res = await axios.post('http://localhost:3005/movies/id',body,{headers:{'authorization':'Bearer ' + token}});
+          console.log("Resultado: ", res.data);
 
-      let body = {
-        id : roomId,
-        member : idUser
+        props.dispatch({type:GETMOVIE,payload: res.data});
+        history.push('/movie');
+      } catch (error) {
+        
       }
 
-      let res = await axios.post('http://localhost:3005/room/leave',body,{headers:{'authorization':'Bearer ' + token}});
-
-    
-
-      findOrders();
-     }catch (err){
-        notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-
-        }      
 
     }
-  
+
 
 
     const findOrders = async () => {  
-    try{
-
+    try{      
       let idUser = props.credentials.idUser;
       let token = props.credentials.token;
     
@@ -66,7 +61,8 @@ const DataMyMovies = (props) => {
       let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
       console.log("Datos devueltos del backend: ", res.data);
-    //   props.dispatch({type:GETORDER,payload: res.data});
+    //  props.dispatch({type:GETORDER,payload: res.data});
+    console.log('datos de mis pedidos: ', res.data);
 
     
         setOrders(res.data);; 
@@ -82,28 +78,12 @@ const DataMyMovies = (props) => {
 
    if (orders[0]?.id) {
       return (
-        <div className="nombreDataRoom"> <h1>MIS PEDIDOS</h1>
-
+        <div className="nombreDataRoom"> <h1>MIS PELICULAS</h1>
 
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (
                 <div className="card" key={index}>
-                    <p className="nombre">{act.title}</p>
-                    {/* <p className="datosCard">Comienzo: {moment(act.dateStart).format('LLL')}</p>
-                    <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                    <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                    <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
-                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie"/>
-
-                  <div clasName="botonCardJoinUser">
-                        <div className="demo">
-                            <div style={{ marginLeft: 0, clear: 'both', whiteSpace: 'nowrap' }}>
-                              <Popconfirm placement="bottom" title="¿Quieres cancelar esta clase?" onConfirm={()=>cancelClass(act._id)} okText="Yes" cancelText="No">
-                                <Button>Cancelar</Button>
-                              </Popconfirm>
-                            </div>
-                        </div>
-                    </div>
+                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie" onClick={()=>playMovie(act.id)}/> 
                 </div>
                    ))}
 

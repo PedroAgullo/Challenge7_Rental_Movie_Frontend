@@ -51,6 +51,7 @@ const Menulateral = (props) => {
     return (
       <div className="boxLateral">
         <div className="lateralMenu">
+        <div className="tituloVistaAdmin">MENÚ USUARIO</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Perfil</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("misPedidos")}>Mis pedidos</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("myMovies")}>Mis películas</div>
@@ -63,14 +64,11 @@ const Menulateral = (props) => {
     return (
       <div className="boxLateral">
         <div className="lateralMenu">
-          <div className="tituloVistaAdmin">Vista Administrador</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Profile</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("useroom")}>Mis Clases</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinuser")}>Ver/editar clases activas</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("newroom")}>Crear/editar Sala</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("newcoach")}>Crear/editar Coach</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("newuser")}>Crear/Editar Cliente</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("codeqr")}>Acceso GYM</div>
+          <div className="tituloVistaAdmin">Administrador</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("useroom")}>Pedidos</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinuser")}>ver/editar clientes</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("newroom")}>Ver/editar pedidos</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("codeqr")}>Vista admin :)</div>
         </div>
       </div>
     );

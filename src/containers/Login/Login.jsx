@@ -69,6 +69,7 @@ const Login = (props) => {
 
             <div className = "vistaLogin">        
                 <div className = "loginCard"> 
+                    <div className="espacioBlanco"></div>
                     <div className = "cardLogin">
                         <input className="input" type="email" name="email" placeholder="email" onChange={updateCredentials} size="40" lenght='30'></input>
                     </div>
@@ -76,7 +77,7 @@ const Login = (props) => {
                         <input className="input" type="password" name="password" placeholder="password" onChange={updateCredentials} size="40" lenght='30'></input>                        
                     </div>
 
-                    <div className = "sendButton" onClick={()=>logeame()}>Login</div>
+                    <div className = "sendButton" onClick={()=>logeame()}>Acción!</div>
                     <div>{msgError}</div>
                 </div>        
             </div>   

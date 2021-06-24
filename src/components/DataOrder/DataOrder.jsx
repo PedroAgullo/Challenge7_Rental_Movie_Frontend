@@ -8,6 +8,7 @@ import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
 import { GETORDER } from '../../redux/types';
 import {notification} from 'antd';
+import {useHistory} from "react-router";
 
 
 const DataOrder = (props) => {
@@ -84,27 +85,20 @@ const DataOrder = (props) => {
       return (
         <div className="nombreDataRoom"> <h1>MIS PEDIDOS</h1>
 
-
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (
-                <div className="card" key={index}>
-                    <p className="nombre">{act.title}</p>
-                    {/* <p className="datosCard">Comienzo: {moment(act.dateStart).format('LLL')}</p>
-                    <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                    <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                    <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
-                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie"/>
-
-                  <div clasName="botonCardJoinUser">
-                        <div className="demo">
-                            <div style={{ marginLeft: 0, clear: 'both', whiteSpace: 'nowrap' }}>
-                              <Popconfirm placement="bottom" title="¿Quieres cancelar esta clase?" onConfirm={()=>cancelClass(act._id)} okText="Yes" cancelText="No">
-                                <Button>Cancelar</Button>
-                              </Popconfirm>
-                            </div>
-                        </div>
+                <div className="card" key={index}>                
+                    <div>                    
+                        <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie"/>
+                    </div>
+                        
+                    <div>
+                        <p className="nombre">{act.title}</p>
+                        <p className="fecha">Fecha compra: {act.createdAt}</p>
+                        <p className="fecha">Precio: {act.precio}€</p>
                     </div>
                 </div>
+
                    ))}
 
             </div>

@@ -3,8 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: unset;
-    background: #ededf4;
-    height: 80vh;
+    background: lightslategrey;
+    height: 92vh;
+    width: 100vw; 
   }
   
   .loginCard {
@@ -15,8 +16,15 @@
     border-radius: 5px;
     color: black;
     font-size: 14px;
+    background-image: url(../../images/CLAQUETA_CINE.jpg);
+    width: 1000px;
+    height: 1000px;
   }
   
+  .espacioBlanco{
+    height: 55vh;
+    width:100vw;
+  }
   .cardLogin{
       margin: 0.5em;
   }
@@ -56,7 +64,7 @@
     font-size: 14px;
     font-weight: normal;
     font-family: Akzidenz, "‘Helvetica Neue’", Helvetica, Arial, sans-serif;
-    border: 1px solid rgb(184, 196, 194);
+    border: 1px solid rgb(95, 121, 116);
     transition: border-color 150ms ease-in-out 1s;
     z-index: 1;
     outline: none;
