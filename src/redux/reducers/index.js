@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import credentials from './credentials-reducer';
 import movie from './movie-reducer';
-import vista from './vista-reducer'
+import tipoDatos from './tipodatos-reducer'
 
 const rootReducer = combineReducers({
     credentials,
     movie,
-    vista   
+    tipoDatos   
 });
 export default rootReducer;

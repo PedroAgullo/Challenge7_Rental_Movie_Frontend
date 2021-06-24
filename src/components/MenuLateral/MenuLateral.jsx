@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./MenuLateral.css";
 import { connect } from "react-redux";
-import axios from "axios";
-import { CLASES, PROFILE, JOIN, JOINMONITOR, GETROOMMONITOR, NEWROOM, PAYMENT, CODEQR, NEWUSER, NEWCOACH} from "../../redux/types";
-import { NavLink } from "react-router-dom";
+import { CAMBIADATOS} from "../../redux/types";
 
 const Menulateral = (props) => {
 
@@ -16,57 +14,30 @@ const Menulateral = (props) => {
   const cambiaDatos = async (info) => {
     switch (info) {
       case "profile":
-        props.dispatch({ type: PROFILE, payload: info });
+        props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
 
-      case "useroom":
-        props.dispatch({ type: CLASES, payload: info });
+      case "misPedidos":
+        props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
 
-      case "joinuser":
-        props.dispatch({ type: JOIN, payload: info });
+
+      case "myMovies":
+        props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
 
-      case "monitoroom":
-        props.dispatch({ type: JOIN, payload: info });
-
-        break;
-
-      case "joinmonitor":
-        props.dispatch({ type: JOINMONITOR, payload: info });
-
-        break;
-
-      case "newroom":
-        props.dispatch({ type: NEWROOM, payload: info });
+      case "favoritos":
+        props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
 
       case "payment":
-        props.dispatch({ type: PAYMENT, payload: info });
+        props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
-
-      case "newcoach":
-        props.dispatch({ type: NEWCOACH, payload: info });
-  
-        break;
-
-      case "newuser":
-          props.dispatch({ type: NEWUSER, payload: info });
-    
-          break;
-    
-
-      case "codeqr":
-        props.dispatch({ type: CODEQR, payload: info });
-
-        break;
-
-
 
       default:
 
@@ -81,8 +52,9 @@ const Menulateral = (props) => {
       <div className="boxLateral">
         <div className="lateralMenu">
           <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Perfil</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("useroom")}>Mis pedidos</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("joinuser")}>Mis películas</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("misPedidos")}>Mis pedidos</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("myMovies")}>Mis películas</div>
+          <div className="botomMenuLateral"onClick={() => cambiaDatos("favoritos")}>Favoritos</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("payment")}>Suscripción</div>          
         </div>
       </div>

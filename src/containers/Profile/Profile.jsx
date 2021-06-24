@@ -3,28 +3,29 @@ import './Profile.css';
 
 import MenuLateral from '../../components/MenuLateral/MenuLateral';
 import { connect } from 'react-redux';
+import DataProfile from '../../components/DataProfile/DataProfile';
 
 
 const Profile = (props) => {
 
     const traeDatos = () => {
-        // switch (props.vista) {
-        //     case 'profile':
+        switch (props.vista) {
+            case 'profile':
 
-        //         return <DataProfile />
+                return <DataProfile />
 
-        //     case 'useroom':
+            // case 'useroom':
 
-        //         return <DataRoom />
+            //     return <DataRoom />
            
-        //     case 'joinuser':
+            // case 'joinuser':
 
-        //         return <DataJoin />
+            //     return <DataJoin />
 
-        //     default:
+            default:
 
-        //         return <DataProfile />
-        // }
+                return <DataProfile />
+        }
 
     }
 

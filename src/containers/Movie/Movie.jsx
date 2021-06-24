@@ -67,13 +67,15 @@ const Movie = (props) => {
                 <div className="buttonMovieBox">
                     <div clasname="buttonMovie">Favoritos</div>                 
                     <div clasname="buttonMovie">Comprar</div>                 
-                    <div clasname="buttonMovie">Reproducir</div>                 
-
+                    <div clasname="buttonMovie">Reproducir</div>
                 </div>
 
             </div>
 
-            <div className="boxRight"></div>
+            <div className="boxRight">
+                <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
+
+            </div>
         </div>  
       );
     } else {

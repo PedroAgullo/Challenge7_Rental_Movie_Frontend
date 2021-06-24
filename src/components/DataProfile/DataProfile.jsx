@@ -1,7 +1,7 @@
 
 import './DataProfile.css';
 // import PhotoProfile from '../../images/defaultFoto.png';
-import PhotoProfile from '../../images/defaultFoto2.png';
+import PhotoProfile from '../../images/Avatar1.jpg';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";
