@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import DataProfile from '../../components/DataProfile/DataProfile';
 import DataOrder from '../../components/DataOrder/DataOrder';
 import DataMyMovies from '../../components/DataMyMovies/DataMyMovies';
+import DataOrderAdmin from '../../components/DataOrderAdmin/DataOrderAdmin';
 
 
 const Profile = (props) => {
@@ -23,6 +24,10 @@ const Profile = (props) => {
             case 'myMovies':
 
                 return <DataMyMovies/>
+            
+            case 'ordersAdmin':
+
+                return <DataOrderAdmin/>
 
             default:
 

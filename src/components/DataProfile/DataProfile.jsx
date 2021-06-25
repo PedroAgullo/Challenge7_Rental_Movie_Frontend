@@ -19,9 +19,9 @@ const DataProfile = (props) => {
             {
 
                 address: props.credentials.user.address,
-                country: props.credentials.user.country,
+                postalCode: props.credentials.user.postalCode,
                 city: props.credentials.user.city,
-                telephone: props.credentials.user.telephone
+                phone: props.credentials.user.phone
         });        
 
 
@@ -33,7 +33,7 @@ const DataProfile = (props) => {
         ePassword: '',
         eBirthday: '',
         eAddress: '',
-        eCountry: '',
+        epostalCode: '',
         eCity: '',
         eDni: '',
         eTelephone: '',
@@ -159,13 +159,13 @@ const DataProfile = (props) => {
                 
             break;
 
-            case 'country':
-                if(datosUser.country.length < 1){
-                    setErrors({...errors, eCountry: 'El campo país no puede estar vacío.'});
-                }else if  (!/^(?=.{3,40}$)[a-zA-ZñÑ]+(?:[-'\s][a-zA-Z]+[-!$%^&*()_+|~=`{}";'<>?,.]+)*$/.test(datosUser.country) ) {
-                    setErrors({...errors, eCountry: 'El campo pais solo puede contener letras.'});
+            case 'postalCode':
+                if(datosUser.postalCode.length < 1){
+                    setErrors({...errors, epostalCode: 'El campo codigo postal no puede estar vacío.'});
+                }else if (! /[\d()+-]{5}/g.test(datosUser.postalCode)) {
+                    setErrors({...errors, epostalCode: 'El campo codig postal solo puede tener 5 números.'});
                 }else{
-                    setErrors({...errors, eCountry: ''});
+                    setErrors({...errors, epostalCode: ''});
                 }
                 
             break;
@@ -182,14 +182,14 @@ const DataProfile = (props) => {
 
             break;
             case 'telephone':
-                if(datosUser.telephone.length < 1){
-                    setErrors({...errors, eTelephone: 'El campo telefono no puede estar vacío.'});
-                }else if (datosUser.telephone.length < 9){
-                    setErrors({...errors, eTelephone: 'El campo telefono debe de tener 9 números'});
-                }else if (! /[\d()+-]{9}/g.test(datosUser.telephone)) {
-                    setErrors({...errors, eTelephone: 'Introduce el formato de teléfono valido 999999999'});                        
+                if(datosUser.phone.length < 1){
+                    setErrors({...errors, ePhone: 'El campo telefono no puede estar vacío.'});
+                }else if (datosUser.ePhone.length < 9){
+                    setErrors({...errors, ephone: 'El campo telefono debe de tener 9 números'});
+                }else if (! /[\d()+-]{9}/g.test(datosUser.phone)) {
+                    setErrors({...errors, ePhone: 'Introduce el formato de teléfono valido 999999999'});                        
                 }else{
-                    setErrors({...errors, eTelephone: ''});
+                    setErrors({...errors, ePhone: ''});
                 }
           
 
@@ -200,71 +200,53 @@ const DataProfile = (props) => {
 
 
     const saveData = async (info) => {        
-        let token = props.credentials.token;
-        let idUser = props.credentials.user._id;
-        let address = datosUser.address;
-        let city = datosUser.city;
-        let country = datosUser.country;
-        let telephone = datosUser.telephone;
-        console.log(idUser)
 
-        var body = {
-            member : idUser,
-            id : idUser,
-            address : address,
-            country : country,
-            city : city,
-            telephone : telephone,
-            
-        }
+            try {
 
-        console.log(props.credentials.perfil)
-        if (props.credentials.admin === false){
-            console.log(body, "Datos de body que pasamos");
-            let token = props.credentials.token;
-
-            var res = await axios.put('http://localhost:3005/user',body,{headers:{'authorization':'Bearer ' + token}});
-            
+                let token = props.credentials.token;
+                let idUser = props.credentials.user.id;
+                let address = datosUser.address;
+                let city = datosUser.city;
+                let phone = datosUser.phone;
+                console.log(idUser)
+        
+                let body = {
+                    id : idUser,
+                    customerId : idUser,
+                    idUser : idUser,
+                    address : address,
+                    city : city,
+                    phone : phone,
+                    postalcode: datosUser.postalCode  
+                }
 
 
 
-            let data = {
-                token: token,
-                user : res.data,
-                idUser: res.data._id,
-                perfil: "user"
-            }
+                console.log(body, "Datos de body que pasamos");
+
+                let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
+                
+
+                let data = {
+                    token: token,
+                    user : res.data,
+                    idUser: res.data.id,
+                    perfil: "user"
+                }
                 console.log("Datos qeu devuelve axios : ", data);
 
                 props.dispatch({type:UPDATE,payload:data});
                 notification.success({message:'Atencion.',description: "Datos actualizados correctamente."});
 
                 setProfile(info);
+
             
-        }else {
-            console.log("Estoy en monitor")
-            console.log(body)
-
-            let token2 = props.credentials.token;
-
-            let res2 = await axios.post('http://localhost:3005/monitor/update',body,{headers:{'authorization':'Bearer ' + token}});
-            console.log (res2);
-            let data2 = {
-                token: token2,
-                user : res2.data,
-                idUser: res2.data.user._id,
-                perfil: "monitor"
-            }        
-            console.log("Datos qeu devuelve axios : ", data2);
-
-            props.dispatch({type:UPDATE,payload:data2});
-            notification.success({message:'Atencion.',description: "Datos actualizados correctamente."});
-
-            setProfile(info);
-
-
+             } catch (error) {
             
         }
+
+            
+
 
 
         
@@ -303,7 +285,7 @@ const DataProfile = (props) => {
                     <div className= "infoUser2Titulos">
                         <div className="titulosInfoUser">Dirección:</div>
                         <div className="titulosInfoUser">Ciudad:</div>
-                        <div className="titulosInfoUser">País:</div>
+                        <div className="titulosInfoUser">Codigo postal:</div>
                         <div className="titulosInfoUser">DNI/NIE:</div>
                         <div className="titulosInfoUser">Telefono:</div>
                         <div className="titulosInfoUser">Fecha de nacimiento:</div>
@@ -313,9 +295,9 @@ const DataProfile = (props) => {
                     <div className="infoUser2">
                         <input className="inputBaseUser"  readonly="readonly" type="text" name="address" value={user.address} size="34" lenght='30'></input>
                         <input className="inputBaseUser"  readonly="readonly" type="text" name="city"  value={user.city} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="country"  value={user.country} size="34" lenght='30'></input>
+                        <input className="inputBaseUser"  readonly="readonly" type="text" name="postalCode"  value={user.postalCode} size="34" lenght='30'></input>
                         <input className="inputBaseUser"  readonly="readonly" type="text" name="dni"  value={user.dni} size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="telephone"  value={user.telephone} size="34" lenght='9'></input>
+                        <input className="inputBaseUser"  readonly="readonly" type="text" name="telephone"  value={user.phone} size="34" lenght='9'></input>
                         <input className="inputBaseUser"  readonly="readonly" type="text" name="birthday" value={moment(user.birthday).format('L')} ></input>
                     </div>
                     <div>
@@ -359,7 +341,7 @@ const DataProfile = (props) => {
 
                         <div className="titulosInfoUser">Dirección:</div>
                         <div className="titulosInfoUser">Ciudad:</div>
-                        <div className="titulosInfoUser">País:</div>
+                        <div className="titulosInfoUser">Código postal:</div>
                         <div className="titulosInfoUser">DNI/NIE:</div>
                         <div className="titulosInfoUser">Telefono:</div>
                         <div className="titulosInfoUser">Fecha de nacimiento:</div>
@@ -374,11 +356,10 @@ const DataProfile = (props) => {
                         <input className="inputBaseUser"  type="text" name="city" onChange={updateFormulario} onBlur={()=>checkError("city")} placeholder={props.credentials.user.city} size="34" lenght='30'></input>
                         
                         <div>{errors.eCity}</div>
-                        <input className="inputBaseUser" type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")} placeholder={props.credentials.user.country} size="34" lenght='30'></input>
-                        {/* <input className="inputBaseUser" type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")}  placeholder={user.country} size="34" lenght='30'></input> */}
-                        <div>{errors.eCountry}</div>
+                        <input className="inputBaseUser" type="text" name="postalCode" onChange={updateFormulario} onBlur={()=>checkError("postalCode")} placeholder={props.credentials.user.postalCode} size="34" lenght='30'></input>
+                        <div>{errors.epostalCode}</div>
                         <input className="inputBaseUser" readonly="readonly" type="text" name="dni"  placeholder={user.dni} size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser"  type="text" name="telephone" onChange={updateFormulario} onBlur={()=>checkError("telephone")}   placeholder={props.credentials.user.telephone}size="34" lenght='9'></input>
+                        <input className="inputBaseUser"  type="text" name="phone" onChange={updateFormulario} onBlur={()=>checkError("phone")}   placeholder={props.credentials.user.phone}size="34" lenght='9'></input>
                         <div>{errors.eTelephone}</div>
                         <input className="inputBaseUser" readonly="readonly" type="text" name="birthday" placeholder={moment(user.birthday).format('L')} ></input>
 
