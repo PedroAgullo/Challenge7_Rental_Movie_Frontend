@@ -7,6 +7,7 @@ import DataProfile from '../../components/DataProfile/DataProfile';
 import DataOrder from '../../components/DataOrder/DataOrder';
 import DataMyMovies from '../../components/DataMyMovies/DataMyMovies';
 import DataOrderAdmin from '../../components/DataOrderAdmin/DataOrderAdmin';
+import DataProfileAdmin from '../../components/DataProfileAdmin/DataProfileAdmin';
 
 
 const Profile = (props) => {
@@ -29,9 +30,14 @@ const Profile = (props) => {
 
                 return <DataOrderAdmin/>
 
+
+            case 'userAdmin':
+
+                return <DataProfileAdmin/>
+
             default:
 
-                return <DataProfile />
+                return <DataProfile/>
         }
 
     }

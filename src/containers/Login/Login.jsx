@@ -1,10 +1,11 @@
-import React , {useState} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import "./Login.css";
 import {notification} from 'antd';
 import {connect} from 'react-redux';
 import {LOGIN} from '../../redux/types'
+import React, { useEffect, useState } from "react";
+
 
 
 const Login = (props) => {
@@ -14,7 +15,23 @@ const Login = (props) => {
     //Hooks
     const [credentials, setCredentials] = useState({email:'', password:''});
     const [msgError, setMensajeError] = useState('');
+
     
+
+    useEffect(()=>{
+        const listener = event => {
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                logeame();
+            }
+        };
+        document.addEventListener("keydown", listener);
+        return () => {
+            document.removeEventListener("keydown", listener);
+        };
+    },[credentials]);
+
+
+
     //Handle
     const updateCredentials = (e) => {
         setCredentials ({...credentials, [e.target.name]: e.target.value});

@@ -17,7 +17,6 @@ const DataProfile = (props) => {
         const [profile, setProfile] = useState([]); 
         const [datosUser, setDatosUser] = useState(
             {
-
                 address: props.credentials.user.address,
                 postalCode: props.credentials.user.postalCode,
                 city: props.credentials.user.city,
@@ -36,8 +35,7 @@ const DataProfile = (props) => {
         epostalCode: '',
         eCity: '',
         eDni: '',
-        eTelephone: '',
-        
+        eTelephone: ''        
     });
 
 
@@ -225,12 +223,12 @@ const DataProfile = (props) => {
                 console.log(body, "Datos de body que pasamos");
 
                 let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
-                
+                console.log(res.data);
 
                 let data = {
                     token: token,
                     user : res.data,
-                    idUser: res.data.id,
+                    idUser: idUser,
                     perfil: "user"
                 }
                 console.log("Datos qeu devuelve axios : ", data);

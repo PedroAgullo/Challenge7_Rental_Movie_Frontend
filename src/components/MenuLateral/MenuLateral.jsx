@@ -84,7 +84,7 @@ const Menulateral = (props) => {
           <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Mi perfil</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("ordersAdmin")}>Ver/editar pedidos</div>
           <div className="botomMenuLateral"onClick={() => cambiaDatos("userAdmin")}>Ver/editar clientes</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("stats")}>Estadísticas :)</div>
+          {/* <div className="botomMenuLateral"onClick={() => cambiaDatos("stats")}>Estadísticas :)</div> */}
         </div>
       </div>
     );
