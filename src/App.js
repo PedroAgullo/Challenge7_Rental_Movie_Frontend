@@ -6,6 +6,7 @@ import Home from './containers/Home/Home';
 import Register from './containers/Register/Register';
 import Profile from './containers/Profile/Profile';
 import Movie from './containers/Movie/Movie';
+import Search from './containers/Search/Search';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
               <Route path="/profile" exact component={Profile}/>
               <Route path="/register" exact component={Register}/>
               <Route path="/movie" exact component={Movie}/>
+              <Route path="/search" exact component={Search}/>
             </Switch>
 
         

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';
 import { useHistory } from 'react-router-dom';
 import {notification} from 'antd';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = (props) => {
 
@@ -55,9 +56,11 @@ const Navbar = (props) => {
       <div className="nav">
         <div className="logo">
           <NavLink to="/"><img className="img" src={Logo} alt="logo"/></NavLink>
+          <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/search">Buscar</NavLink>
+
         </div>
 
-        <div className="blank"></div>
+        <div className="blank"><SearchBar/></div>
 
         <div className="NavMenu" >
           <div className="NavLink">
@@ -75,6 +78,8 @@ const Navbar = (props) => {
       <div className="nav">
         <div className="logo">
           <NavLink to="/"><img className="img" src={Logo} alt="Logo" /></NavLink>
+          <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/search">Buscar</NavLink>
+
         </div>
         <div className="blank"></div>
         <div className="NavMenu">

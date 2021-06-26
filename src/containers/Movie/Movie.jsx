@@ -91,7 +91,7 @@ const Movie = (props) => {
 
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w200"
+  const size = "w500"
   // if (props.getroomusers[0]?._id) {
     if (props.movie?.id) {
 
