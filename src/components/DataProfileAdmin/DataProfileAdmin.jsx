@@ -29,6 +29,7 @@ const DataProfileAdmin = (props) => {
 
     const [datosUser, setDatosUser] = useState(
         {
+            id: '',
             name : '',
             lastName1: '',
             lastName2: '',
@@ -39,26 +40,26 @@ const DataProfileAdmin = (props) => {
             country: '',
             city: '',
             dni: '',
-            telephone: '',
+            phone: '',
             subscription: ''
     });
 
-    const [datosMonitor, setDatosMonitor] = useState(
-        {
-            _id: '',
-            name : '',
-            lastName1: '',
-            lastName2: '',
-            email: '',
-            password: '',
-            birthday: '',
-            address: '',
-            country: '',
-            city: '',
-            dni: '',
-            telephone: '',
-            subscription: ''            
-    });
+    // const [datosMonitor, setDatosMonitor] = useState(
+    //     {
+    //         _id: '',
+    //         name : '',
+    //         lastName1: '',
+    //         lastName2: '',
+    //         email: '',
+    //         password: '',
+    //         birthday: '',
+    //         address: '',
+    //         country: '',
+    //         city: '',
+    //         dni: '',
+    //         telephone: '',
+    //         subscription: ''            
+    // });
 
     const [errors, setErrors] = useState({
         name : datosUser.name,
@@ -87,6 +88,7 @@ const DataProfileAdmin = (props) => {
 
     const findUser = async (info) => {
         let opc= document.getElementById("op").value;
+        let dato = document.getElementById("dataSearch").value;
         console.log(opc);
         if (opc === '') 
         {
@@ -96,26 +98,35 @@ const DataProfileAdmin = (props) => {
 
         let token = props.credentials.token;
         let body = {
-            id : props.credentials.idUser
+            customerId : parseInt(dato),
+            dni : parseInt(dato),
+            email : dato
         }
+
         switch (opc){
             case 'EMAIL':
-                console.log(body);
-                let res = await axios.post('http://localhost:3005/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
+                console.log("Email : ", body);
+                let res = await axios.post('http://localhost:3005/customer/email',body,{headers:{'authorization':'Bearer ' + token}});
                 console.log(res.data);
-                setDatosMonitor(res.data);
+                setDatosUser(res.data);
                 setProfile(info);
 
             break;
 
             case 'DNI':
+                
+                console.log("DNI",body);
+                let resDNI = await axios.post('http://localhost:3005/customer/dni',body,{headers:{'authorization':'Bearer ' + token}});                
+                console.log(resDNI.data);
+                setDatosUser(resDNI.data);
+                setProfile(info);
             break;
 
             case 'ID':
-                console.log(body);
+                console.log("id", body);
                 let resID = await axios.post('http://localhost:3005/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
-                console.log(res.data);
-                setDatosMonitor(resID.data);
+                console.log(resID.data);
+                setDatosUser(resID.data);
                 setProfile(info);
             break;
         }
@@ -142,27 +153,21 @@ const DataProfileAdmin = (props) => {
     }
 
 
-    const updateMonitor = async (info) => {        
+    const updateUser = async (info) => {        
         let token = props.credentials.token;
-        let idUser = props.credentials.user._id;
-        let address = datosUser.address;
-        let country = datosUser.country;
-        let city = datosUser.city;
-        let telephone = datosUser.telephone;
-
         let body = {
-            member : datosMonitor._id,
-            address : address,
-            country : country,
-            city : city,
-            telephone : telephone,
-            subscription : datosUser.subscription
-            
+            id : datosUser.id,
+            customerId : datosUser.id,
+            idUser : datosUser.id,
+            address : datosUser.address,
+            city : datosUser.city,
+            phone : datosUser.phone,
+            postalcode: datosUser.postalCode  
         }
 
 
            try {
-            let res = await axios.post('http://localhost:3005/user/update',body,{headers:{'authorization':'Bearer ' + token}});
+            let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
 
             let data = {
                token: props.credentials.token,
@@ -302,14 +307,14 @@ const DataProfileAdmin = (props) => {
 
             break;
             case 'telephone':
-                if(datosUser.telephone.length < 1){
-                    setErrors({...errors, eTelephone: 'El campo telefono no puede estar vacío.'});
-                }else if (datosUser.telephone.length < 9){
-                    setErrors({...errors, eTelephone: 'El campo telefono debe de tener 9 números'});
-                }else if (! /[\d()+-]{9}/g.test(datosUser.telephone)) {
-                    setErrors({...errors, eTelephone: 'Introduce el formato de teléfono valido 999999999'});                        
+                if(datosUser.phone.length < 1){
+                    setErrors({...errors, ePhone: 'El campo telefono no puede estar vacío.'});
+                }else if (datosUser.phone.length < 9){
+                    setErrors({...errors, ePhone: 'El campo telefono debe de tener 9 números'});
+                }else if (! /[\d()+-]{9}/g.test(datosUser.phone)) {
+                    setErrors({...errors, ePhone: 'Introduce el formato de teléfono valido 999999999'});                        
                 }else{
-                    setErrors({...errors, eTelephone: ''});
+                    setErrors({...errors, ePhone: ''});
                 }
           
 
@@ -389,7 +394,7 @@ const DataProfileAdmin = (props) => {
                             <option value="DNI">DNI</option>
                             <option value="ID">ID</option>
                         </select>          
-                        <input className="inputBaseUser" type="text" name="busqueda" size="34" lenght='30'></input>       
+                        <input id="dataSearch" className="inputBaseUser" type="text" name="busqueda" size="34" lenght='30'></input>       
                     </div>
 
                     <div className= "infoUser2Titulos">
@@ -458,7 +463,7 @@ const DataProfileAdmin = (props) => {
 
                     <div className="infoUser1">
                     <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
-                        <div className="empty"><button onClick={(()=>updateMonitor(1))}>Guardar</button></div>
+                        <div className="empty"><button onClick={(()=>updateUser(1))}>Guardar</button></div>
 
                     </div>
 
@@ -473,11 +478,11 @@ const DataProfileAdmin = (props) => {
                     </div>
 
                     <div className="infoUser2">
-                        <input className="inputBaseUser" value={datosMonitor.name} readonly="readonly" type="text" name="name"  size="34" lenght='30'></input>
-                        <input className="inputBaseUser" value={datosMonitor.lastName1} readonly="readonly" type="text" name="lastName1"   size="34" lenght='30' ></input>
-                        <input className="inputBaseUser" value={datosMonitor.lastName2} readonly="readonly" type="text" name="lastName2"   size="34" lenght='30'></input>
-                        <input className="inputBaseUser" value={datosMonitor.email} readonly="readonly" type="text" name="email"   size="34" lenght='30'></input>
-                        <input className="inputBaseUser" value={datosMonitor.password} readonly="readonly" type="password" name="password"  placeholder="************" size="34" lenght='8'></input>
+                        <input className="inputBaseUser" value={datosUser.name} readonly="readonly" type="text" name="name"  size="34" lenght='30'></input>
+                        <input className="inputBaseUser" value={datosUser.lastName1} readonly="readonly" type="text" name="lastName1"   size="34" lenght='30' ></input>
+                        <input className="inputBaseUser" value={datosUser.lastName2} readonly="readonly" type="text" name="lastName2"   size="34" lenght='30'></input>
+                        <input className="inputBaseUser" value={datosUser.email} readonly="readonly" type="text" name="email"   size="34" lenght='30'></input>
+                        <input className="inputBaseUser" value={datosUser.password} readonly="readonly" type="password" name="password"  placeholder="************" size="34" lenght='8'></input>
  
                     </div>
 
@@ -492,16 +497,16 @@ const DataProfileAdmin = (props) => {
                     </div>
 
                     <div className="infoUser3">
-                        <input className="inputBaseUser" placeholder={datosMonitor.address} type="text" name="address" onChange={updateFormulario} onBlur={()=>checkError("address")}  size="34" lenght='30'></input>                        
+                        <input className="inputBaseUser" placeholder={datosUser.address} type="text" name="address" onChange={updateFormulario} onBlur={()=>checkError("address")}  size="34" lenght='30'></input>                        
                         <div>{errors.eAddress}</div>
-                        <input className="inputBaseUser" placeholder={datosMonitor.city} type="text" name="city" onChange={updateFormulario} onBlur={()=>checkError("city")}  size="34" lenght='30'></input>
+                        <input className="inputBaseUser" placeholder={datosUser.city} type="text" name="city" onChange={updateFormulario} onBlur={()=>checkError("city")}  size="34" lenght='30'></input>
                         <div>{errors.eCity}</div>
-                        <input className="inputBaseUser" placeholder={datosMonitor.country} type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")}  size="34" lenght='30'></input>
+                        <input className="inputBaseUser" placeholder={datosUser.country} type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")}  size="34" lenght='30'></input>
                         <div>{errors.eCountry}</div>
-                        <input className="inputBaseUser" value={datosMonitor.dni} readonly="readonly" type="text" name="dni"  size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser" placeholder={datosMonitor.telephone} type="text" name="telephone" onChange={updateFormulario} onBlur={()=>checkError("telephone")}  size="34" lenght='9'></input>
+                        <input className="inputBaseUser" value={datosUser.dni} readonly="readonly" type="text" name="dni"  size="34" maxlenght='9' ></input>
+                        <input className="inputBaseUser" placeholder={datosUser.telephone} type="text" name="telephone" onChange={updateFormulario} onBlur={()=>checkError("telephone")}  size="34" lenght='9'></input>
                         <div>{errors.eTelephone}</div>
-                        <input className="inputBaseUser" value={moment(datosMonitor.birthday).format('LL')} readonly="readonly" type="text" name="birthday" ></input>
+                        <input className="inputBaseUser" value={moment(datosUser.birthday).format('LL')} readonly="readonly" type="text" name="birthday" ></input>
                     </div>
 
 
