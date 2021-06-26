@@ -57,9 +57,9 @@ const TopRated = (props) => {
 
       return (
         <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
-            <div className="boxCard">
+            <div className="boxCardTopRated">
               {movieData.map((act, index) => (
-                <div className="card" onClick={()=> selectMovie(act)} key={index}>
+                <div className="cardTopRated" onClick={()=> selectMovie(act)} key={index}>
                     <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
                   {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
                   <p className="datosCard">Entrenador: {act.nameCoach}</p>

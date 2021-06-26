@@ -60,7 +60,6 @@ const Navbar = (props) => {
 
         </div>
 
-        <div className="blank"><SearchBar/></div>
 
         <div className="NavMenu" >
           <div className="NavLink">

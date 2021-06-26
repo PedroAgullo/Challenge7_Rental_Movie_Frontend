@@ -5,15 +5,11 @@ import {connect} from 'react-redux';
 
 
 
-
-
-
 const SearchBar = () => {
 
     return (
         <div className="SearchDiv">
             Estamos en "buscar";
-            <SearchBar/>
         </div>
     );
 }

@@ -7,7 +7,7 @@
 
 
 
-.card {
+.cardTopRated {
     height: 20vh;
     width: 10vw;
     display: flex;
@@ -24,7 +24,7 @@
     overflow: hidden;
 }
 
-.card:hover{
+.cardTopRated:hover{
     
     cursor: pointer;
     transition: 0.3s;
@@ -36,7 +36,7 @@
 }
 
 
-.boxCard {
+.boxCardTopRated {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -44,6 +44,8 @@
     flex-wrap: wrap;  
     height: auto;
     width: auto;
+    max-width: 100vw;
+    flex-wrap: nowrap;
 }
 
 .poster{

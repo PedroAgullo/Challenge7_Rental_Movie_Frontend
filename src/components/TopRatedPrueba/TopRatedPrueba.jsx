@@ -1,24 +1,24 @@
 
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-import './Popular.css';
+import {useHistory} from "react-router";
+import './TopRated.css';
 import axios from "axios";
+// import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
-import {useHistory} from "react-router";
 
 
 
-
-const Popular = (props) => {
+const TopRated = (props) => {
+  
   let history = useHistory();
-
     //hooks
     const [movieData, setMovieData] = useState([]);  
   
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
-      findPopular();
+        findTopRated();
     }, []);
   
     //Equivalente a componentDidUpdate en componentes de clase
@@ -29,10 +29,8 @@ const Popular = (props) => {
     const selectMovie = async (movie) => {
       try{
 
-
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/movie');
-
 
 
     }catch (err){
@@ -41,28 +39,43 @@ const Popular = (props) => {
 
     }
   
-    const findPopular = async () => {  
+    const findTopRated = async () => {  
     try{
       //GET TOP RATED MOVIES
-      
-      let res = await axios.get('http://localhost:3005/movies/popular');
-     
+      let res = await axios.get('http://localhost:3005/movies/');
       setMovieData(res.data.results); 
   }catch (err){      
   }
   
 }
+
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w200"
 
   // if (props.getroomusers[0]?._id) {
     if (movieData[0]?.id) {
 
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       return (
-        <div className="popularBoxMovies"> <h1>POPULARES</h1>
-            <div className="popularBoxCard">
+        <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
+            <div className="boxCard">
               {movieData.map((act, index) => (
-                <div className="popularCard" onClick={()=> selectMovie(act)} key={index}>
+                <div className="card" onClick={()=> selectMovie(act)} key={index}>
                     <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
                   {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
                   <p className="datosCard">Entrenador: {act.nameCoach}</p>
@@ -75,11 +88,11 @@ const Popular = (props) => {
       );
     } else {
       return <div>
-          POPULAR - CARGANDO DATOS</div>;
+          TOP RATED - CARGANDO DATOS</div>;
     }
 };
 
 export default connect((state) => ({
 //   credentials:state.credentials, 
 //   getroomusers:state.getroomusers
-  }))(Popular);
+  }))(TopRated);
