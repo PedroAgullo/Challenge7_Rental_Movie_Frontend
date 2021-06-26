@@ -20,25 +20,10 @@ const Movie = (props) => {
   
     //Equivalente a componentDidUpdate en componentes de clase
     useEffect(() => {
-    });
-  
-    //Guarda la movie en redux y nos lleva a la vista de película.
-    // const selectMovie = async (movie) => {
-    //   try{
-
-    //     props.dispatch({type:GETMOVIE,payload: movie});
-    //     history.push('/movie');
-
-
-    // }catch (err){
-    //      console.log(err);      
-    //      }      
-
-    // }
+    });  
   
     const compraPeli = async () => {
         console.log("Entramos a comprar la peli");
-
 
         try{
 

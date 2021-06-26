@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
 }
 
 
@@ -44,7 +46,6 @@
     flex-wrap: wrap;  
     height: auto;
     width: auto;
-    max-width: 100vw;
     flex-wrap: nowrap;
 }
 

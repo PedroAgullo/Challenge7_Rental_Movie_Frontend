@@ -3,3 +3,21 @@
     width: 100vw;
     height: 92vh;
 }
+
+
+.searchBar{
+    width: 100vw;
+    height: 3vh;
+    background-color: blue;
+}
+
+.boxCardSearch{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+    height: auto;
+    width: auto;
+    flex-wrap: wrap;
+
+}

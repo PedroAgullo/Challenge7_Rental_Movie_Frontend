@@ -7,35 +7,30 @@ import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 
 
-
-
-
-
-
-
 const Search = (props) => {
 
     let history = useHistory();
 
-
-
     const [dataMovies, setDataMovies] = useState([]); 
 
 
-        //Guarda la movie en redux y nos lleva a la vista de película.
-        const selectMovie = async (movie) => {
-            try{      
-              props.dispatch({type:GETMOVIE,payload: movie});
-              history.push('/movie');
-          }catch (err){
-               console.log(err);      
-               }            
-          }
+    //Guarda la movie en redux y nos lleva a la vista de película.
+    const selectMovie = async (movie) => {
+        try{      
+          props.dispatch({type:GETMOVIE,payload: movie});
+          history.push('/movie');
+      }catch (err){
+           console.log(err);      
+           }            
+    }
 
+    //Busca la película con cada tecla que pulsamos
     const searchMovie = async () => {
 
+        let dataSearch = document.getElementById("movieName").value;        
         let body={
-          title : document.getElementById("movieName").value
+          title : dataSearch,
+          actor : dataSearch
         }
         try {
             let res = await axios.post('http://localhost:3005/movies/title',body);
@@ -44,11 +39,12 @@ const Search = (props) => {
         } catch (error) {
     
         }
-
     }
+
 
     const baseImgUrl = "https://image.tmdb.org/t/p"
     const size = "w500"
+
 
     return (
         <div className="SearchDiv">
@@ -57,7 +53,7 @@ const Search = (props) => {
             </div>
 
             <div className="dataMovies">
-            <div className="boxCard">
+            <div className="boxCardSearch">
               {dataMovies?.map((act, index) => (
                 <div className="card" onClick={()=> selectMovie(act)} key={index}>
                     <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
@@ -66,14 +62,12 @@ const Search = (props) => {
                   <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
                 </div>
                    ))}
-
             </div>
-
             </div>
-
         </div>
     );
 }
+
 export default connect((state) => ({
     user: state.credentials.user,
     tipodatos: state.tipodatos
