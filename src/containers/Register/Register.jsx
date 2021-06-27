@@ -5,7 +5,9 @@ import axios from 'axios';
 import {useHistory} from "react-router";
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {notification} from 'antd';
+import {notification, message} from 'antd';
+import 'antd/dist/antd.css'
+
 
 const Register = () => {
     let history = useHistory();

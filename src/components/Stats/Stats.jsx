@@ -1,82 +1,188 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
 import {useHistory} from "react-router";
-import './TopRated.css';
+import './Stats.css';
 import axios from "axios";
-// import { Popconfirm, message, Button } from 'antd';
+import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
+import { Column } from '@ant-design/charts';
 
 
 
-const Stats = (props) => {
-  
-  let history = useHistory();
-    //hooks
-    const [movieData, setMovieData] = useState([]);  
-  
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
-    useEffect(() => {
-        findRecommendations();
-    }, []);
-  
-    //Equivalente a componentDidUpdate en componentes de clase
-    useEffect(() => {
-    });
-  
-    //Guarda la movie en redux y nos lleva a la vista de película.
-    const selectMovie = async (movie) => {
-      try{
-
-        props.dispatch({type:GETMOVIE,payload: movie});
-        history.push('/movie');
+const DemoColumn = (data) => {
 
 
-    }catch (err){
-         console.log(err);      
-         }      
 
-    }
-  
-    const findRecommendations = async () => {  
-    try{
-      //GET TOP RATED MOVIES
-      let res = await axios.get('http://localhost:3005/recommendations/');
-      setMovieData(res.data.results); 
-  }catch (err){      
+
+  const total = async () => {
+
+
+
+
   }
-  
-}
 
-  const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w200"
 
-  // if (props.getroomusers[0]?._id) {
-    if (movieData[0]?.id) {
 
-      return (
-        <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
-            <div className="boxCard">
-              {movieData.map((act, index) => (
-                <div className="card" onClick={()=> selectMovie(act)} key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
-                  {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                  <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                  <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
-                </div>
-                   ))}
 
-            </div>
-        </div>  
-      );
-    } else {
-      return <div>
-          TOP RATED - CARGANDO DATOS</div>;
-    }
+
+
+  var data = [
+    {
+      name: 'Ventas',
+      Mes: 'Jan.',
+      Cantidad: 18.9,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Feb.',
+      Cantidad: 28.8,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Mar.',
+      Cantidad: 39.3,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Apr.',
+      Cantidad: 81.4,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'May',
+      Cantidad: 47,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Jun.',
+      Cantidad: 20.3,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Jul.',
+      Cantidad: 24,
+    },
+    {
+      name: 'Ventas',
+      Mes: 'Aug.',
+      Cantidad: 35.6,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Jan.',
+      Cantidad: 12.4,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Feb.',
+      Cantidad: 23.2,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Mar.',
+      Cantidad: 34.5,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Apr.',
+      Cantidad: 99.7,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'May',
+      Cantidad: 52.6,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Jun.',
+      Cantidad: 35.5,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Jul.',
+      Cantidad: 37.4,
+    },
+    {
+      name: 'Alquiler',
+      Mes: 'Aug.',
+      Cantidad: 42.4,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Jan.',
+      Cantidad: 12.4,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Feb.',
+      Cantidad: 23.2,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Mar.',
+      Cantidad: 34.5,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Apr.',
+      Cantidad: 99.7,
+    },
+    {
+      name: 'Premium',
+      Mes: 'May',
+      Cantidad: 52.6,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Jun.',
+      Cantidad: 35.5,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Jul.',
+      Cantidad: 37.4,
+    },
+    {
+      name: 'Premium',
+      Mes: 'Aug.',
+      Cantidad: 42.4,
+    },
+  ];
+
+  var config = {
+    data: data,
+    isGroup: true,
+    xField: 'Mes',
+    yField: 'Cantidad',
+    seriesField: 'name',
+    label: {
+      position: 'middle',
+      layout: [
+        { type: 'interval-adjust-position' },
+        { type: 'interval-hide-overlap' },
+        { type: 'adjust-color' },
+      ],
+    },
+  };
+
+  return (
+    <div>
+
+      <h1>Estadisticas</h1>
+      
+      <div className="chart"> 
+        <Column {...config} />
+      </div>
+      <div>
+        <button onClick={()=>total()}>Totales</button>
+        
+        
+      </div>
+
+    </div>
+    
+    );
 };
 
-export default connect((state) => ({
-//   credentials:state.credentials, 
-//   getroomusers:state.getroomusers
-  }))(Stats);
+export default DemoColumn;

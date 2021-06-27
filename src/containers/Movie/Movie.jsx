@@ -5,7 +5,7 @@ import axios from "axios";
 import { GETORDER } from '../../redux/types';
 import { Button, notification, Space } from 'antd';
 import { useHistory } from 'react-router-dom';
-
+import 'antd/dist/antd.css'
 
 
 const Movie = (props) => {

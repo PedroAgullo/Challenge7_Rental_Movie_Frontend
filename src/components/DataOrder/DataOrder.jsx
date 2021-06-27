@@ -95,6 +95,7 @@ const DataOrder = (props) => {
                     <div>
                         <p className="nombre">{act.title}</p>
                         <p className="fecha">Fecha compra: {act.createdAt}</p>
+                        <p className="fecha">Tipo:  {act.type}</p>
                         <p className="fecha">Precio: {act.precio}€</p>
                     </div>
                 </div>
