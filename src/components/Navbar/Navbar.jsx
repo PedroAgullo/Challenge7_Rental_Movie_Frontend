@@ -60,7 +60,7 @@ const Navbar = (props) => {
 
         </div>
 
-
+        <div className="blank"></div>
         <div className="NavMenu" >
           <div className="NavLink">
             <NavLink style={{ color: 'inherit', textDecoration: 'inherit'}} to="/register">Inscribirse</NavLink>

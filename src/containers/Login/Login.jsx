@@ -69,8 +69,8 @@ const Login = (props) => {
                 props.dispatch({type:LOGIN,payload:data});
                                
                 //Mensaje de bienvenida
-                let description = ("Bienvenido " + res.data.user.name + " " + res.data.user.lastName1 + ".");
-                // notification.success({message:'Login correcto.',description: description});
+                let description = ("Bienvenido " + res.data.customer.name + " " + res.data.customer.lastName1 + ".");
+                notification.success({message:'Login correcto.',description: description});
                 
                 //Redireccion           
                 history.push("/");
