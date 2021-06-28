@@ -2,11 +2,10 @@ import './Movie.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { GETORDER } from '../../redux/types';
-import { Button, notification, Space } from 'antd';
-import { useHistory } from 'react-router-dom';
-import 'antd/dist/antd.css'
-
+import {notification} from 'antd';
+import {useHistory} from 'react-router-dom';
+import 'antd/dist/antd.css';
+import Recommendations from '../../components/Recommendations/Recommendations';
 
 const Movie = (props) => {
 
@@ -15,6 +14,7 @@ const Movie = (props) => {
 
     //hooks
     const [movieData, setMovieData] = useState([]);  
+    const [similarMovie, setSimilarMovie] = useState([]);
   
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
@@ -29,7 +29,7 @@ const Movie = (props) => {
 
         if (!props.credentials.user.id){
             history.push("/register");
-            notification.warning({message:'Atencion.',description: "Debes estar registrado para realizar esta acción."});
+            notification.warning({message:'Atencion.',description: "Debes estar registrado comprar, alquilar o ver una película."});
         }
 
 
@@ -155,7 +155,10 @@ const Movie = (props) => {
 
             <div className="boxRight">
                 <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
-
+                <div className="titulo"><h3>SINOPSIS</h3><p>{props.movie.overview}</p></div>
+            </div>
+            <div>QUIZÁ PODRÍA INTERESARTE
+                <Recommendations/>
             </div>
         </div>  
       );

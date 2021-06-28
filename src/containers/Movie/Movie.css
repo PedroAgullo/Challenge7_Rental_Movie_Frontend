@@ -1,3 +1,8 @@
+h1, h3{
+    color: white;
+}
+
+
 .boxMovie{
     display: flex;
     flex-direction: row;
@@ -6,7 +11,7 @@
     color: white;
     height:92vh;
     width: 100vw;
-    background-color: black;
+    background-color: #060d17;
 }
 
 
@@ -37,8 +42,6 @@
     background-color: grey;
     height:7vh;
     width: 21vw;
-    border: solid white 0.1em;
-
 }
 
 .buttonMovie{
@@ -48,15 +51,15 @@
     justify-content: center;
     height:7vh;
     width: 24vw;
-    background-color: blue;
+    background-color: #1c252f;
     cursor: pointer;
 }
 
 
 .buttonMovie:hover{
-    color:blue;
+    color:white;
     cursor: pointer;
-    background-color: pink;
+    background-color: #383d47;
     
 }
 
@@ -64,10 +67,12 @@
 .boxRight{
     background-color: red;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
     height:92vh;
     width: 50vw;
+    color: white;
+
 }
+

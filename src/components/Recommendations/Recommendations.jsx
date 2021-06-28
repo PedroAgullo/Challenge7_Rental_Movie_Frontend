@@ -2,11 +2,12 @@
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
 import {useHistory} from "react-router";
-import './TopRated.css';
+import './Recommendations.css';
 import axios from "axios";
 // import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
+import {notification} from 'antd';
 
 
 
@@ -38,24 +39,30 @@ const Recommendations = (props) => {
 
     }
   
-    const findRecommendations = async () => {  
+  const findRecommendations = async () => {  
     try{
-      //GET TOP RATED MOVIES
-      let res = await axios.get('http://localhost:3005/recommendations/');
+      let body = {
+        id: props.movie.id
+    }
+      console.log("Antes del axios en redommendations", body);
+      let res = await axios.post('http://localhost:3005/recommendations', body);
+      console.log("Recommendations",res.data.results);
       setMovieData(res.data.results); 
-  }catch (err){      
-  }
+    }catch (err){      
+      notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
+      // .response.data.message
+    }
   
-}
+  }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w200"
+  const size = "w600"
 
   // if (props.getroomusers[0]?._id) {
     if (movieData[0]?.id) {
 
       return (
-        <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
+        <div className="TopRatedBoxMovies"> <h1>Para tí</h1>
             <div className="boxCard">
               {movieData.map((act, index) => (
                 <div className="card" onClick={()=> selectMovie(act)} key={index}>
@@ -71,11 +78,11 @@ const Recommendations = (props) => {
       );
     } else {
       return <div>
-          TOP RATED - CARGANDO DATOS</div>;
+          RECOMENDACIONES - CARGANDO DATOS</div>;
     }
 };
 
 export default connect((state) => ({
-//   credentials:state.credentials, 
-//   getroomusers:state.getroomusers
+  credentials:state.credentials, 
+  getroomusers:state.getroomusers
   }))(Recommendations);

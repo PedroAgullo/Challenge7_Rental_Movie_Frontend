@@ -44,7 +44,7 @@ const Stats = (props) => {
 
     let numRent = 0;
     let numBuy = 0;
-    let premium = 0;
+    let premium = 10;
 
       for(let x=0; x < num; x++){
         numRent = numRent + datos[x].numRent;
@@ -65,7 +65,12 @@ const Stats = (props) => {
         {
           name:'Premium',
           Mes: 'Cantidad',
-          Cantidad: 10
+          Cantidad: premium
+        },
+        {
+          name:'Total',
+          Mes: 'Cantidad',
+          Cantidad: numBuy+numRent+10
         }
       ]
       
@@ -96,7 +101,7 @@ const Stats = (props) => {
 
     let numRent = 0;
     let numBuy = 0;
-    let premium = 0;
+    let premium = 10;
 
       for(let x=0; x < num; x++){
         numRent = numRent + datos[x].numRent;
@@ -116,6 +121,11 @@ const Stats = (props) => {
         },
         {
           name:'Premium',
+          Mes: 'Cantidad',
+          Cantidad: 10
+        },
+        {
+          name:'Total',
           Mes: 'Cantidad',
           Cantidad: 10
         }
