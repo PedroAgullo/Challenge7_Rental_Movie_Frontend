@@ -46,13 +46,9 @@ const DataOrder = (props) => {
       findOrders();
      }catch (err){
         notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-
         }      
-
     }
   
-
-
     const findOrders = async () => {  
     try{
 

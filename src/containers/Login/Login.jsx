@@ -8,7 +8,6 @@ import {LOGIN} from '../../redux/types'
 import React, { useEffect, useState } from "react";
 
 
-
 const Login = (props) => {
 
     let history = useHistory();
@@ -16,8 +15,7 @@ const Login = (props) => {
     //Hooks
     const [credentials, setCredentials] = useState({email:'', password:''});
     const [msgError, setMensajeError] = useState('');
-
-    
+   
 
     useEffect(()=>{
         const listener = event => {
@@ -30,7 +28,6 @@ const Login = (props) => {
             document.removeEventListener("keydown", listener);
         };
     },[credentials]);
-
 
 
     //Handle
@@ -76,7 +73,8 @@ const Login = (props) => {
                 //Redireccion           
                 history.push("/");
 
-            } catch (err) {                
+            } catch (err) {      
+                    notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
                     notification.warning({message:'Atencion.',description: "Usuario o password incorrecto."});              
             }
     }

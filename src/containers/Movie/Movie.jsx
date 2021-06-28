@@ -78,15 +78,12 @@ const Movie = (props) => {
                     // }, 0)
                     
                     let res2 = await axios.post('http://localhost:3005/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
-                    console.log("Añadimos +1 a numBuy: ", res2.data)
-                   
+                    console.log("Añadimos +1 a numBuy: ", res2.data);                   
                
                 }catch (err){      
-                  notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-                  
+                  notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
                 }
                 return;
-
 
             case "alquilar" :
                 try{

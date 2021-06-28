@@ -10,22 +10,23 @@ import { Column } from '@ant-design/charts';
 
 
 
-const DemoColumn = (data) => {
-
-
-
+const DemoColumn = (props) => {
 
   const total = async () => {
+    try {
+      let token = props.credentials.token;
 
 
+    let res = await axios.get('http://localhost:3005/movies/all',{headers:{'authorization':'Bearer ' + token}});
 
+    console.log(res.data);
+    } catch (err) {
+      console.log(err)
+    }
+
+    
 
   }
-
-
-
-
-
 
   var data = [
     {
@@ -175,9 +176,7 @@ const DemoColumn = (data) => {
         <Column {...config} />
       </div>
       <div>
-        <button onClick={()=>total()}>Totales</button>
-        
-        
+        <button onClick={()=>total()}>Totales</button>        
       </div>
 
     </div>
@@ -185,4 +184,7 @@ const DemoColumn = (data) => {
     );
 };
 
-export default DemoColumn;
+export default connect((state) => ({
+  credentials:state.credentials, 
+  orders:state.orders
+  }))(DemoColumn);
