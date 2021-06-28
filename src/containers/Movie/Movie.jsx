@@ -146,9 +146,9 @@ const Movie = (props) => {
                     <img src={`${baseImgUrl}/${size}${props.movie.poster_path}`}  alt="poster" className="posterMovie"/>
                 </div>
                 <div className="buttonMovieBox">
-                    <div clasname="buttonMovie">Favoritos</div>                 
-                    <div clasname="buttonMovie" onClick={()=>compraPeli("comprar", 5)}>Comprar</div>                 
-                    <div clasname="buttonMovie" onClick={()=>compraPeli("alquilar", 2)}>Alquilar</div>
+                    <div className="buttonMovie">Favoritos</div>                 
+                    <div className="buttonMovie" onClick={()=>compraPeli("comprar", 5)}>Comprar</div>                 
+                    <div className="buttonMovie" onClick={()=>compraPeli("alquilar", 2)}>Alquilar</div>
                 </div>
 
             </div>

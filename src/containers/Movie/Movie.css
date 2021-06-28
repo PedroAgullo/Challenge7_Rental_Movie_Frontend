@@ -49,7 +49,9 @@
     height:7vh;
     width: 24vw;
     background-color: blue;
+    cursor: pointer;
 }
+
 
 .buttonMovie:hover{
     color:blue;

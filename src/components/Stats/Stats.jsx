@@ -10,149 +10,129 @@ import { Column } from '@ant-design/charts';
 
 
 
-const DemoColumn = (props) => {
+const Stats = (props) => {
 
-  const total = async () => {
+    //hooks
+    const [estadisticas, setEstadisticas] = useState([]);  
+  
+    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
+    useEffect(() => {
+      cantidad();
+    }, []);
+  
+    //Equivalente a componentDidUpdate en componentes de clase
+    useEffect(() => {
+    });
+
+
+  const cantidad = async () => {
     try {
       let token = props.credentials.token;
 
 
     let res = await axios.get('http://localhost:3005/movies/all',{headers:{'authorization':'Bearer ' + token}});
 
-    console.log(res.data);
+
+    console.log("Datos de las movies",res.data);
+
+    let datos = [];
+    console.log(datos.length);
+    datos = res.data;
+    let num = datos.length;
+
+    console.log("Num del array : ", datos.lenght);
+
+    let numRent = 0;
+    let numBuy = 0;
+    let premium = 0;
+
+      for(let x=0; x < num; x++){
+        numRent = numRent + datos[x].numRent;
+        numBuy = numBuy + datos[x].numBuy;
+      }
+
+      var data = [
+        {
+          name: 'Ventas',
+          Mes: 'Cantidad',
+          Cantidad: numBuy,
+        },
+        {
+          name: 'Alquiler',
+          Mes: 'Cantidad',
+          Cantidad: numRent,
+        },
+        {
+          name:'Premium',
+          Mes: 'Cantidad',
+          Cantidad: 10
+        }
+      ]
+      
+      setEstadisticas(data);
+
+
     } catch (err) {
       console.log(err)
     }
-
-    
-
   }
 
-  var data = [
-    {
-      name: 'Ventas',
-      Mes: 'Jan.',
-      Cantidad: 18.9,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Feb.',
-      Cantidad: 28.8,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Mar.',
-      Cantidad: 39.3,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Apr.',
-      Cantidad: 81.4,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'May',
-      Cantidad: 47,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Jun.',
-      Cantidad: 20.3,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Jul.',
-      Cantidad: 24,
-    },
-    {
-      name: 'Ventas',
-      Mes: 'Aug.',
-      Cantidad: 35.6,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Jan.',
-      Cantidad: 12.4,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Feb.',
-      Cantidad: 23.2,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Mar.',
-      Cantidad: 34.5,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Apr.',
-      Cantidad: 99.7,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'May',
-      Cantidad: 52.6,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Jun.',
-      Cantidad: 35.5,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Jul.',
-      Cantidad: 37.4,
-    },
-    {
-      name: 'Alquiler',
-      Mes: 'Aug.',
-      Cantidad: 42.4,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Jan.',
-      Cantidad: 12.4,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Feb.',
-      Cantidad: 23.2,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Mar.',
-      Cantidad: 34.5,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Apr.',
-      Cantidad: 99.7,
-    },
-    {
-      name: 'Premium',
-      Mes: 'May',
-      Cantidad: 52.6,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Jun.',
-      Cantidad: 35.5,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Jul.',
-      Cantidad: 37.4,
-    },
-    {
-      name: 'Premium',
-      Mes: 'Aug.',
-      Cantidad: 42.4,
-    },
-  ];
+  const ingresos = async () => {
+    try {
+      let token = props.credentials.token;
+
+
+    let res = await axios.get('http://localhost:3005/movies/all',{headers:{'authorization':'Bearer ' + token}});
+
+
+    console.log("Datos de las movies",res.data);
+
+    let datos = [];
+    console.log(datos.length);
+    datos = res.data;
+    let num = datos.length;
+
+    console.log("Num del array : ", datos.lenght);
+
+    let numRent = 0;
+    let numBuy = 0;
+    let premium = 0;
+
+      for(let x=0; x < num; x++){
+        numRent = numRent + datos[x].numRent;
+        numBuy = numBuy + datos[x].numBuy;
+      }
+
+      var data = [
+        {
+          name: 'Ventas',
+          Mes: 'Cantidad',
+          Cantidad: numBuy,
+        },
+        {
+          name: 'Alquiler',
+          Mes: 'Cantidad',
+          Cantidad: numRent,
+        },
+        {
+          name:'Premium',
+          Mes: 'Cantidad',
+          Cantidad: 10
+        }
+      ]
+      
+      setEstadisticas(data);
+
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
 
   var config = {
-    data: data,
+    data: estadisticas,
     isGroup: true,
     xField: 'Mes',
     yField: 'Cantidad',
@@ -176,7 +156,10 @@ const DemoColumn = (props) => {
         <Column {...config} />
       </div>
       <div>
-        <button onClick={()=>total()}>Totales</button>        
+        <button onClick={()=>cantidad()}>Totales</button>        
+      </div>
+      <div>
+        <button onClick={()=>ingresos()}>Ingresos</button>        
       </div>
 
     </div>
@@ -187,4 +170,4 @@ const DemoColumn = (props) => {
 export default connect((state) => ({
   credentials:state.credentials, 
   orders:state.orders
-  }))(DemoColumn);
+  }))(Stats);
