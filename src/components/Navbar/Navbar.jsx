@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';
 import { useHistory } from 'react-router-dom';
 import {notification} from 'antd';
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 
 
 const Navbar = (props) => {

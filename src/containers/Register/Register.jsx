@@ -6,7 +6,7 @@ import {useHistory} from "react-router";
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {notification, message} from 'antd';
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 
 
 const Register = () => {

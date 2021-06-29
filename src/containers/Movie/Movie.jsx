@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {notification} from 'antd';
 import {useHistory} from 'react-router-dom';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import Recommendations from '../../components/Recommendations/Recommendations';
 
 const Movie = (props) => {

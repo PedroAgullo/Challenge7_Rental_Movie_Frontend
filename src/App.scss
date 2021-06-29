@@ -1,9 +1,12 @@
+@import 'antd/dist/antd.css';
+
 @import './containers/Home/Home.scss';
 @import './containers/Login/Login.scss';
 @import './containers/Movie/Movie.scss';
 @import './containers/Profile/Profile.scss';
 @import './containers/Register/Register.scss';
 @import './containers/Search/Search.scss';
+
 @import './components/DataMyMovies/DataMyMovies.scss';
 @import './components/DataOrder/DataOrder.scss';
 @import './components/DataOrderAdmin/DataOrderAdmin.scss';
@@ -15,13 +18,14 @@
 @import './components/Recommendations/Recommendations.scss';
 @import './components/Stats/Stats.scss';
 @import './components/TopRated/TopRated.scss';
-@import 'antd/dist/antd.css';
 
 
 .App {
   text-align: center;
 }
-
+h1{
+  color:white;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

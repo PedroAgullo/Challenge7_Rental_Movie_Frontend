@@ -6,7 +6,7 @@ import axios from 'axios';
 import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 import {notification, message} from 'antd';
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 
 const Search = (props) => {
 
