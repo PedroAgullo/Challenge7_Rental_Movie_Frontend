@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./MenuLateral.css";
+// import "./MenuLateral.css";
 import { connect } from "react-redux";
 import { CAMBIADATOS} from "../../redux/types";
 

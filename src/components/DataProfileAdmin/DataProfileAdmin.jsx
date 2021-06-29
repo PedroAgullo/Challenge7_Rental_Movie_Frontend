@@ -1,5 +1,5 @@
 
-import './DataProfileAdmin.css';
+// import './DataProfileAdmin.css';
 // import PhotoProfile from '../../images/defaultFoto.png';
 import PhotoProfile from '../../images/Avatar1.jpg';
 import moment from 'moment';

@@ -1,7 +1,7 @@
 
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-import './DataOrderAdmin.css';
+// import './DataOrderAdmin.css';
 import axios from "axios";
 import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
@@ -78,7 +78,7 @@ const DataOrderAdmin = (props) => {
               {orders.map((act, index) => (
                 <div className="card" key={index}>                
                     <div>                    
-                        <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie"/>
+                        <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie"/>
                     </div>
                         
                     <div>

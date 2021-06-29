@@ -1,4 +1,4 @@
-import './Movie.css';
+// import './Movie.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -100,7 +100,8 @@ const Movie = (props) => {
                     
                     let res2 = await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                     console.log("Añadimos +1 a numRent: ", res2.data)
-                   
+                    notification.success({message:'Pelicula alquilada.',description: "Ve a tu perfil/mis peliculas para poder verla."});
+
                
                 }catch (err){      
                   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
@@ -125,7 +126,7 @@ const Movie = (props) => {
 
             let res = await axios.post('http://localhost:3005/movies/id',body);
             
-            console.log("Resultado de la busqueda de pelicula por id: ", res);
+            // console.log("Resultado de la busqueda de pelicula por id: ", res);
             
             setMovieData(res); 
         }catch (err){      
@@ -156,9 +157,9 @@ const Movie = (props) => {
             <div className="boxRight">
                 <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
                 <div className="titulo"><h3>SINOPSIS</h3><p>{props.movie.overview}</p></div>
-            </div>
-            <div>QUIZÁ PODRÍA INTERESARTE
+            <div className="recommen">PENSAMOS QUE PODRÍA PODRÍA INTERESARTE
                 <Recommendations/>
+            </div>
             </div>
         </div>  
       );

@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-import "./Register.css";
+// import "./Register.css";
 import axios from 'axios';
 import {useHistory} from "react-router";
 import moment from 'moment';

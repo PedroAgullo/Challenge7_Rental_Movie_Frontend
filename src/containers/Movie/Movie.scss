@@ -2,7 +2,6 @@ h1, h3{
     color: white;
 }
 
-
 .boxMovie{
     display: flex;
     flex-direction: row;
@@ -13,8 +12,6 @@ h1, h3{
     width: 100vw;
     background-color: #060d17;
 }
-
-
 
 .boxLeft{
     display: flex;
@@ -55,7 +52,6 @@ h1, h3{
     cursor: pointer;
 }
 
-
 .buttonMovie:hover{
     color:white;
     cursor: pointer;
@@ -63,16 +59,17 @@ h1, h3{
     
 }
 
-
 .boxRight{
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height:92vh;
-    width: 50vw;
+    width: 40vw;
     color: white;
 
 }
+
+
 

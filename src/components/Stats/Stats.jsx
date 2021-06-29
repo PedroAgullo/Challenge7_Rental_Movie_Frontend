@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import {useHistory} from "react-router";
-import './Stats.css';
+// import './Stats.css';
 import axios from "axios";
 import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';

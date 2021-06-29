@@ -1,7 +1,7 @@
 
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-import './Popular.css';
+// import './Popular.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
@@ -53,7 +53,7 @@ const Popular = (props) => {
   
 }
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w200"
+  const size = "w500"
 
   // if (props.getroomusers[0]?._id) {
     if (movieData[0]?.id) {

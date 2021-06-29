@@ -1,5 +1,5 @@
 import React from 'react';
-import './Profile.css';
+// import './Profile.css';
 import {notification, message} from 'antd';
 import 'antd/dist/antd.css'
 import MenuLateral from '../../components/MenuLateral/MenuLateral';

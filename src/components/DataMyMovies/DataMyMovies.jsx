@@ -1,7 +1,7 @@
 
 //Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-import './DataMyMovies.css';
+// import './DataMyMovies.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import {notification} from 'antd';
@@ -83,7 +83,7 @@ const DataMyMovies = (props) => {
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (
                 <div className="card" key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterMovie" onClick={()=>playMovie(act.id)}/> 
+                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie" onClick={()=>playMovie(act.id)}/> 
                 </div>
                    ))}
 
