@@ -49,7 +49,6 @@ const Movie = (props) => {
           type: opcion
         }
 
-
         let bodyMovie = {
             idUser : idUser,
             customerId : idUser,
@@ -126,7 +125,7 @@ const Movie = (props) => {
             }
 
             let res = await axios.post('http://localhost:3005/movies/id',body);  
-            
+
             let res2 = await axios.post('http://localhost:3005/movies/video',body);             
            
             setTrailer(res2.data); 
