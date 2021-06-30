@@ -28,8 +28,8 @@ const Recommendations = (props) => {
     const selectMovie = async (movie) => {
       try{
         await props.dispatch({type:GETMOVIE,payload: movie});
+        history.push('/movie');
         await findRecommendations();
-        // history.push('/movie');
 
     }catch (err){
          console.log(err);      

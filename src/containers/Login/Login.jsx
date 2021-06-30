@@ -86,13 +86,15 @@ const Login = (props) => {
             <div className = "vistaLogin">        
                 <div className = "loginCard"> 
                     <div className="espacioBlanco"></div>
-                    <div className = "cardLogin">
-                        <input className="input" type="email" name="email" placeholder="email" onChange={updateCredentials} size="40" lenght='30'></input>
+                    <div class="form">
+                        <input type="text" id="email" class="form__input" name="email" autocomplete="off" placeholder=" "  onChange={updateCredentials}></input>
+                        <label for="email" class="form__label">Email</label>
                     </div>
-                    <div className = "cardLogin">
-                        <input className="input" type="password" name="password" placeholder="password" onChange={updateCredentials} size="40" lenght='30'></input>                        
+                    <div class="form">
+                        <input type="password" id="email" class="form__input" name="password" autocomplete="off" placeholder=" "  onChange={updateCredentials}></input>
+                        <label for="email" class="form__label">Password</label>
                     </div>
-
+                    
                     <div className = "sendButton" onClick={()=>logeame()}>Acción!</div>
                     <div>{msgError}</div>
                 </div>        
