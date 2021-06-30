@@ -197,12 +197,12 @@ const Register = () => {
                     </div>
                 <div>{errors.eEmail}</div>                
                     <div class="form">
-                        <input type="password" id="email" class="form__input" name="password" autocomplete="off" placeholder=" " onBlur={()=>checkError("password")} onChange={updateFormulario}></input>
-                        <label for="email" class="form__label">Password</label>
+                        <input type="password" id="password" class="form__input" name="password" autocomplete="off" placeholder=" " onBlur={()=>checkError("password")} onChange={updateFormulario}></input>
+                        <label for="password" class="form__label">Password</label>
                     </div>
                 <div>{errors.ePassword}</div>
                 <div class="form">
-                        <input type="date" id="birthday" class="form__input" name="password" autocomplete="off" placeholder=" " onBlur={()=>checkError("birthday")} onChange={updateFormulario}></input>
+                        <input type="date" id="birthday" class="form__input" name="birthday" autocomplete="off" placeholder=" " onBlur={()=>checkError("birthday")} onChange={updateFormulario}></input>
                         <label for="birthday" class="form__label">Fecha de nacimiento</label>
                     </div>
                 <div>{errors.eBirthday}</div>

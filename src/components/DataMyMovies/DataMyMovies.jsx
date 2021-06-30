@@ -57,7 +57,7 @@ const DataMyMovies = (props) => {
         customerId : idUser,
         idUser: idUser        
       }
-
+      console.log()
       let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
       console.log("Datos devueltos del backend: ", res.data);
@@ -83,7 +83,7 @@ const DataMyMovies = (props) => {
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (
                 <div className="card" key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie" onClick={()=>playMovie(act.id)}/> 
+                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie" onClick={()=>playMovie(act.movieId)}/> 
                 </div>
                    ))}
 
