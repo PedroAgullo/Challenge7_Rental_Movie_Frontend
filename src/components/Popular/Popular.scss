@@ -5,6 +5,7 @@
     justify-content: center;
     flex-wrap: nowrap;
     overflow-x: scroll;
+    background-color: #060d17;
 }
 
 
@@ -20,7 +21,6 @@
     border-radius: 1em;
     transition: 0.3s;
     font-size: 0.8em;
-    /* box-shadow:  5px 5px 5px 2px grey; */
     margin: 1em;
     background-color: darkgreen;
     overflow: hidden;
@@ -30,11 +30,8 @@
     
     cursor: pointer;
     transition: 0.3s;
-    /* box-shadow: 5px 5px 5px 2px grey; */
-    /* box-shadow: 3px 3px 3px 2px grey; */
-
-    border: 0.2em solid red;    
-
+    border: 0.2em solid red;
+    
 }
 
 
