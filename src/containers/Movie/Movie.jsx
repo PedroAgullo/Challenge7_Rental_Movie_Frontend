@@ -24,6 +24,7 @@ const Movie = (props) => {
   
     //Equivalente a componentDidUpdate en componentes de clase
     useEffect(() => {
+        findMovie();
     });  
   
     const compraPeli = async (opcion, precio) => {
@@ -120,17 +121,14 @@ const Movie = (props) => {
 
     const findMovie = async () => {  
         try{
-            //GET TOP RATED MOVIES
             let body = {
                 id: props.movie.id
             }
 
             let res = await axios.post('http://localhost:3005/movies/id',body);  
             
-            let res2 = await axios.post('http://localhost:3005/movies/video',body);  
-
-            let trailerLink = '"' + res2.data + '"';
-            console.log("Link del video de youtube: ", trailerLink);
+            let res2 = await axios.post('http://localhost:3005/movies/video',body);             
+           
             setTrailer(res2.data); 
             setMovieData(res); 
         }catch (err){      
