@@ -25,8 +25,7 @@ const Register = () => {
             postalCode: '',
             dni: '',
             phone: '',
-            subscription: 'Mensual'
-            
+            subscription: 'Mensual'            
     });
 
     const [errors, setErrors] = useState({
@@ -41,8 +40,7 @@ const Register = () => {
         eCity: '',
         eDni: '',
         ePhone: '',
-        ePostalCode: ''
-        
+        ePostalCode: ''        
     });
 
     const [newMessage, setNewMessage] = useState([]);
@@ -52,8 +50,6 @@ const Register = () => {
     const updateFormulario = (e) => {
         setDatosUser({...datosUser, [e.target.name]: e.target.value});
     }
-
-
 
     const checkError = (arg) => {
         switch (arg){
@@ -130,7 +126,7 @@ const Register = () => {
         }
     }
 
-    const ejecutaRegistro = async () => {       
+    const ejecutaRegistro = async () => {      
 
         let  user = {
             name : datosUser.name,

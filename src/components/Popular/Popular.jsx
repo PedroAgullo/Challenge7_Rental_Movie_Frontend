@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 
-
-
-
 const Popular = (props) => {
   let history = useHistory();
 
@@ -53,7 +50,7 @@ const Popular = (props) => {
   
 }
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w500"
+  const size = "w780"
 
   // if (props.getroomusers[0]?._id) {
     if (movieData[0]?.id) {

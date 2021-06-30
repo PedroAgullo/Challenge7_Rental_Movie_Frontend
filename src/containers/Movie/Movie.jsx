@@ -15,7 +15,8 @@ const Movie = (props) => {
     //hooks
     const [movieData, setMovieData] = useState([]);  
     const [similarMovie, setSimilarMovie] = useState([]);
-  
+    const [trailer, setTrailer] = useState([]);  
+
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
         findMovie();
@@ -124,10 +125,13 @@ const Movie = (props) => {
                 id: props.movie.id
             }
 
-            let res = await axios.post('http://localhost:3005/movies/id',body);
+            let res = await axios.post('http://localhost:3005/movies/id',body);  
             
-            // console.log("Resultado de la busqueda de pelicula por id: ", res);
-            
+            let res2 = await axios.post('http://localhost:3005/movies/video',body);  
+
+            let trailerLink = '"' + res2.data + '"';
+            console.log("Link del video de youtube: ", trailerLink);
+            setTrailer(res2.data); 
             setMovieData(res); 
         }catch (err){      
         }
@@ -136,30 +140,37 @@ const Movie = (props) => {
 
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w500"
+  const size = "w780"
   // if (props.getroomusers[0]?._id) {
     if (props.movie?.id) {
 
       return (
         <div className="boxMovie"> <h1></h1>
-            <div className="boxLeft">
-                <div className="posterMovie">
-                    <img src={`${baseImgUrl}/${size}${props.movie.poster_path}`}  alt="poster" className="posterMovie"/>
-                </div>
-                <div className="buttonMovieBox">
-                    <div className="buttonMovie">Favoritos</div>                 
-                    <div className="buttonMovie" onClick={()=>compraPeli("comprar", 5)}>Comprar</div>                 
-                    <div className="buttonMovie" onClick={()=>compraPeli("alquilar", 2)}>Alquilar</div>
+            <div className="up">
+                <div className="boxLeft">
+                    <div className="posterMovie">
+                        <img src={`${baseImgUrl}/${size}${props.movie.poster_path}`}  alt="poster" className="posterMovie"/>
+                    </div>
+                    <div className="buttonMovieBox">
+                        <div className="buttonMovie">Favoritos</div>                 
+                        <div className="buttonMovie" onClick={()=>compraPeli("comprar", 5)}>Comprar</div>                 
+                        <div className="buttonMovie" onClick={()=>compraPeli("alquilar", 2)}>Alquilar</div>
+                    </div>
+
                 </div>
 
+                <div className="boxRight">
+                    <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
+                    <div className="titulo"><h3>SINOPSIS</h3><p>{props.movie.overview}</p></div>
+                    <div className="trailer"><h3>TRAILER</h3>                     </div>
+                    <iframe width="560" height="315" src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                </div>
             </div>
 
-            <div className="boxRight">
-                <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
-                <div className="titulo"><h3>SINOPSIS</h3><p>{props.movie.overview}</p></div>
+
             <div className="recommen">PENSAMOS QUE PODRÍA PODRÍA INTERESARTE
                 <Recommendations/>
-            </div>
             </div>
         </div>  
       );

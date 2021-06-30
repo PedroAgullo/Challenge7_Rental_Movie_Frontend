@@ -57,7 +57,7 @@ const Recommendations = (props) => {
   }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w500"
+  const size = "w780"
     if (movieData[0]?.id) {
       return (
         <div className="recomBoxMovies"> <h1>Para tí</h1>
