@@ -63,13 +63,19 @@ const Login = (props) => {
                     idUser: res.data.customer.id,
                 }
 
-                //Guardo en RDX
-                props.dispatch({type:LOGIN,payload:data});
-                               
-                //Mensaje de bienvenida
+
                 let description = ("Bienvenido " + res.data.customer.name + " " + res.data.customer.lastName1 + ".");
                 notification.success({message:'Login correcto.',description: description});
-                
+
+                //Guardo en RDX
+                props.dispatch({type:LOGIN,payload:data});
+                console.log(res.data);
+                console.log("premium:", res.data.customer.premium);
+                console.log("infantil:", res.data.customer.infantil);
+                if ((res.data.customer.premium === true) && (res.data.customer.infantil=== true)){
+                    history.push("/infantil")
+                }
+                               
                 //Redireccion           
                 history.push("/");
 

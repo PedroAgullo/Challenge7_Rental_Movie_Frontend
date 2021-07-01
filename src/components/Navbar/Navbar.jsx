@@ -1,7 +1,7 @@
 import React from 'react';
 // import "./Navbar.css";
 import { NavLink } from 'react-router-dom';
-import Logo from '../../images/Logo1.jpg';
+import Logo from '../../images/Logo4.jpg';
 import Avatar from '../../images/Avatar1.jpg';
 import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';

@@ -1,0 +1,47 @@
+.infantilBoxMovies{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 92vh;    
+    width: 100vw;
+    background-image: url("../../images/infantil.jpg");
+    background-attachment: fixed;
+    // background-color: blue;
+}
+
+.infantilCard {
+    height: 20vh;
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.2em solid yellow;    
+    border-radius: 1em;
+    transition: 0.3s;
+    font-size: 0.8em;
+    margin: 1em;
+    background-color: darkgreen;
+}
+
+.infantilCard:hover{    
+    cursor: pointer;
+    transition: 0.3s;
+    border: 0.2em solid red;    
+}
+
+.infantilBoxCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;  
+    height: auto;
+    width: auto;
+}
+
+.poster{
+    height: 20vh;
+    width: 10vw;
+}
