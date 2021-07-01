@@ -72,12 +72,15 @@ const Login = (props) => {
                 console.log(res.data);
                 console.log("premium:", res.data.customer.premium);
                 console.log("infantil:", res.data.customer.infantil);
-                if ((res.data.customer.premium === true) && (res.data.customer.infantil=== true)){
-                    history.push("/infantil")
+                if (res.data.customer.admin){
+                    history.push("/profile");
+                }else if ((res.data.customer.premium === true) && (res.data.customer.infantil=== true)){
+                    history.push("/infantil");
+                }else {
+                    history.push("/");
                 }
                                
                 //Redireccion           
-                history.push("/");
 
             } catch (err) {      
                     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
