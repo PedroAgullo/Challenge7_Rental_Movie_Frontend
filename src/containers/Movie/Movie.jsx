@@ -15,7 +15,6 @@ const Movie = (props) => {
     //hooks
     const [movieData, setMovieData] = useState([]);  
     const [similarMovie, setSimilarMovie] = useState([]);
-    const [trailer, setTrailer] = useState([]);  
 
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
@@ -24,7 +23,6 @@ const Movie = (props) => {
   
     //Equivalente a componentDidUpdate en componentes de clase
     useEffect(() => {
-        findMovie();
     });  
   
     const compraPeli = async (opcion, precio) => {
@@ -80,7 +78,8 @@ const Movie = (props) => {
                     
                     let res2 = await axios.post('http://localhost:3005/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                     console.log("Añadimos +1 a numBuy: ", res2.data);                   
-               
+                    notification.success({message:'Película comprada.',description: "Ve a tu perfil, mis películas para verla."});
+
                 }catch (err){      
                   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
                 }
@@ -123,12 +122,7 @@ const Movie = (props) => {
             let body = {
                 id: props.movie.id
             }
-
             let res = await axios.post('http://localhost:3005/movies/id',body);  
-
-            let res2 = await axios.post('http://localhost:3005/movies/video',body);             
-           
-            setTrailer(res2.data); 
             setMovieData(res); 
         }catch (err){      
         }
@@ -160,7 +154,7 @@ const Movie = (props) => {
                     <div className="titulo"><h1>{props.movie.title}</h1><h3>({props.movie.release_date})</h3></div>
                     <div className="titulo"><h3>SINOPSIS</h3><p>{props.movie.overview}</p></div>
                     <div className="trailer"><h3>TRAILER</h3>                     </div>
-                    <iframe width="560" height="315" src={trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src={props.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                 </div>
             </div>
@@ -180,6 +174,7 @@ const Movie = (props) => {
 }
 export default connect((state) => ({
       credentials:state.credentials, 
-      movie:state.movie
+      movie:state.movie,
+      trailer: state.trailer
       }))(Movie);
       

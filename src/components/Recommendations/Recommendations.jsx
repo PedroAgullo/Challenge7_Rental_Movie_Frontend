@@ -6,7 +6,7 @@ import {useHistory} from "react-router";
 import axios from "axios";
 // import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
+import { GETMOVIE, TRAILER } from '../../redux/types';
 import {notification} from 'antd';
 
 const Recommendations = (props) => {
@@ -26,8 +26,14 @@ const Recommendations = (props) => {
   
     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
+      let body = {
+        id: movie.id
+      } 
       try{
         await props.dispatch({type:GETMOVIE,payload: movie});
+        let res2 = await axios.post('http://localhost:3005/movies/video',body);  
+        console.log("Estoy en selectMovie de Recommendations: ", res2.data);
+        props.dispatch({type:TRAILER,payload:res2.data});
         history.push('/movie');
         await findRecommendations();
 
@@ -38,20 +44,18 @@ const Recommendations = (props) => {
     }
   
   const findRecommendations = async () => { 
-    console.log("Estoy entrando.");
     let body = {
       id: props.movie.id
     } 
-      console.log("Antes del axios en redommendations", body);
 
     try{
 
       let res = await axios.post('http://localhost:3005/movies/recommendations', body);
-      console.log("Recommendations",res.data.results);
+      // let res2 = await axios.post('http://localhost:3005/movies/video',body);  
+      // props.dispatch({type:TRAILER,payload:res2.data});
       setMovieData(res.data.results); 
     }catch (err){      
       notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
-      // .response.data.message
     }
   
   }
@@ -79,5 +83,6 @@ const Recommendations = (props) => {
 export default connect((state) => ({
   credentials:state.credentials,
   movie:state.movie, 
-  getroomusers:state.getroomusers
+  getroomusers:state.getroomusers,
+  trailer:state.trailer
   }))(Recommendations);
