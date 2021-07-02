@@ -12,10 +12,14 @@ const DataOrderAdmin = (props) => {
 
     //hooks
     const [orders, setOrders] = useState([]);  
-  
+    const [ordersAll, setOrdersAll] = useState([]);  
+    const [ordersBuy, setOrdersBuy] = useState([]);  
+    const [ordersRent, setOrdersRent] = useState([]);  
+    const [ordersPremium, setOrdersPremium] = useState([]);  
+
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
-      findAllOrders();
+      findOderByType("All")
     }, []);
   
     //Equivalente a componentDidUpdate en componentes de clase
@@ -23,46 +27,83 @@ const DataOrderAdmin = (props) => {
     });
   
     //CANCELA LA CLASE
-    const cancelClass = async (roomId) => {
-      try{
-        message.info('Clase cancelada.');
+    // const cancelClass = async (roomId) => {
+    //   try{
+    //     message.info('Clase cancelada.');
+
+    //   let token = props.credentials.token;
+    //   let idUser = props.credentials.idUser;
+
+
+    //   let body = {
+    //     id : roomId,
+    //     member : idUser
+    //   }
+
+    //   let res = await axios.post('http://localhost:3005/room/leave',body,{headers:{'authorization':'Bearer ' + token}});
+
+    //   findAllOrders();
+    //  }catch (err){
+    //     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+    //     }      
+    // }
+
+
+    const findOderByType = async (opc) => {
+      console.log("Entro en cambiaDAtos. OPC:", opc);
 
       let token = props.credentials.token;
-      let idUser = props.credentials.idUser;
-
-
       let body = {
-        id : roomId,
-        member : idUser
+        customerId : props.credentials.idUser,
+        idUser: props.credentials.idUser,
+        type: opc        
       }
+      console.log("El ritmo in the body: ", body);
+      switch(opc){
+        case "All" : 
+        try{
+              let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
+              console.log("Datos devueltos del backend: ", res.data);
+              setOrders(res.data); 
+            }catch (err){     
+              console.log(err) ;
+              notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+            }  
+          return;
 
-      let res = await axios.post('http://localhost:3005/room/leave',body,{headers:{'authorization':'Bearer ' + token}});
-
-      findAllOrders();
-     }catch (err){
-        notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-        }      
+        default : 
+            try{
+              let res = await axios.post('http://localhost:3005/order/type',body,{headers:{'authorization':'Bearer ' + token}});      
+              console.log("Datos devueltos del backend: ", res.data);
+              setOrders(res.data); 
+            }catch (err){     
+              console.log(err) ;
+              notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+            }              
+          return;
+      }
     }
 
-    const findAllOrders = async () => {  
-      try{
 
-        let idUser = props.credentials.idUser;
-        let token = props.credentials.token;
+    // const findAllOrders = async () => {  
+    //   try{
+    //     let idUser = props.credentials.idUser;
+    //     let token = props.credentials.token;
       
-        let body = {
-          customerId : idUser,
-          idUser: idUser        
-        }
+    //     let body = {
+    //       customerId : idUser,
+    //       idUser: idUser        
+    //     }
 
-        let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
-        console.log("Datos devueltos del backend: ", res.data);    
-        setOrders(res.data);; 
-      }catch (err){     
-          console.log(err) ;
-          notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-      }  
-    }
+    //     let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
+    //     console.log("Datos devueltos del backend: ", res.data);
+
+    //     setOrders(res.data); 
+    //   }catch (err){     
+    //       console.log(err) ;
+    //       notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+    //   }  
+    // }
     
     const baseImgUrl = "https://image.tmdb.org/t/p"
     const size = "w200"
@@ -71,10 +112,10 @@ const DataOrderAdmin = (props) => {
       return (
         <div className="nombreDataRoom"> 
             <div className="tipoDatos">
-              <div className="botonDatos">Todo</div>
-              <div className="botonDatos">Ventas</div>
-              <div className="botonDatos">Alquileres</div>
-              <div className="botonDatos">Premium</div>
+              <div className="botonDatos" onClick={()=>findOderByType("All")}>Todo</div>
+              <div className="botonDatos" onClick={()=>findOderByType("Compra")}>Compras</div>
+              <div className="botonDatos" onClick={()=>findOderByType("Alquiler")}>Alquileres</div>
+              <div className="botonDatos" onClick={()=>findOderByType("Premium")}>Premium</div>
             </div>
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (

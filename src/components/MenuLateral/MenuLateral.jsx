@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 // import "./MenuLateral.css";
 import { connect } from "react-redux";
 import { CAMBIADATOS} from "../../redux/types";
-import { faAddressCard, faUsers, faShoppingCart, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faAddressCard, faUsers, faShoppingCart, faChartBar, faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -86,11 +86,11 @@ const Menulateral = (props) => {
               <span class="tooltip">Mis peliculas</span>
             </li>
             <li onClick={() => cambiaDatos("favoritos")}>
-              <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
-              <span class="tooltip">Estadisticas</span>
+              <FontAwesomeIcon className="iconAdmin" icon={faStar}/>
+              <span class="tooltip">Favoritos</span>
             </li>
             <li onClick={() => cambiaDatos("subscription")}>
-            <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
+            <FontAwesomeIcon className="iconAdmin" icon={faCog}/>
             <span class="tooltip">Configuración</span>
             </li>
           </ul>
@@ -126,13 +126,13 @@ const Menulateral = (props) => {
                 <FontAwesomeIcon className="iconAdmin" icon={faUsers}/>
 			          <span class="tooltip">Usuarios</span>
 		          </li>
-		          <li onClick={() => cambiaDatos("stats")}>
+		          {/* <li onClick={() => cambiaDatos("stats")}>
                 <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
           			<span class="tooltip">Estadisticas</span>
-		          </li>
+		          </li> */}
 		          <li >
-			          <i class="fa fa-sliders"></i>
-			        <span class="tooltip">Settings</span>
+              <FontAwesomeIcon className="iconAdmin" icon={faCog}/>
+			        <span class="tooltip">Configuración</span>
 		          </li>
 	          </ul>
           </nav>

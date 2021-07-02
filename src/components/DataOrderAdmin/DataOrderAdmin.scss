@@ -20,6 +20,7 @@
     box-shadow:  2px 2px 2px 1px grey;
     height: 2em;
     width: 5em;
+    z-index: 999;
     
     &:hover{
         cursor: pointer;
