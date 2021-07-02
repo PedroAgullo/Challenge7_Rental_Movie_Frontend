@@ -9,7 +9,6 @@ import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-
 const DataOrderAdmin = (props) => {
 
     //hooks
@@ -29,25 +28,24 @@ const DataOrderAdmin = (props) => {
     });
   
 
-
     // Borra order.
     const deleteOrder = async (orderId) => {
       try{
 
-      let token = props.credentials.token;
+        let token = props.credentials.token;
 
-      let body = {
-        id : orderId,
-      }
+        const body = {
+          id : orderId
+        }
+        console.log("DeleteOrder, body: ", body);
 
-      let res = await axios.delete('http://localhost:3005/order',body,{headers:{'authorization':'Bearer ' + token}});
-      message.info('Pedido eliminado.');
-      findOderByType("All");
+        let res = await axios.post('http://localhost:3005/order/delete',body,{headers:{'authorization':'Bearer ' + token}});      
+        message.info('Pedido eliminado.');
+        findOderByType("All");
      }catch (err){
         notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
         }      
     }
-
 
     //Encuentra pedido por tipo (compra, alquiler, premiun, todos);
     const findOderByType = async (opc) => {
