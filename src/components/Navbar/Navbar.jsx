@@ -12,9 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = (props) => {
 
-
   let history = useHistory();
-
 
   const takeMe = (where) => {
     history.push(where);
@@ -36,7 +34,6 @@ const Navbar = (props) => {
 
   }
 
-
   const cambiaDatos = async (info) => {
     switch (info) {
       case "profile":
@@ -49,8 +46,6 @@ const Navbar = (props) => {
         break;
     }
   };
-
-
 
   if (props.credentials?.token === '') {
     return (
@@ -103,9 +98,7 @@ const Navbar = (props) => {
         )
 }
 
-
 };
-
 
 export default connect((state)=>({credentials:state.credentials}))(Navbar);
 

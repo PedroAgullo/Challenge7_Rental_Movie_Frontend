@@ -31,12 +31,9 @@ const TopRated = (props) => {
 
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/movie');
-
-
     }catch (err){
          console.log(err);      
          }      
-
     }
   
     const findTopRated = async () => {  
@@ -45,8 +42,7 @@ const TopRated = (props) => {
       let res = await axios.get('http://localhost:3005/movies/');
       setMovieData(res.data.results); 
   }catch (err){      
-  }
-  
+  }  
 }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
@@ -56,7 +52,7 @@ const TopRated = (props) => {
     if (movieData[0]?.id) {
 
       return (
-        <div className="TopRatedBoxMovies"> <h1>TOP RATED</h1>
+        <div className="TopRatedBoxMovies"> <h2>MEJOR VALORADOS</h2>
             <div className="boxCardTopRated">
               {movieData.map((act, index) => (
                 <div className="cardTopRated" onClick={()=> selectMovie(act)} key={index}>
