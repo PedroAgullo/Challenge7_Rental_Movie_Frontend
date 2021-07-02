@@ -1,11 +1,11 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-// import './DataOrderAdmin.css';
 import axios from "axios";
-import { Popconfirm, message, Button } from 'antd';
+import { message } from 'antd';
 import { connect } from 'react-redux';
 import {notification} from 'antd';
+import moment from "moment";
+
 
 
 const DataOrderAdmin = (props) => {
@@ -45,26 +45,23 @@ const DataOrderAdmin = (props) => {
     }
 
     const findAllOrders = async () => {  
-    try{
+      try{
 
-      let idUser = props.credentials.idUser;
-      let token = props.credentials.token;
-    
-      let body = {
-        customerId : idUser,
-        idUser: idUser        
-      }
+        let idUser = props.credentials.idUser;
+        let token = props.credentials.token;
+      
+        let body = {
+          customerId : idUser,
+          idUser: idUser        
+        }
 
-      let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});
-     
-      console.log("Datos devueltos del backend: ", res.data);    
-      setOrders(res.data);; 
-
-    }catch (err){     
-        console.log(err) ;
-        notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-    }
-  
+        let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
+        console.log("Datos devueltos del backend: ", res.data);    
+        setOrders(res.data);; 
+      }catch (err){     
+          console.log(err) ;
+          notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+      }  
     }
     
     const baseImgUrl = "https://image.tmdb.org/t/p"
@@ -72,24 +69,35 @@ const DataOrderAdmin = (props) => {
     console.log("Datos del Hook orders:", orders);
    if (orders[0]?.id) {
       return (
-        <div className="nombreDataRoom"> <h1>Todos los pedidos</h1>
-
+        <div className="nombreDataRoom"> 
+            <div className="tipoDatos">
+              <div className="botonDatos">Todo</div>
+              <div className="botonDatos">Ventas</div>
+              <div className="botonDatos">Alquileres</div>
+              <div className="botonDatos">Premium</div>
+            </div>
             <div className="boxCardDataRoom">
               {orders.map((act, index) => (
-                <div className="card" key={index}>                
+                <div className="cardAdmin" key={index}>                
                     <div>                    
-                        <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie"/>
-                    </div>
-                        
-                    <div>
-                        <p className="nombre">{act.title}</p>
-                        <p className="fecha">Fecha compra: {act.createdAt}</p>
-                        <p className="fecha">Precio: {act.precio}€</p>
-                    </div>
+                        <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovieVentas"/>
+                    </div>  
+                    <div className="cardAdminRight">
+                        <div className="dato">
+                          <p className="">{act.title}</p>                        
+                          <p className="fecha">Fecha: {moment(act.createdAt).format('LL')}</p>
+                        </div>
+                        <div className="dato">
+                          <p className="fecha">Tipo:  {act.type}</p>
+                          <p className="fecha">Precio: {act.precio}€</p>                  
+                        </div>           
+                        <div className="dato">
+                          <p className="fecha">ID Cliente :  {act.customerId}</p>
+                          <p className="fecha">ID Compra: {act.id}</p>                  
+                        </div>                
+                    </div>                      
                 </div>
-
                    ))}
-
             </div>
         </div>  
       );

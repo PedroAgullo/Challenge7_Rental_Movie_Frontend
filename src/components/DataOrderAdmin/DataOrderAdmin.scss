@@ -1,23 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 
+.tipoDatos{
 
-.card {
-   /*  height: 30vh;
-    width: 15vw;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: center; 
     justify-content: center;
-    border: 0.2em solid grey;    
-    border-radius: 1em;
-    transition: 0.3s;
-    font-size: 0.8em;
-    box-shadow:  5px 5px 5px 2px grey;
-    margin-right: 1em;
-    background-color: #F0EC57; */
-    height: auto;
-    width: fit-content;
+    margin: 1em;
+    color: white;
+}
+
+.botonDatos{    
+    justify-content: center;
+    align-items: center; 
+    background-color: #313443;
+    margin: 0.5em;
+    border-radius: 0.3em;
+    box-shadow:  2px 2px 2px 1px grey;
+    height: 2em;
+    width: 5em;
+    
+    &:hover{
+        cursor: pointer;
+        background-color:#22252E ;
+    }
+}
+
+.cardAdmin {    
+    height: 8em;
+    width: 40em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -26,25 +38,42 @@
     border-radius: 1em;
     transition: 0.3s;
     font-size: 0.8em;
-    box-shadow:  5px 5px 5px 2px grey;
+    box-shadow:  2px 2px 2px 1px grey;
     margin-right: 1em;
-    background-color: #F0EC57;
+    background-color: lightgrey;
     margin-bottom: 1em;
     padding: 1em;
+
+    &:hover{
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 3px 3px 3px 2px grey, 5px 5px 5px 2px grey;    }  
 }
 
-.card:hover{
-    background-color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 5px 5px 5px 2px grey, 8px 8px 8px 5px grey;
+.dato{
+    margin: 1em;
 }
 
-.nombre{
-    font-weight: bold;
-    font-size: 25px;
-    font-family: 'Antonio', sans-serif;
+
+.cardAdminRight{
+    margin: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
+
+.posterDataMovieVentas{
+    height: 10vh;
+    width: 4vw;
+}
+
+
+// .nombre{
+//     font-weight: bold;
+//     font-size: 25px;
+//     font-family: 'Antonio', sans-serif;
+// }
 
 .boxCardDataRoom {
     display: flex;
@@ -54,31 +83,8 @@
     flex-wrap: wrap;  
     height: auto;
     width: auto;
-
 }
 
-.datosCard {
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    /* max-width: fit-content; */
-    width: fit-content;
-    
-}
-
-.nombreDataRoom {
-    font-family: 'Antonio', sans-serif;
-    font-size: 20px;
-    text-align: center;
-}
-
-.spinner {
-    height: 80vh;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
@@ -87,11 +93,3 @@
       font-size: 15px;
     }
   }
-
-
-
-
-
-
-
-  /* A partir de aquí el spinner */

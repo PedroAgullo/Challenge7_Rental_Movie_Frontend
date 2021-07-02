@@ -63,7 +63,7 @@ const Movie = (props) => {
 
         switch (opcion){
 
-            case "comprar" :
+            case "Compra" :
                 try{
 
                     console.log("datos que le pasamos a axios",bodyOrder);
@@ -85,7 +85,7 @@ const Movie = (props) => {
                 }
                 return;
 
-            case "alquilar" :
+            case "Alquiler" :
                 try{
 
                     console.log("datos que le pasamos a axios",bodyOrder);
@@ -146,8 +146,8 @@ const Movie = (props) => {
                     </div>
                     <div className="buttonMovieBox">
                         <div className="buttonMovie">Favoritos</div>                 
-                        <div className="buttonMovie" onClick={()=>compraPeli("comprar", 5)}>Comprar</div>                 
-                        <div className="buttonMovie" onClick={()=>compraPeli("alquilar", 2)}>Alquilar</div>
+                        <div className="buttonMovie" onClick={()=>compraPeli("Compra", 5)}>Comprar</div>                 
+                        <div className="buttonMovie" onClick={()=>compraPeli("Alquiler", 2)}>Alquilar</div>
                     </div>
 
                 </div>
