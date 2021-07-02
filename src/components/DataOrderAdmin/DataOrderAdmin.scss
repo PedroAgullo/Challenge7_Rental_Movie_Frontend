@@ -20,7 +20,6 @@
     box-shadow:  2px 2px 2px 1px grey;
     height: 2em;
     width: 5em;
-    z-index: 999;
     
     &:hover{
         cursor: pointer;
@@ -55,7 +54,6 @@
     margin: 1em;
 }
 
-
 .cardAdminRight{
     margin: 2em;
     display: flex;
@@ -70,11 +68,6 @@
 }
 
 
-// .nombre{
-//     font-weight: bold;
-//     font-size: 25px;
-//     font-family: 'Antonio', sans-serif;
-// }
 
 .boxCardDataRoom {
     display: flex;

@@ -7,21 +7,11 @@ import axios from 'axios';
 import {notification} from 'antd';
 
 
-
 const DataProfileAdmin = (props) => {
 
         //Hooks
         const [profile, setProfile] = useState([]); 
-        // const [datosUser, setDatosUser] = useState(
-        //     {
-
-        //         address: props.credentials.user.address,
-        //         country: props.credentials.user.country,
-        //         city: props.credentials.user.city,
-        //         telephone: props.credentials.user.telephone
-        // });        
-
-
+      
     const [datosUser, setDatosUser] = useState(
         {
             id: '',
@@ -39,23 +29,6 @@ const DataProfileAdmin = (props) => {
             subscription: ''
     });
 
-    // const [datosMonitor, setDatosMonitor] = useState(
-    //     {
-    //         _id: '',
-    //         name : '',
-    //         lastName1: '',
-    //         lastName2: '',
-    //         email: '',
-    //         password: '',
-    //         birthday: '',
-    //         address: '',
-    //         country: '',
-    //         city: '',
-    //         dni: '',
-    //         telephone: '',
-    //         subscription: ''            
-    // });
-
     const [errors, setErrors] = useState({
         name : datosUser.name,
         lastName1: datosUser.lastName1,
@@ -68,10 +41,7 @@ const DataProfileAdmin = (props) => {
         city: datosUser.city,
         dni: datosUser.dni,
         telephone: datosUser.telephone,        
-        
     });
-
-
 
     useEffect(() => {
         setProfile(1);
@@ -79,13 +49,11 @@ const DataProfileAdmin = (props) => {
 
     let user = props.credentials.user;   
 
-
-
     const findUser = async (info) => {
         let opc= document.getElementById("op").value;
         let dato = document.getElementById("dataSearch").value;
-        console.log(opc);
-        if (opc === '') 
+        console.log("Datos del campo que hay vacío", dato);
+        if (dato === "") 
         {
             notification.warning({message:'Atención.',description: "El campo de búsqueda no puede estar vacío" });            
             return;
@@ -94,24 +62,34 @@ const DataProfileAdmin = (props) => {
         let token = props.credentials.token;
         let body = {
             customerId : parseInt(dato),
-            dni : parseInt(dato),
+            dni : dato,
             email : dato
         }
 
         switch (opc){
             case 'EMAIL':
+                
                 console.log("Email : ", body);
                 let res = await axios.post('http://localhost:3005/customer/email',body,{headers:{'authorization':'Bearer ' + token}});
-                console.log(res.data);
+                    if (res.data === null){
+                        notification.warning({message:'Atención.',description: "Email del usuario no encontrado" });
+                    return;
+                }                
+                console.log(res.data);                
                 setDatosUser(res.data);
                 setProfile(info);
 
             break;
 
-            case 'DNI':
-                
+            case 'DNI':                
                 console.log("DNI",body);
                 let resDNI = await axios.post('http://localhost:3005/customer/dni',body,{headers:{'authorization':'Bearer ' + token}});                
+                
+                if (resDNI.data === null){
+                    notification.warning({message:'Atención.',description: "DNI del usuario no encontrado" });
+                return;
+                }  
+
                 console.log(resDNI.data);
                 setDatosUser(resDNI.data);
                 setProfile(info);
@@ -120,33 +98,16 @@ const DataProfileAdmin = (props) => {
             case 'ID':
                 console.log("id", body);
                 let resID = await axios.post('http://localhost:3005/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
+                if (resID.data === null){
+                    notification.warning({message:'Atención.',description: "Id del usuario no encontrado" });
+                return;
+                }  
                 console.log(resID.data);
                 setDatosUser(resID.data);
                 setProfile(info);
             break;
         }
-
-        // try {
-            
-        //     let body = {
-        //         email : datosUser.email
-        //     }
-        //     let res = await axios.post('http://localhost:3005/user/email',body,{headers:{'authorization':'Bearer ' + token}});
-
-        //     if (res.data === null){
-        //         notification.warning({message:'Atención.',description: "El email no se ha encontrado" });
-
-        //         return;
-        //     }
-
-        //     notification.success({message:'Busqueda con éxito.',description: "Usuario encontrado" });
-        //     setDatosMonitor(res.data);
-        //     setProfile(info);
-        // } catch (err) {
-
-        // }
     }
-
 
     const updateUser = async (info) => {        
         let token = props.credentials.token;
@@ -159,7 +120,6 @@ const DataProfileAdmin = (props) => {
             phone : datosUser.phone,
             postalcode: datosUser.postalCode  
         }
-
 
            try {
             let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
@@ -311,8 +271,6 @@ const DataProfileAdmin = (props) => {
                 }else{
                     setErrors({...errors, ePhone: ''});
                 }
-          
-
             break;
 
             
@@ -327,11 +285,8 @@ const DataProfileAdmin = (props) => {
                 }
          
             break;
-
-
         }
     }
-
 
     const saveData = async (info) => {        
         let token = props.credentials.token;
@@ -356,7 +311,6 @@ const DataProfileAdmin = (props) => {
             let res = await axios.post('http://localhost:3005/user',body,{headers:{'authorization':'Bearer ' + token}});
             notification.success({message:'Atencion.',description: "Nuevo coach creado correctamente."});
 
-
         } catch (err) {
             var errorText = err.response.data.message;
             if (errorText.includes("email")){
@@ -368,30 +322,33 @@ const DataProfileAdmin = (props) => {
             }else{
                 notification.error({message:'Atencion.',description: "Tenemos problemas en la base de datos. Póngase en contacto con el administrador."});
             }
-        }
-
-  
-        
+        }        
     }
 
     if (profile === 1) {
         return (
             <div>
-                <div className="tituloDataProfile"><h1>Nuevo usuario</h1></div>
-                <div className="boxDataProfileUser">
+                <div className="tipoDatos">
+                    {/* <div className="botonDatos" onClick={()=>findOderByType("All")}>Nuevo</div> */}
+                    <div className="botonDatos" onClick={(()=>saveData())}>Guardar</div>
+                    <div className="botonDatos" onClick={(()=>findUser(2))}>Buscar</div>
 
-                    <div className="infoUser1">
-                        <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
-                        <div className="empty"><button onClick={(()=>saveData())}>Guardar</button></div>
-                        <div className="empty"><button onClick={(()=>findUser(2))}>Buscar</button></div>
-                        Buscar por :<select id="op" className="inputBase" type="select" name="subscription" required="true" placeholder="Abono"  lenght='30'>
+                    <div className="userSearch">
+                         Buscar por : 
+                         <select id="op" className="inputBase" value="" type="select" name="subscription" required="true" placeholder="Abono"  lenght='30'>
                             <option value="EMAIL">EMAIL</option>
                             <option value="DNI">DNI</option>
                             <option value="ID">ID</option>
-                        </select>          
-                        <input id="dataSearch" className="inputBaseUser" type="text" name="busqueda" size="34" lenght='30'></input>       
+                             </select>          
+                             <input id="dataSearch" className="inputBaseUser" type="text" name="busqueda" size="34" lenght='30'></input>                     
                     </div>
+                </div>
 
+                <div className="boxDataProfileUser">
+                    <div className="infoUser1">
+                        <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
+                    </div>
+                    
                     <div className= "infoUser2Titulos">
                         <div className="titulosInfoUser">Nombre:</div>
                         <div className="titulosInfoUser">Primer apellido:</div>
@@ -399,7 +356,6 @@ const DataProfileAdmin = (props) => {
                         <div className="titulosInfoUser">Email:</div>
                         <div className="titulosInfoUser">Password:</div>
                         <div className="titulosInfoUser">Suscripcion:</div>
-                     
                     </div>
 
                     <div className="infoUser2">
@@ -412,12 +368,7 @@ const DataProfileAdmin = (props) => {
                         <input className="inputBaseUser"  type="text" name="email"onChange={updateFormulario} onBlur={()=>checkError("email")}  size="34" lenght='30'></input>
                         <div>{errors.eEmail}</div>
                         <input className="inputBaseUser"  type="password" name="password"onChange={updateFormulario} onBlur={()=>checkError("password")}   size="34" lenght='8'></input>              <div>{errors.ePassword}</div>
-
-
                     </div>
-
-                    
-
 
                     <div className= "infoUser2Titulos">
                         <div className="titulosInfoUser">Dirección:</div>
@@ -426,7 +377,6 @@ const DataProfileAdmin = (props) => {
                         <div className="titulosInfoUser">DNI/NIE:</div>
                         <div className="titulosInfoUser">Telefono:</div>
                         <div className="titulosInfoUser">Fecha de nacimiento:</div>  
-                   
                     </div>
 
                     <div className="infoUser2">
@@ -459,7 +409,6 @@ const DataProfileAdmin = (props) => {
                     <div className="infoUser1">
                     <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
                         <div className="empty"><button onClick={(()=>updateUser(1))}>Guardar</button></div>
-
                     </div>
 
                     <div className= "infoUser2Titulos">
@@ -468,8 +417,7 @@ const DataProfileAdmin = (props) => {
                         <div className="titulosInfoUser">Segundo apellido:</div>
                         <div className="titulosInfoUser">Email:</div>
                         <div className="titulosInfoUser">Password:</div>
-                        <div className="titulosInfoUser">Suscripcion:</div>
-                     
+                        <div className="titulosInfoUser">Suscripcion:</div>                     
                     </div>
 
                     <div className="infoUser2">
@@ -477,8 +425,7 @@ const DataProfileAdmin = (props) => {
                         <input className="inputBaseUser" value={datosUser.lastName1} readonly="readonly" type="text" name="lastName1"   size="34" lenght='30' ></input>
                         <input className="inputBaseUser" value={datosUser.lastName2} readonly="readonly" type="text" name="lastName2"   size="34" lenght='30'></input>
                         <input className="inputBaseUser" value={datosUser.email} readonly="readonly" type="text" name="email"   size="34" lenght='30'></input>
-                        <input className="inputBaseUser" value={datosUser.password} readonly="readonly" type="password" name="password"  placeholder="************" size="34" lenght='8'></input>
- 
+                        <input className="inputBaseUser" value={datosUser.password} readonly="readonly" type="password" name="password"  placeholder="************" size="34" lenght='8'></input> 
                     </div>
 
                     <div className= "infoUser2Titulos">
@@ -487,8 +434,7 @@ const DataProfileAdmin = (props) => {
                         <div className="titulosInfoUser">País:</div>
                         <div className="titulosInfoUser">DNI/NIE:</div>
                         <div className="titulosInfoUser">Telefono:</div>
-                        <div className="titulosInfoUser">Fecha de nacimiento:</div>
-                     
+                        <div className="titulosInfoUser">Fecha de nacimiento:</div>                     
                     </div>
 
                     <div className="infoUser3">
@@ -503,8 +449,6 @@ const DataProfileAdmin = (props) => {
                         <div>{errors.eTelephone}</div>
                         <input className="inputBaseUser" value={moment(datosUser.birthday).format('LL')} readonly="readonly" type="text" name="birthday" ></input>
                     </div>
-
-
                 </div>
 
             </div>

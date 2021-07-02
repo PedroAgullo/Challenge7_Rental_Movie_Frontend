@@ -5,6 +5,8 @@ import { message } from 'antd';
 import { connect } from 'react-redux';
 import {notification} from 'antd';
 import moment from "moment";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
@@ -26,29 +28,28 @@ const DataOrderAdmin = (props) => {
     useEffect(() => {
     });
   
-    //CANCELA LA CLASE
-    // const cancelClass = async (roomId) => {
-    //   try{
-    //     message.info('Clase cancelada.');
-
-    //   let token = props.credentials.token;
-    //   let idUser = props.credentials.idUser;
 
 
-    //   let body = {
-    //     id : roomId,
-    //     member : idUser
-    //   }
+    // Borra order.
+    const deleteOrder = async (orderId) => {
+      try{
 
-    //   let res = await axios.post('http://localhost:3005/room/leave',body,{headers:{'authorization':'Bearer ' + token}});
+      let token = props.credentials.token;
 
-    //   findAllOrders();
-    //  }catch (err){
-    //     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-    //     }      
-    // }
+      let body = {
+        id : orderId,
+      }
+
+      let res = await axios.delete('http://localhost:3005/order',body,{headers:{'authorization':'Bearer ' + token}});
+      message.info('Pedido eliminado.');
+      findOderByType("All");
+     }catch (err){
+        notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
+        }      
+    }
 
 
+    //Encuentra pedido por tipo (compra, alquiler, premiun, todos);
     const findOderByType = async (opc) => {
       console.log("Entro en cambiaDAtos. OPC:", opc);
 
@@ -135,6 +136,12 @@ const DataOrderAdmin = (props) => {
                         <div className="dato">
                           <p className="fecha">ID Cliente :  {act.customerId}</p>
                           <p className="fecha">ID Compra: {act.id}</p>                  
+                        </div>    
+                        <div className="datoVacio"></div>
+                        <div className="datoIcon">
+                          <FontAwesomeIcon className="iconOrderAdmin" icon={faEdit}/>
+                          <FontAwesomeIcon onClick={()=>deleteOrder(act.id)} className="iconOrderAdmin" icon={faTrashAlt}/>
+
                         </div>                
                     </div>                      
                 </div>
@@ -143,10 +150,22 @@ const DataOrderAdmin = (props) => {
         </div>  
       );
     } else {
-      return <div>
-            ESTAMOS EN TODOS LOS PEDIDOS (ADMIN)
-        </div>        
+         return (
+          <div>
+            <div className="nombreDataRoom"> 
+              <div className="tipoDatos">
+                <div className="botonDatos" onClick={()=>findOderByType("All")}>Todo</div>
+                <div className="botonDatos" onClick={()=>findOderByType("Compra")}>Compras</div>
+                <div className="botonDatos" onClick={()=>findOderByType("Alquiler")}>Alquileres</div>
+                <div className="botonDatos" onClick={()=>findOderByType("Premium")}>Premium</div>
+              </div>
 
+              <div>        
+                 NO HAYA PEDIDOS DE ESTE TIPO.
+               </div>        
+            </div>
+          </div>            
+        )
     }
 };
 

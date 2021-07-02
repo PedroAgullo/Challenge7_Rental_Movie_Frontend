@@ -8,7 +8,31 @@
     flex-direction: row; 
 }
 
+.userSearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row; 
+}
 
+.datoIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+}
+
+.iconOrderAdmin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    margin: 0.8em;
+}
+
+.datoVacio{
+    width: 2em;
+}
 
 .boxDataProfileUser{
     display: flex;
