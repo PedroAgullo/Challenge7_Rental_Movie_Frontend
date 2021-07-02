@@ -4,11 +4,9 @@ import React, { useEffect, useState } from "react";
 // import './DataOrder.css';
 import axios from "axios";
 import moment from "moment";
-import { Popconfirm, message, Button } from 'antd';
+import { message } from 'antd';
 import { connect } from 'react-redux';
-import { GETORDER } from '../../redux/types';
 import {notification} from 'antd';
-import {useHistory} from "react-router";
 
 
 const DataOrder = (props) => {

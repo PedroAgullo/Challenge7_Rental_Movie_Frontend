@@ -118,10 +118,12 @@ const Movie = (props) => {
 
 
     const findMovie = async () => {  
+
         try{
             let body = {
                 id: props.movie.id
             }
+            console.log("Estoy en findmovie de Movie. body: ", body);
             let res = await axios.post('http://localhost:3005/movies/id',body);  
             setMovieData(res); 
         }catch (err){      
@@ -136,7 +138,7 @@ const Movie = (props) => {
     if (props.movie?.id) {
 
       return (
-        <div className="boxMovie"> <h1></h1>
+        <div className="boxMovie">
             <div className="up">
                 <div className="boxLeft">
                     <div className="posterMovie">

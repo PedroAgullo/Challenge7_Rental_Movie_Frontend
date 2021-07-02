@@ -25,7 +25,7 @@ const Register = () => {
             postalCode: '',
             dni: '',
             phone: '',
-            subscription: 'Mensual'            
+            subscription: ''            
     });
 
     const [errors, setErrors] = useState({
@@ -123,6 +123,8 @@ const Register = () => {
                     setErrors({...errors, eBirthday: ''});
                 }         
             break;
+            default:
+                break;
         }
     }
 
@@ -148,26 +150,24 @@ const Register = () => {
         console.log("Datos variable user: ", user);      
 
        try{
-            let res = await axios.post(("http://localhost:3005/customer"), user);   
-            console.log("REs.data: ", res.data);
+            await axios.post(("http://localhost:3005/customer"), user);  
         
             notification.success({message:'Usuario registrado.',description: "Te hemos enviado un email para activar la cuenta." });        
-                history.push('/login');
+            history.push('/login');
         
         }catch(err){
-           console.log(err.response.data.message);
-            // var errorText = err.response.data.message;
-            // if (errorText.includes("email")){
-            //     setNewMessage(JSON.stringify("El email ya existe en la base de datos."));
+           console.log("Prueab: ", err.response);
+             var errorText = err.response.data.mensaje;
+            if (errorText?.includes("email")){
+                notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
 
-            // }else if (errorText.includes("dni")){
-            //     setNewMessage(JSON.stringify("El dni ya existe en la base de datos."));
+                setNewMessage(JSON.stringify("El email ya existe en la base de datos."));
 
-            // }else if (errorText.includes("phone")){
-            //     setNewMessage(JSON.stringify("El teléfono ya existe en la base de datos."));
-            // }else{
-            //     setNewMessage(JSON.stringify(err.response.data.message));            
-            // }            
+            }else{
+                notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
+
+                setNewMessage(JSON.stringify(err.response.data.message));            
+            }            
         };      
    
     }    

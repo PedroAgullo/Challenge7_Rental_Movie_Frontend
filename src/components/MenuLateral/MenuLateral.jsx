@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 // import "./MenuLateral.css";
 import { connect } from "react-redux";
 import { CAMBIADATOS} from "../../redux/types";
+import { faAddressCard, faUsers, faShoppingCart, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Menulateral = (props) => {
 
@@ -10,7 +13,9 @@ const Menulateral = (props) => {
   let history = useHistory();
   let credentials = props.credentials;
   const [useroom, setUseroom] = useState([]);
+  
 
+  
   const cambiaDatos = async (info) => {
     switch (info) {
       case "profile":
@@ -65,29 +70,85 @@ const Menulateral = (props) => {
   if (props?.credentials?.user?.admin === false) 
   {
     return (
-      <div className="boxLateral">
-        <div className="lateralMenu">
-        <div className="tituloVistaAdmin">MENÚ USUARIO</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Mi perfil</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("misPedidos")}>Mis pedidos</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("myMovies")}>Mis películas</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("favoritos")}>Favoritos</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("subscription")}>Suscripción</div>          
-        </div>
+      <div>
+        <nav class="sidebar-navigation">
+          <ul>
+            <li class="active" onClick={() => cambiaDatos("profile")}>
+              <FontAwesomeIcon className="iconAdmin" icon={faAddressCard}/>
+              <span class="tooltip">Datos Admin</span>
+            </li>
+            <li onClick={() => cambiaDatos("misPedidos")}>
+              <FontAwesomeIcon className="iconAdmin" icon={faShoppingCart}/>
+              <span class="tooltip" >Mis pedidos</span>
+            </li>
+            <li onClick={() => cambiaDatos("myMovies")}>
+              <FontAwesomeIcon className="iconAdmin" icon={faUsers}/>
+              <span class="tooltip">Mis peliculas</span>
+            </li>
+            <li onClick={() => cambiaDatos("favoritos")}>
+              <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
+              <span class="tooltip">Estadisticas</span>
+            </li>
+            <li onClick={() => cambiaDatos("subscription")}>
+            <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
+            <span class="tooltip">Configuración</span>
+            </li>
+          </ul>
+        </nav>
       </div>
     );
+    // return (
+    //   <div className="boxLateral">
+    //     <div className="lateralMenu">
+    //     <div className="tituloVistaAdmin">MENÚ USUARIO</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Mi perfil</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("misPedidos")}>Mis pedidos</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("myMovies")}>Mis películas</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("favoritos")}>Favoritos</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("subscription")}>Suscripción</div>          
+    //     </div>
+    //   </div>
+    // );
   }  else {
-    return (
-      <div className="boxLateral">
-        <div className="lateralMenu">
-          <div className="tituloVistaAdmin">Administrador</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Mi perfil</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("ordersAdmin")}>Ver/editar pedidos</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("userAdmin")}>Ver/editar clientes</div>
-          <div className="botomMenuLateral"onClick={() => cambiaDatos("stats")}>Estadísticas :)</div>
+      return (
+        <div>
+          <nav class="sidebar-navigation">
+	          <ul>
+		          <li class="active" onClick={() => cambiaDatos("profile")}>
+                <FontAwesomeIcon className="iconAdmin" icon={faAddressCard}/>
+			          <span class="tooltip">Datos Admin</span>
+		          </li>
+		          <li onClick={() => cambiaDatos("ordersAdmin")}>
+                <FontAwesomeIcon className="iconAdmin" icon={faShoppingCart}/>
+			          <span class="tooltip" >Pedidos</span>
+		          </li>
+		          <li onClick={() => cambiaDatos("userAdmin")}>
+                <FontAwesomeIcon className="iconAdmin" icon={faUsers}/>
+			          <span class="tooltip">Usuarios</span>
+		          </li>
+		          <li onClick={() => cambiaDatos("stats")}>
+                <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
+          			<span class="tooltip">Estadisticas</span>
+		          </li>
+		          <li >
+			          <i class="fa fa-sliders"></i>
+			        <span class="tooltip">Settings</span>
+		          </li>
+	          </ul>
+          </nav>
         </div>
-      </div>
-    );
+      );
+    // return (
+    //   <div className="boxLateral">
+    //     <div className="lateralMenu">
+    //       <div className="tituloVistaAdmin">Administrador</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("profile")}>Mi perfil</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("ordersAdmin")}>Ver/editar pedidos</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("userAdmin")}>Ver/editar clientes</div>
+    //       <div className="botomMenuLateral"onClick={() => cambiaDatos("stats")}>Estadísticas :)</div>
+    //     </div>
+    //   </div>
+    // );
   }
 };
 

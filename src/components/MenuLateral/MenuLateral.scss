@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 
+.iconAdmin{
+    font-size: 3em;
 
+}
 
 .boxLateral{
     display: flex;
@@ -11,15 +14,11 @@
     background-color: white;
     height: 80vh;
     position: fixed;
-    
-
-
-
 }
 
 .lateralMenu{
     height: 200vh;
-    width: max-content;
+    width: 10vw;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -27,14 +26,26 @@
     align-items: center;
   /*   border-radius: 1em; */
     border: 0.1em solid #303036;
-    background-color: #4D4D56;
+    background: #060d17;
     padding: 2em;
     margin-right: 7em;
-  
-
 }
 
 
+.lateralMenu:hover{
+    height: 200vh;
+    width: 20vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  /*   border-radius: 1em; */
+    border: 0.1em solid #303036;
+    background: #060d17;
+    padding: 2em;
+    margin-right: 7em;
+}
 
 
 .card {
@@ -96,4 +107,85 @@
     font-family: Akzidenz, "‘Helvetica Neue’", Helvetica, Arial, sans-serif;
     margin-bottom: 2em;
     font-size: 1.2em;
+}
+
+
+//Probando nueva barra
+//Color Variables
+$sidebar-background-color: #313443;
+$active-sidebar-link-color: #22252E;
+$hover-sidebar-link-color: $active-sidebar-link-color;
+$active-link-color: #98D7EC;
+$tooltip-background-color: $sidebar-background-color;
+
+
+
+
+.sidebar-navigation {
+	display: inline-block;
+	min-height: 100vh;
+	width: 80px;
+	background-color: $sidebar-background-color;
+	float: left;
+	
+	ul {
+		text-align: center;
+		color: white;
+		
+		li {
+			padding: 28px 0;
+			cursor: pointer;
+			transition: all ease-out 120ms;
+			
+			i {
+				display: block;
+				font-size: 24px;
+
+				transition: all ease 450ms;
+			}
+			
+			.tooltip {
+				display: inline-block;
+				position: absolute;
+				background-color: $tooltip-background-color;
+				padding: 8px 15px;
+				border-radius: 3px;
+				margin-top: -26px;
+				left: 90px;
+				opacity: 0;
+				visibility: hidden;
+				font-size: 13px;
+				letter-spacing: .5px;
+				
+				&:before {
+					content: '';
+					display: block;
+					position: absolute;
+					left: -4px;
+					top: 10px;
+					transform: rotate(45deg);
+					width: 10px;
+					height: 10px;
+					background-color: inherit;
+				}
+			}
+			
+			&:hover {
+				background-color: $hover-sidebar-link-color;
+				
+				.tooltip {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+			
+			&.active {
+				background-color: $active-sidebar-link-color;
+				
+				i {
+					color: $active-link-color;
+				}
+			}			
+		}
+	}
 }

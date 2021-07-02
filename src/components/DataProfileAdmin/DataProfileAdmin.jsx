@@ -1,19 +1,14 @@
 
-// import './DataProfileAdmin.css';
-// import PhotoProfile from '../../images/defaultFoto.png';
 import PhotoProfile from '../../images/Avatar1.jpg';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import {LOGIN, UPDATE} from '../../redux/types'
-import {Input, notification} from 'antd';
+import {notification} from 'antd';
 
 
 
 const DataProfileAdmin = (props) => {
-       
-
 
         //Hooks
         const [profile, setProfile] = useState([]); 
