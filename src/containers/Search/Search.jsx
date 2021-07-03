@@ -119,8 +119,8 @@ const Search = (props) => {
                       console.log(res2.data.results);
                       addPages(numPages);
 
-                      setDataMovies(res2.data.results);
-                  } catch (error) {
+                      setDataMovies(dataMovies.concat(res2.data.results));
+                    } catch (error) {
               
                   }
                 return;
@@ -165,7 +165,7 @@ const Search = (props) => {
                 <div className="boxCardSearch">
                   {dataMovies?.map((act, index) => (
                     <div className="card" onClick={()=> selectMovie(act)} key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
+                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt={act.title} className="poster"/>
                     </div>
                     ))}
                 </div>

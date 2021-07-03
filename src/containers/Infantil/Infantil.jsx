@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 
-const Novedades = (props) => {
+const Infantil = (props) => {
   let history = useHistory();
 
     //hooks
@@ -75,4 +75,4 @@ const Novedades = (props) => {
 export default connect((state) => ({
   credentials:state.credentials, 
   getroomusers:state.getroomusers
-  }))(Novedades);
+  }))(Infantil);

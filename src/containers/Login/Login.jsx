@@ -14,7 +14,6 @@ const Login = (props) => {
     const [credentials, setCredentials] = useState({email:'', password:''});
     const [msgError, setMensajeError] = useState('');
    
-
     useEffect(()=>{
         const listener = event => {
             if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -26,7 +25,6 @@ const Login = (props) => {
             document.removeEventListener("keydown", listener);
         };
     },[credentials]);
-
 
     //Handle
     const updateCredentials = (e) => {
@@ -41,8 +39,7 @@ const Login = (props) => {
              setMensajeError('Introduce el formato de email valido ejemplo@ejemplo.com');
              return;
         }
-        console.log ("Credentials : ", credentials);
-        //Luego, generamos el body de datos
+        
         let body = {
             email : credentials.email,
             password : credentials.password
@@ -50,35 +47,24 @@ const Login = (props) => {
         
         //Axios      
             try {
-                console.log("Datos que pasamos por body: ", body);
                 var res = await axios.post('http://localhost:3005/login', body);
-                console.log("Resultado del backend: ", res.data);
 
-                // let perfil = document.getElementById("opciones").value;                
                 let data = {
                     token : res.data.token,
                     user : (res.data.customer),
                     idUser: res.data.customer.id,
                 }
 
-
                 let description = ("Bienvenido " + res.data.customer.name + " " + res.data.customer.lastName1 + ".");
                 notification.success({message:'Login correcto.',description: description});
 
                 //Guardo en RDX
                 props.dispatch({type:LOGIN,payload:data});
-                console.log(res.data);
-                console.log("premium:", res.data.customer.premium);
-                console.log("infantil:", res.data.customer.infantil);
                 if (res.data.customer.admin){
                     history.push("/profile");
-                }else if ((res.data.customer.premium === true) && (res.data.customer.infantil=== true)){
-                    history.push("/infantil");
                 }else {
-                    history.push("/");
-                }
-                               
-                //Redireccion           
+                    history.push("/select");
+                }                               
 
             } catch (err) {      
                     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
@@ -88,8 +74,7 @@ const Login = (props) => {
 
     return (
 
-        <div>          
-
+        <div>
             <div className = "vistaLogin">        
                 <div className = "loginCard"> 
                     <div className="espacioBlanco"></div>
@@ -100,8 +85,7 @@ const Login = (props) => {
                     <div class="form">
                         <input type="password" id="email" class="form__input" name="password" autocomplete="off" placeholder=" "  onChange={updateCredentials}></input>
                         <label for="email" class="form__label">Password</label>
-                    </div>
-                    
+                    </div>                    
                     <div className = "sendButton" onClick={()=>logeame()}>Acción!</div>
                     <div>{msgError}</div>
                 </div>        
