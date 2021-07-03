@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {connect} from 'react-redux';
 import axios from 'axios';
 import { GETMOVIE } from '../../redux/types';
@@ -96,17 +96,17 @@ const Search = (props) => {
             
 
             <div className="dataMovies">
-            <div className="boxCardSearch">
-              {dataMovies?.map((act, index) => (
-                <div className="card" onClick={()=> selectMovie(act)} key={index}>
+
+                <div className="boxCardSearch">
+                  {dataMovies?.map((act, index) => (
+                    <div className="card" onClick={()=> selectMovie(act)} key={index}>
                     <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
-                  {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                  <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                  <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
+                    </div>
+                    ))}
                 </div>
-                   ))}
+                
             </div>
-            </div>
+            <div id="visor"></div>
         </div>
     );
 }

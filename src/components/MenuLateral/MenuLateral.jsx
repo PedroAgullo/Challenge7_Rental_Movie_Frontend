@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 // import "./MenuLateral.css";
 import { connect } from "react-redux";
 import { CAMBIADATOS} from "../../redux/types";
-import { faStar, faAddressCard, faUsers, faShoppingCart, faFilm, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faAddressCard, faUsers, faShoppingCart, faFilm, faCog, faChartBar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -126,10 +126,10 @@ const Menulateral = (props) => {
                 <FontAwesomeIcon className="iconAdmin" icon={faUsers}/>
 			          <span class="tooltip">Usuarios</span>
 		          </li>
-		          {/* <li onClick={() => cambiaDatos("stats")}>
+		          <li onClick={() => cambiaDatos("stats")}>
                 <FontAwesomeIcon className="iconAdmin" icon={faChartBar}/>
           			<span class="tooltip">Estadisticas</span>
-		          </li> */}
+		          </li>
 		          <li >
               <FontAwesomeIcon className="iconAdmin" icon={faCog}/>
 			        <span class="tooltip">Configuración</span>

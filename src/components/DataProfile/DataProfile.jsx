@@ -9,8 +9,6 @@ import axios from 'axios';
 import {UPDATE} from '../../redux/types'
 import {notification} from 'antd';
 
-
-
 const DataProfile = (props) => {
        
         //Hooks
@@ -22,7 +20,6 @@ const DataProfile = (props) => {
                 city: props.credentials.user.city,
                 phone: props.credentials.user.phone
         });        
-
 
     const [errors, setErrors] = useState({
         eName : '',
@@ -38,8 +35,6 @@ const DataProfile = (props) => {
         eTelephone: ''        
     });
 
-
-
     useEffect(() => {
         setProfile(1);
       }, []);
@@ -50,8 +45,6 @@ const DataProfile = (props) => {
         setProfile(info);
     }
 
-
-
     const [newMessage, setNewMessage] = useState([]);
 
     //Handlers (manejadores)
@@ -59,7 +52,6 @@ const DataProfile = (props) => {
     const updateFormulario = (e) => {
         setDatosUser({...datosUser, [e.target.name]: e.target.value});
     }
-
 
     const checkError = (arg) => {
         switch (arg){
@@ -76,12 +68,6 @@ const DataProfile = (props) => {
                 }
             break;
             
-
-
-         
-
-
-
             case 'lastName1':
                 if(datosUser.lastName1.length < 1){
                     setErrors({...errors, eLastName1: 'El campo Apellido no puede estar vacío.'});
@@ -91,8 +77,7 @@ const DataProfile = (props) => {
                     setErrors({...errors, eLastName1: 'Introduce el formato de apellido valido'});     
                 }else{
                     setErrors({...errors, eLastName1: ''});
-                }
-                
+                }                
             break;
 
             case 'lastName2':
@@ -130,11 +115,8 @@ const DataProfile = (props) => {
                     setErrors({...errors, ePassword: 'Introduce el password valido'}); 
                 }else{
                     setErrors({...errors, ePassword: ''});
-                }
-                
-            break;
-
-          
+                }                
+            break;          
 
             case 'address':
                 if(datosUser.address.length < 1){
@@ -153,8 +135,7 @@ const DataProfile = (props) => {
                     setErrors({...errors, eCity: 'El campo ciudad solo puede contener letras'});
                 }else{
                     setErrors({...errors, eCity: ''});
-                }
-                
+                }                
             break;
 
             case 'postalCode':
@@ -164,8 +145,7 @@ const DataProfile = (props) => {
                     setErrors({...errors, epostalCode: 'El campo codig postal solo puede tener 5 números.'});
                 }else{
                     setErrors({...errors, epostalCode: ''});
-                }
-                
+                }                
             break;
 
             case 'dni':
@@ -176,9 +156,8 @@ const DataProfile = (props) => {
                 }else{
                     setErrors({...errors, eDni: ''});
                 }
-            
-
             break;
+
             case 'telephone':
                 if(datosUser.phone.length < 1){
                     setErrors({...errors, ePhone: 'El campo telefono no puede estar vacío.'});
@@ -189,18 +168,12 @@ const DataProfile = (props) => {
                 }else{
                     setErrors({...errors, ePhone: ''});
                 }
-          
-
             break;
-
         }
     }
 
-
-    const saveData = async (info) => {        
-
+    const saveData = async (info) => {       
             try {
-
                 let token = props.credentials.token;
                 let idUser = props.credentials.user.id;
                 let address = datosUser.address;
@@ -217,8 +190,6 @@ const DataProfile = (props) => {
                     phone : phone,
                     postalcode: datosUser.postalCode  
                 }
-
-
 
                 console.log(body, "Datos de body que pasamos");
 
@@ -237,68 +208,65 @@ const DataProfile = (props) => {
                 notification.success({message:'Atencion.',description: "Datos actualizados correctamente."});
 
                 setProfile(info);
-
             
-             } catch (error) {
-            
-        }
-
-            
-
-
-
-        
+             } catch (error) {            
+        }        
     }
 
     if (profile === 1) {
         return (
             <div>
                 <div className="tituloDataProfile"><h1>Perfil del usuario</h1></div>
+                    <div className="tipoDatos">
+                        <div className="botonDatos" onClick={(()=>changeState(2))}>Editar</div>
+                     </div>
+                     
                 <div className="boxDataProfileUser">
 
-                    <div className="infoUser1">
-                        <div className="fotoUser"><img id="foto" src={props.credentials.user.photo} alt="Profile photo" /></div>
-                        <div className="empty"><button onClick={(()=>changeState(2))}>Editar</button></div>
-                    </div>
-
-                    <div className= "infoUser2Titulos">
-                        <div className="titulosInfoUser">Nombre:</div>
-                        <div className="titulosInfoUser">Primer apellido:</div>
-                        <div className="titulosInfoUser">Segundo apellido:</div>
-                        <div className="titulosInfoUser">Email:</div>
-                        <div className="titulosInfoUser">Password:</div>
-                     
+                    <div className="infoUser2">
+                        <div class="form">
+                            <input type="text" id="name" class="form__input" name="name" autocomplete="off" placeholder=" " value={user.name} readonly="readonly"></input>
+                            <label for="name" class="form__label">Nombre</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="lastName1" class="form__input" name="lastName1" autocomplete="off" placeholder=" " value={user.lastName1} readonly="readonly"></input>
+                            <label for="lastName1" class="form__label">Primer apellido</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="lastName2" class="form__input" name="lastName2" autocomplete="off" placeholder=" " value={user.lastName2} readonly="readonly"></input>
+                            <label for="lastName2" class="form__label">Segundo apellido</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="email" class="form__input" name="email" autocomplete="off" placeholder=" " value={user.email} readonly="readonly"></input>
+                            <label for="email" class="form__label">Email</label>
+                        </div>
+                        <div class="form">
+                            <input type="password" id="password" class="form__input" name="password" autocomplete="off" placeholder=" " value="********" readonly="readonly"></input>
+                            <label for="password" class="form__label">Password</label>
+                        </div>
                     </div>
 
                     <div className="infoUser2">
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="name" value={user.name} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="lastName1"  value={user.lastName1} size="34" lenght='30' ></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="lastName2"  value={user.lastName2} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="email"  value={user.email} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="password" name="password"  value="************" size="34" lenght='8'></input>
-                        
-
-                    </div>
-
-                    <div className= "infoUser2Titulos">
-                        <div className="titulosInfoUser">Dirección:</div>
-                        <div className="titulosInfoUser">Ciudad:</div>
-                        <div className="titulosInfoUser">Codigo postal:</div>
-                        <div className="titulosInfoUser">DNI/NIE:</div>
-                        <div className="titulosInfoUser">Telefono:</div>
-                        <div className="titulosInfoUser">Fecha de nacimiento:</div>
-                     
-                    </div>
-
-                    <div className="infoUser2">
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="address" value={user.address} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="city"  value={user.city} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="postalCode"  value={user.postalCode} size="34" lenght='30'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="dni"  value={user.dni} size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="telephone"  value={user.phone} size="34" lenght='9'></input>
-                        <input className="inputBaseUser"  readonly="readonly" type="text" name="birthday" value={moment(user.birthday).format('L')} ></input>
-                    </div>
-                    <div>
+                        <div class="form">
+                            <input type="text" id="address" class="form__input" name="address" autocomplete="off" placeholder=" " value={user.address} readonly="readonly"></input>
+                            <label for="address" class="form__label">Dirección</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="city" class="form__input" name="city" autocomplete="off" placeholder=" " value={user.city} readonly="readonly"></input>
+                            <label for="city" class="form__label">Ciudad</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="postalCode" class="form__input" name="postalCode" autocomplete="off" placeholder=" " value={user.postalCode} readonly="readonly"></input>
+                            <label for="postalCode" class="form__label">Código postal</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="phone" class="form__input" name="phone" autocomplete="off" placeholder=" " value={user.phone} readonly="readonly"></input>
+                            <label for="phone" class="form__label">Telephone</label>
+                        </div>
+                        <div class="form">
+                            <input type="Date" id="birthday" class="form__input" name="birthday" autocomplete="off" placeholder=" " value={moment(user.birthday).format('L')} readonly="readonly"></input>
+                            <label for="birthday" class="form__label">Fecha nacimiento</label>
+                        </div>
                     </div>
 
                 </div>
@@ -308,62 +276,58 @@ const DataProfile = (props) => {
     }else {
         return (
             <div>
-                <div className="tituloDataProfile"><h1>Editar datos del usuario</h1></div>
-                <div className="boxDataProfileUser">
-
-                    <div className="infoUser1">
-                    <div className="fotoUser"><img id="foto" src={props.credentials.user.photo} alt="Profile photo" /></div>
-                        <div className="empty"><button onClick={(()=>saveData(1))}>Guardar</button></div>
-
-                    </div>
-
-                    <div className= "infoUser2Titulos">
-                        <div className="titulosInfoUser">Nombre:</div>
-                        <div className="titulosInfoUser">Primer apellido:</div>
-                        <div className="titulosInfoUser">Segundo apellido:</div>
-                        <div className="titulosInfoUser">Email:</div>
-                        <div className="titulosInfoUser">Password:</div>
+                <div className="tituloDataProfile"><h1>Perfil del usuario</h1></div>
+                <div className="tipoDatos">
+                    <div className="botonDatos" onClick={(()=>saveData(1))}>Guardar</div>
+                    <div className="botonDatos" onClick={(()=>changeState(1))}>Volver</div>
+                </div>
                      
+                <div className="boxDataProfileUser">
+                    <div className="infoUs">
+                        <div class="form">       
+                            <input type="text" id="name" class="form__input" name="name" autocomplete="off" placeholder=" " value={user.name} readonly="readonly"></input>                     
+                            <label for="name" class="form__label">Nombre</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="lastName1" class="form__input" name="lastName1" autocomplete="off" placeholder=" " value={user.lastName1} readonly="readonly"></input>
+                            <label for="lastName1" class="form__label">Primer apellido</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="lastName2" class="form__input" name="lastName2" autocomplete="off" placeholder=" " value={user.lastName2} readonly="readonly"></input>
+                            <label for="lastName2" class="form__label">Segundo apellido</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="email" class="form__input" name="email" autocomplete="off" placeholder=" " value={user.email} readonly="readonly"></input>
+                            <label for="email" class="form__label">Email</label>
+                        </div>
+                        <div class="form">
+                            <input type="password" id="password" class="form__input" name="password" autocomplete="off" placeholder=" " value="********" readonly="readonly"></input>
+                            <label for="password" class="form__label">Password</label>
+                        </div>
                     </div>
 
                     <div className="infoUser2">
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="name"  placeholder={user.name} size="34" lenght='30'></input>
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="lastName1"  placeholder={user.lastName1} size="34" lenght='30' ></input>
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="lastName2"  placeholder={user.lastName2} size="34" lenght='30'></input>
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="email"  placeholder={user.email} size="34" lenght='30'></input>
-                        <input className="inputBaseUser" readonly="readonly" type="password" name="password"  placeholder="************" size="34" lenght='8'></input>
-
+                        <div class="form">
+                            <input type="text" id="address" class="form__input" name="address" autoComplete="off" placeholder={user.address}  onChange={updateFormulario} onBlur={()=>checkError("address")}></input>
+                            <label for="address" class="form__label">Dirección</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="city" class="form__input" name="city" autocomplete="off" placeholder={user.city}  onChange={updateFormulario} onBlur={()=>checkError("city")}></input>
+                            <label for="city" class="form__label">Ciudad</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="postalCode" class="form__input" name="postalCode" autocomplete="off" placeholder={user.postalCode} onChange={updateFormulario} onBlur={()=>checkError("postalCode")}></input>
+                            <label for="postalCode" class="form__label">Código postal</label>
+                        </div>
+                        <div class="form">
+                            <input type="text" id="phone" class="form__input" name="phone" autocomplete="off" placeholder={user.phone} onChange={updateFormulario} onBlur={()=>checkError("phone")} ></input>
+                            <label for="phone" class="form__label">Telephone</label>
+                        </div>
+                        <div class="form">
+                            <input type="Date" id="birthday" class="form__input" name="birthday" autocomplete="off" placeholder=" " value={moment(user.birthday).format('L')} readonly="readonly"></input>
+                            <label for="birthday" class="form__label">Fecha nacimiento</label>
+                        </div>
                     </div>
-
-                    <div className= "infoUser2Titulos">
-
-                        <div className="titulosInfoUser">Dirección:</div>
-                        <div className="titulosInfoUser">Ciudad:</div>
-                        <div className="titulosInfoUser">Código postal:</div>
-                        <div className="titulosInfoUser">DNI/NIE:</div>
-                        <div className="titulosInfoUser">Telefono:</div>
-                        <div className="titulosInfoUser">Fecha de nacimiento:</div>
-
-                     
-                    </div>
-
-                    <div className="infoUser3">
-
-                        <input className="inputBaseUser"  type="text" name="address" onChange={updateFormulario} onBlur={()=>checkError("address")} placeholder={props.credentials.user.address} size="34" lenght='30'></input>
-                        <div>{errors.eAddress}</div>
-                        <input className="inputBaseUser"  type="text" name="city" onChange={updateFormulario} onBlur={()=>checkError("city")} placeholder={props.credentials.user.city} size="34" lenght='30'></input>
-                        
-                        <div>{errors.eCity}</div>
-                        <input className="inputBaseUser" type="text" name="postalCode" onChange={updateFormulario} onBlur={()=>checkError("postalCode")} placeholder={props.credentials.user.postalCode} size="34" lenght='30'></input>
-                        <div>{errors.epostalCode}</div>
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="dni"  placeholder={user.dni} size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser"  type="text" name="phone" onChange={updateFormulario} onBlur={()=>checkError("phone")}   placeholder={props.credentials.user.phone}size="34" lenght='9'></input>
-                        <div>{errors.eTelephone}</div>
-                        <input className="inputBaseUser" readonly="readonly" type="text" name="birthday" placeholder={moment(user.birthday).format('L')} ></input>
-
-                    </div>
-
-
                 </div>
 
             </div>

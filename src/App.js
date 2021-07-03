@@ -26,7 +26,6 @@ function App() {
               <Route path="/search" exact component={Search}/>
               <Route path="/infantil" exact component={Infantil}/>
             </Switch>
-
         
       </BrowserRouter>
 

@@ -24,58 +24,50 @@ const Stats = (props) => {
     useEffect(() => {
     });
 
-
   const cantidad = async () => {
     try {
       let token = props.credentials.token;
 
-
-    let res = await axios.get('http://localhost:3005/movies/all',{headers:{'authorization':'Bearer ' + token}});
-
-
-    console.log("Datos de las movies",res.data);
-
-    let datos = [];
-    console.log(datos.length);
-    datos = res.data;
-    let num = datos.length;
-
-    console.log("Num del array : ", datos.lenght);
+      let res = await axios.post('http://localhost:3005/order/all',{headers:{'authorization':'Bearer ' + token}});
 
     let numRent = 0;
     let numBuy = 0;
-    let premium = 10;
+    let numPremium = 0;
 
-      for(let x=0; x < num; x++){
-        numRent = numRent + datos[x].numRent;
-        numBuy = numBuy + datos[x].numBuy;
+    res.data.map((act, index) => {
+      if(act.type === "Compra"){
+        numBuy += 1;
+      }else if(act.type === "Alquiler"){
+        numRent += 1;
+      }else if(act.type === "Premium"){
+        numPremium += 1;
       }
+    });
 
       var data = [
         {
           name: 'Ventas',
-          Mes: 'Cantidad',
+          Mes: 'Unidades vendidas',
           Cantidad: numBuy,
         },
         {
           name: 'Alquiler',
-          Mes: 'Cantidad',
+          Mes: 'Unidades vendidas',                    
           Cantidad: numRent,
         },
         {
           name:'Premium',
-          Mes: 'Cantidad',
-          Cantidad: premium
+          Mes: 'Unidades vendidas',                    
+          Cantidad: numPremium
         },
         {
           name:'Total',
-          Mes: 'Cantidad',
-          Cantidad: numBuy+numRent+10
+          Mes: 'Unidades vendidas',
+          Cantidad: numBuy+numRent+numPremium
         }
       ]
       
       setEstadisticas(data);
-
 
     } catch (err) {
       console.log(err)
@@ -86,60 +78,51 @@ const Stats = (props) => {
     try {
       let token = props.credentials.token;
 
-
-    let res = await axios.get('http://localhost:3005/movies/all',{headers:{'authorization':'Bearer ' + token}});
-
-
-    console.log("Datos de las movies",res.data);
-
-    let datos = [];
-    console.log(datos.length);
-    datos = res.data;
-    let num = datos.length;
-
-    console.log("Num del array : ", datos.lenght);
+    let res = await axios.post('http://localhost:3005/order/all',{headers:{'authorization':'Bearer ' + token}});
 
     let numRent = 0;
     let numBuy = 0;
-    let premium = 10;
+    let numPremium = 0;
 
-      for(let x=0; x < num; x++){
-        numRent = numRent + datos[x].numRent;
-        numBuy = numBuy + datos[x].numBuy;
+    res.data.map((act, index) => {
+      if(act.type === "Compra"){
+        numBuy += act.precio;
+      }else if(act.type === "Alquiler"){
+        numRent += act.precio;
+      }else if(act.type === "Premium"){
+        numPremium += act.precio;
       }
+    });
 
       var data = [
         {
           name: 'Ventas',
-          Mes: 'Cantidad',
+          Mes: 'Ingresos en €',
           Cantidad: numBuy,
         },
         {
           name: 'Alquiler',
-          Mes: 'Cantidad',
+          Mes: 'Ingresos en €',
           Cantidad: numRent,
         },
         {
           name:'Premium',
-          Mes: 'Cantidad',
-          Cantidad: 10
+          Mes: 'Ingresos en €',
+          Cantidad: numPremium
         },
         {
           name:'Total',
-          Mes: 'Cantidad',
-          Cantidad: 10
+          Mes: 'Ingresos en €',
+          Cantidad: numBuy + numRent + numPremium
         }
       ]
-      
+     
       setEstadisticas(data);
-
 
     } catch (err) {
       console.log(err)
     }
   }
-
-
 
   var config = {
     data: estadisticas,
@@ -159,19 +142,16 @@ const Stats = (props) => {
 
   return (
     <div>
-
       <h1>Estadisticas</h1>
-      
+
       <div className="chart"> 
         <Column {...config} />
       </div>
-      <div>
-        <button onClick={()=>cantidad()}>Totales</button>        
-      </div>
-      <div>
-        <button onClick={()=>ingresos()}>Ingresos</button>        
-      </div>
+      <div className="tipoDatos">
+        <div className="botonDatos" onClick={(()=>cantidad())}>Ventas</div>
+        <div className="botonDatos" onClick={(()=>ingresos())}>Ingresos</div>
 
+      </div>
     </div>
     
     );
