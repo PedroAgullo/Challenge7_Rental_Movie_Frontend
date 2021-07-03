@@ -13,10 +13,7 @@ const DataOrderAdmin = (props) => {
 
     //hooks
     const [orders, setOrders] = useState([]);  
-    const [ordersAll, setOrdersAll] = useState([]);  
-    const [ordersBuy, setOrdersBuy] = useState([]);  
-    const [ordersRent, setOrdersRent] = useState([]);  
-    const [ordersPremium, setOrdersPremium] = useState([]);  
+ 
 
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
