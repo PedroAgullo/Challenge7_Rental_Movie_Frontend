@@ -32,13 +32,57 @@ const Search = (props) => {
     }
 
 
-    const addPages = (num) => {
+    const addPages = async (num) => {
         num = num + 1;
-        setNumPages(num);
+        console.log("addPages, el numero vale : ", num);
+        await setNumPages(num);
         return;
     }
     //Busca la película con cada tecla que pulsamos
     const searchMovie = async (opc) => {
+        setGenre(opc);
+        setNumPages(1);
+        setDataMovies([]);
+        let dataSearch = document.getElementById("movieName").value;        
+        let body={
+          title : dataSearch,
+          actor : dataSearch,
+          genre : opc,
+          num : numPages 
+        }
+
+        switch(opc){           
+            
+            case "all":
+                
+                try {
+                    let res = await axios.post('http://localhost:3005/movies/title',body);
+                    console.log(res.data.results);   
+                    await addPages(numPages);
+                    console.log("El numPages vale: ", numPages);
+
+                    await setDataMovies(dataMovies.concat(res.data.results));
+                    console.log(dataMovies);
+                } catch (error) {            
+                }        
+                return;
+
+            default:
+
+                  try {
+                      console.log("Entro en genre", body);
+                      let res2 = await axios.post('http://localhost:3005/movies/genre',body);
+                      addPages(numPages);
+                      console.log(res2.data.results);
+                      setDataMovies(res2.data.results);
+                  } catch (error) {
+              
+                  }
+                return;
+        }
+    }
+
+    const nextSearch = async (opc) => {
 
         let dataSearch = document.getElementById("movieName").value;        
         let body={
@@ -53,6 +97,7 @@ const Search = (props) => {
             case "all":
                 
                 try {
+                    console.log("Body del nextSearch opcion All: ", body);
                     let res = await axios.post('http://localhost:3005/movies/title',body);
                     console.log(res.data.results);   
                     console.log("El numPages vale: ", numPages);
@@ -69,22 +114,17 @@ const Search = (props) => {
                   try {
                       console.log("Entro en genre", body);
                       let res2 = await axios.post('http://localhost:3005/movies/genre',body);
+                      console.log("El numPages vale: ", numPages);
+
                       console.log(res2.data.results);
+                      addPages(numPages);
+
                       setDataMovies(res2.data.results);
                   } catch (error) {
               
                   }
                 return;
         }
-    }
-
-    const nextSearch = async (opc) => {
-        console.log("entro en nextSearch");
-        let res = await axios.get('http://localhost:3005/movies/');
-        setDataMovies(dataMovies.concat(res.data.results));
-        return res.data.results;
-
-
     }
 
     const baseImgUrl = "https://image.tmdb.org/t/p"
@@ -121,7 +161,7 @@ const Search = (props) => {
             </div>            
 
             <div className="dataMovies">
-                <InfiniteScroll dataLength={dataMovies.length} next={()=>searchMovie("all")} hasMore={true} loader={<h4>Loading...</h4>}>
+                <InfiniteScroll dataLength={dataMovies.length} next={()=>nextSearch(genre)} hasMore={true} loader={<h4>Loading...</h4>}>
                 <div className="boxCardSearch">
                   {dataMovies?.map((act, index) => (
                     <div className="card" onClick={()=> selectMovie(act)} key={index}>
