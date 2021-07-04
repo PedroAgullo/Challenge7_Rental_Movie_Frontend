@@ -11,15 +11,13 @@ const Wellcome = (props) => {
     let history = useHistory();
 
     let buyPremium = () => {
-        if (props.credentials?.token === '') {
-            notification.warning({message:'Registrate o haz login',description: "Para acceder a las ventajas de ser premium, regístrate o haz login." });        
-
+        console.log("token: ",props.credentials?.token);
+        if (props.credentials?.token === "" || props.credentials?.token === undefined) {
+            notification.warning({message:'Registrate o haz login',description: "Para acceder a las ventajas de ser premium, regístrate o haz login." });   
         }else{
             history.push('profile');
         }
     }
-
-
 
     return (
         <div className="SearchDiv">
@@ -50,5 +48,6 @@ const Wellcome = (props) => {
 
 export default connect((state) => ({
     user: state.credentials.user,
-    tipodatos: state.tipodatos
+    tipodatos: state.tipodatos,
+    credentials:state.credentials
 }))(Wellcome);

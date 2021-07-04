@@ -30,17 +30,19 @@ const Recommendations = (props) => {
         id: movie.id
       } 
       try{
-        await props.dispatch({type:GETMOVIE,payload: movie});
-        let res2 = await axios.post('http://localhost:3005/movies/video',body);  
+        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        let res = await axios.post('http://localhost:3005/movies/id', body); 
         console.log("Estoy en selectMovie de Recommendations: ", res2.data);
-        props.dispatch({type:TRAILER,payload:res2.data});
-        history.push('/movie');
+        await props.dispatch({type:TRAILER,payload:res2.data});
+        console.log("pelicula por id: ", res.data);
+        console.log("Datos de movie enviados:", movie);
+        await props.dispatch({type:GETMOVIE,payload: res.data});
         await findRecommendations();
+        history.push('/movie');
 
     }catch (err){
          console.log(err);      
          }      
-
     }
   
   const findRecommendations = async () => { 
@@ -51,8 +53,7 @@ const Recommendations = (props) => {
     try{
 
       let res = await axios.post('http://localhost:3005/movies/recommendations', body);
-      // let res2 = await axios.post('http://localhost:3005/movies/video',body);  
-      // props.dispatch({type:TRAILER,payload:res2.data});
+
       setMovieData(res.data.results); 
     }catch (err){      
       notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
@@ -83,6 +84,5 @@ const Recommendations = (props) => {
 export default connect((state) => ({
   credentials:state.credentials,
   movie:state.movie, 
-  getroomusers:state.getroomusers,
   trailer:state.trailer
   }))(Recommendations);

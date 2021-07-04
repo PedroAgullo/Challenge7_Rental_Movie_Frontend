@@ -100,5 +100,6 @@ const Navbar = (props) => {
 
 };
 
-export default connect((state)=>({credentials:state.credentials}))(Navbar);
+export default connect((state)=>({
+  credentials:state.credentials}))(Navbar);
 

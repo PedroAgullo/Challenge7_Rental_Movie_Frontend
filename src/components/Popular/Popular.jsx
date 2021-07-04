@@ -41,7 +41,6 @@ const Popular = (props) => {
   const size = "w780"
 
     if (movieData[0]?.id) {
-
       return (
         <div className="popularBoxMovies"> <h2>POPULARES</h2>
             <div className="popularBoxCard">

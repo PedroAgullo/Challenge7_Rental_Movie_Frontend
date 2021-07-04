@@ -1,11 +1,11 @@
 .popularBoxMovies{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
     background-color: #060d17;
     margin-bottom: 1em;
+    align-items: left;
 }
 
 .popularCard {
