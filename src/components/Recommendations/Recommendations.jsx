@@ -18,19 +18,25 @@ const Recommendations = (props) => {
     }, []);
 
     //Guarda la movie en redux y nos lleva a la vista de película.
-    const selectMovie = async (movie) => {
 
+    const selectMovie = async (movie) => {
       let body = {
         id: movie.id
       } 
+      console.log("Selecto movie en recommendations:" , body);
 
       try{
+        console.log("Selecto")
         let res2 = await axios.post('http://localhost:3005/movies/video',body); 
         let res = await axios.post('http://localhost:3005/movies/id', body); 
-        await props.dispatch({type:TRAILER,payload:res2.data});
-        await props.dispatch({type:GETMOVIE,payload: res.data});
-        await findRecommendations();
-        history.push('/movie');
+        let res3 = await axios.post('http://localhost:3005/movies/recommendations', body);
+        props.dispatch({type:TRAILER,payload:res2.data});
+        props.dispatch({type:GETMOVIE,payload: res.data});
+        let resultado = [];
+        for(let x=0; x<8; x++){
+          resultado.push(res3.data.results[x]);
+        }
+        setMovieData(resultado); 
 
     }catch (err){
          console.log(err);      

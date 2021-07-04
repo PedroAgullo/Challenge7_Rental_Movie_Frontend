@@ -15,13 +15,9 @@ const DataOrder = (props) => {
     //hooks
     const [orders, setOrders] = useState([]);  
   
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
       findOderByType("All");
     }, []);
-
-
-
 
     const findOderByType = async (opc) => {
       console.log("Entro en cambiaDAtos. OPC:", opc);
@@ -60,32 +56,7 @@ const DataOrder = (props) => {
       }
     }
     
-
-
-
-    // const findOrders = async () => {  
-    // try{
-
-    //   let idUser = props.credentials.idUser;
-    //   let token = props.credentials.token;
-    
-    //   let body = {
-    //     customerId : idUser,
-    //     idUser: idUser        
-    //   }
-
-    //   let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
-     
-    //   console.log("Datos devueltos del backend: ", res.data);    
-    //     setOrders(res.data);; 
-
-    // }catch (err){     
-    //     console.log(err) ;
-    //     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-    // }
-  
-    // }
-    
+   
     const baseImgUrl = "https://image.tmdb.org/t/p"
     const size = "w500"
 

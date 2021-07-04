@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {connect} from 'react-redux';
 import axios from 'axios';
-import { GETMOVIE } from '../../redux/types';
+import { GETMOVIE, TRAILER } from '../../redux/types';
 import {useHistory} from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -16,13 +16,22 @@ const Search = (props) => {
     
     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
+        let body = {
+            id: movie.id
+          } 
+
         try{      
-          props.dispatch({type:GETMOVIE,payload: movie});
-          history.push('/movie');
+            let res2 = await axios.post('http://localhost:3005/movies/video',body);
+            let res = await axios.post('http://localhost:3005/movies/id', body); 
+
+            props.dispatch({type:TRAILER,payload:res2.data});
+            props.dispatch({type:GETMOVIE,payload: res.data});
+            history.push('/movie');
       }catch (err){
            console.log(err);      
            }            
     }
+
 
     const addPages = async (num) => {
         num = num + 1;
@@ -31,6 +40,7 @@ const Search = (props) => {
         return;
     }
     
+
     //Busca la película con cada tecla que pulsamos
     const searchMovie = async (opc) => {
         let moviesVacio = [];
@@ -241,5 +251,6 @@ const Search = (props) => {
 
 export default connect((state) => ({
     user: state.credentials.user,
-    tipodatos: state.tipodatos
+    tipodatos: state.tipodatos,
+    trailer:state.trailer
 }))(Search);

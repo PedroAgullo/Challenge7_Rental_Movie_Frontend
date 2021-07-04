@@ -10,7 +10,6 @@ const Movie = (props) => {
 
     let history = useHistory();
 
-
     //hooks
     const [movieData, setMovieData] = useState([]);  
     const [similarMovie, setSimilarMovie] = useState([]);
@@ -50,6 +49,7 @@ const Movie = (props) => {
             numRent: 1,
             type: opcion,
             genre : props.movie.genre_ids[0],
+            // genre : props.movie.genres[0]?.id,
             poster_path : props.movie.poster_path
           }
 
@@ -107,7 +107,29 @@ const Movie = (props) => {
     }
 
     const verPeli = async () => {
-        history.push("/play");
+        if (props.credentials?.token === "" || props.credentials?.token === undefined) {
+
+            notification.warning({message:'Atención',description: "Tienes que hacer login o registrarte para poder ver una película."});
+        
+        }else if (props.credentials.premium){
+                history.push("/play");            
+        }
+
+        try {            
+            let token = props.credentials.token;
+            let body = {
+              customerId : props.credentials.idUser,
+              idUser: props.credentials.idUser,
+              id: props.credentials.idUser,
+              type: "compra"    
+            }
+
+            let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+
+
+        } catch (err) {
+            
+        }
     }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
