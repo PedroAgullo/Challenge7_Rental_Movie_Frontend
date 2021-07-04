@@ -19,14 +19,18 @@
   font-size: 1.5em;
   margin: 1em;
 }
-.logo:hover {  
-  color: #E15554;
-  border-radius: 2%;
-  transition: 0.2s;
-}
+
 
 .searchBox{
   margin: 1.5em;
+
+  &:hover{
+    color: #E15554;
+    border-radius: 2%;
+    transition: 0.2s;
+
+
+  }
 }
 
 .blank {
@@ -47,6 +51,7 @@
   text-align: center;
   font-size: 1.5em;
   
+
 }
 
 .img {
@@ -62,12 +67,6 @@
   text-align: center;
 }
 
-.NavLink:hover {  
-  color: #E15554;
-  border-radius: 2%;
-  transition: 0.2s;
-}
-
 .fotouser{
   display: flex;
   align-items: center;
@@ -80,3 +79,10 @@
   border-radius: 50%;
 }
 
+.Logout{
+  &:hover{
+    color: #E15554;
+    border-radius: 2%;
+    transition: 0.2s;
+  }
+}

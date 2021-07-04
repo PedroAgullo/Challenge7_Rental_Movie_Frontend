@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
+import { GETMOVIE, TRAILER } from '../../redux/types';
 import {useHistory} from "react-router";
 
 const Infantil = (props) => {
@@ -19,7 +19,14 @@ const Infantil = (props) => {
   
     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
+
+      let body = {
+        id: movie.id
+      } 
+
       try{
+        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        await props.dispatch({type:TRAILER,payload:res2.data});
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/play');
     }catch (err){
@@ -93,5 +100,6 @@ const Infantil = (props) => {
 
 export default connect((state) => ({
   credentials:state.credentials, 
-  getroomusers:state.getroomusers
+  getroomusers:state.getroomusers,
+  trailer:state.trailer
   }))(Infantil);

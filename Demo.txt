@@ -1,0 +1,43 @@
+=========== USUARIO CREADO DE 0===========
+
+0.- Intentamos sin hacer login comprar o ver alguna película. Nos tiene que redirigir siempre a register o login.
+
+1.- Crear usuario nuevo. Comprabar envío y activación de cuenta por email. (pedro.agullo.marco@gmail.com)
+
+2.- Hacemos login para comprobar que funciona. Sin cuenta premium.
+
+3.- Intenamos ver alguna película. No podemos.
+
+4.- Compramos / alquilamos alguna película. Podemos verlas.
+
+
+
+
+================= USUARIO PREMIUM =====================
+5.- Cambiamos de usuario a premium.  (mari@gmail.com)
+
+6.- Entramos en menú infantil para enseñarlo. Solo películas infantiles con acceso directo al visionado.
+
+7.- Probamos el buscador con el scroll infinito y probamos a ver cualquier película.
+
+8.- Nos vamos a HOME para enseñar la personalización por usuario: recomendaciones por ultima vista y última buscada.
+
+9.- Entramos en el panel del usuario. Modificamos los datos del usuario y los guardamos.
+
+10.- Vamos a mis pedidos. Filtramos por compra, alquiler o premium.
+
+11.- Sección favoritos no implementada.
+
+12.- Configuración. Vemos como está nuestra subscripción Premium. También activamos o desactivamos el control parental.
+
+====================== ADMIN ======================
+
+13.- Hacemos login con admin y vamos a profile. Cambiamos datos.
+
+14.- Vemos todos los pedidos. Filtramos por compra, alquiler o premium. Podemos borrar un pedido, pero no editarlo.
+
+15.- Usuarios. Busqueda por email, id y DNI. Modificación de los mismos.
+
+16.- Estadísticas. Enseñamos los gráficos de ventas y de ingresos. Idea de filtrar por meses a 1 año vista.
+
+17.- Configuración (idea de cambio de precios desde aquí).
