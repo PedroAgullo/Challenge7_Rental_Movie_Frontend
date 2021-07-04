@@ -24,10 +24,12 @@
 @import './components//ForYouPlay/ForYouPlay.scss';
 @import './components/Novedades/Novedades.scss';
 @import './components//Carrousel/Carrousel.scss';
-
+@import './components/Wellcome/Wellcome.scss';
 
 .App {
   text-align: center;
+  background-color: #282c34;
+
 }
 h1, h2, h3, h4, h5, h6{
   color:white;

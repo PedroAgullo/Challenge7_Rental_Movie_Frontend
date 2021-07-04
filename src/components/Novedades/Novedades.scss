@@ -4,36 +4,29 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: scroll;
     background-color: #060d17;
+    margin-bottom: 1em;
 }
-
-
 
 .popularCard {
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 0.2em solid yellow;    
     border-radius: 1em;
     transition: 0.3s;
     font-size: 0.8em;
     margin: 1em;
-    background-color: darkgreen;
     overflow: hidden;
 }
 
-.popularCard:hover{
-    
+.popularCard:hover{    
     cursor: pointer;
     transition: 0.3s;
-    border: 0.2em solid red;
-    
+    border: 0.2em solid yellow;    
 }
-
 
 .popularBoxCard {
     display: flex;
@@ -44,9 +37,10 @@
     height: auto;
     width: auto;
     flex-wrap: nowrap;
+    margin-bottom: 1em;
 }
 
 .poster{
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
 }

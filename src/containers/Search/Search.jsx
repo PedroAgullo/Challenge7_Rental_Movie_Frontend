@@ -6,8 +6,6 @@ import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
-
 const Search = (props) => {
 
     let history = useHistory();
@@ -32,6 +30,7 @@ const Search = (props) => {
         await setNumPages(num);
         return;
     }
+    
     //Busca la película con cada tecla que pulsamos
     const searchMovie = async (opc) => {
         setGenre(opc);

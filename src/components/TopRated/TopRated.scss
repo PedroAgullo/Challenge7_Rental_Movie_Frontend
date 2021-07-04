@@ -4,13 +4,13 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: scroll;
     background-color: #060d17;
+    margin-bottom: 1em;
 }
 
 .cardTopRated {
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +25,7 @@
 .cardTopRated:hover{    
     cursor: pointer;
     transition: 0.3s;
-    border: 0.3em solid blue;    
+    border: 0.3em solid yellow;    
 }
 
 .boxCardTopRated {
@@ -41,5 +41,5 @@
 
 .poster{
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
 }

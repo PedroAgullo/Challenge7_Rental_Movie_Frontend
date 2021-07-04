@@ -8,11 +8,11 @@ const Home = () => {
 
     return (
         <div className="HomeDiv">
-           <div>
+
                <TopRated/>
                <Popular/>
                <Novedades/>
-           </div>           
+
         </div>
     );
 }
