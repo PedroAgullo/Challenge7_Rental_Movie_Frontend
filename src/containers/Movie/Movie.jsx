@@ -5,6 +5,8 @@ import axios from "axios";
 import {notification} from 'antd';
 import {useHistory} from 'react-router-dom';
 import Recommendations from '../../components/Recommendations/Recommendations';
+import moment from 'moment';
+
 
 const Movie = (props) => {
 
@@ -27,7 +29,8 @@ const Movie = (props) => {
 
         let idUser = props.credentials.idUser;
         let token = props.credentials.token;
-      
+        let genre;
+
         let bodyOrder = {
           idUser : idUser,
           customerId : idUser,
@@ -37,6 +40,13 @@ const Movie = (props) => {
           precio: precio,
           type: opcion
         }
+
+        if (props.movie.genre_ids !== undefined){
+            genre = props.movie.genre_ids[0];
+        }else {
+            genre = props.movie.genres[0].id;
+        }
+
 
         let bodyMovie = {
             idUser : idUser,
@@ -48,10 +58,14 @@ const Movie = (props) => {
             numBuy: 1,
             numRent: 1,
             type: opcion,
-            genre : props.movie.genre_ids[0],
+            genre : genre,
+            // genre : props.movie?.genre_ids[0],
             // genre : props.movie.genres[0]?.id,
             poster_path : props.movie.poster_path
           }
+
+
+console.log(bodyMovie);
 
         switch (opcion){
 
@@ -93,15 +107,17 @@ const Movie = (props) => {
         }
     }
 
-    const findMovie = async () => {  
+    const findMovie = async () => {
 
         try{
             let body = {
                 id: props.movie.id
             }
+
             console.log("Estoy en findmovie de Movie. body: ", body);
-            let res = await axios.post('http://localhost:3005/movies/id',body);  
+            let res = await axios.post('http://localhost:3005/movies/id',body);             
             setMovieData(res); 
+
         }catch (err){      
         }  
     }
@@ -110,9 +126,12 @@ const Movie = (props) => {
         if (props.credentials?.token === "" || props.credentials?.token === undefined) {
 
             notification.warning({message:'Atención',description: "Tienes que hacer login o registrarte para poder ver una película."});
+            return;
         
-        }else if (props.credentials.premium){
-                history.push("/play");            
+        }
+        else if (props.credentials.user.premium=== true){
+                history.push("/play"); 
+                return;           
         }
 
         try {            
@@ -125,17 +144,47 @@ const Movie = (props) => {
             }
 
             let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+            console.log("compas que tiene el usuario.", res.data);
 
+            res.data.map((movie) =>{
+                if(movie.movieId === props.movie.id){
+                    history.push("/play"); 
+                    return;
+                }
+            });
 
-        } catch (err) {
+        } catch (err) {            
             
         }
+        try {            
+            let token = props.credentials.token;
+            let body = {
+              customerId : props.credentials.idUser,
+              idUser: props.credentials.idUser,
+              id: props.credentials.idUser,
+              type: "alquiler"    
+            }
+
+            let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+            console.log("compas que tiene el usuario.", res.data);
+
+            res.data.map((movie) =>{
+                console.log("dias de diferencia: ", movie.createdAt, (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')))
+                if(movie.movieId === props.movie.id &&  (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')) <2  ){
+                    history.push("/play"); 
+                    return;
+                }
+            });
+
+        } catch (err) {            
+            
+        }
+        notification.warning({message:'Atención',description: "Tienes que comprar/alquilar o ser premium para ver la película."});
     }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w780"
     if (props.movie?.id) {
-
       return (
         <div className="boxMovie">
             <div className="up">
@@ -168,9 +217,9 @@ const Movie = (props) => {
       return <div>
             ESTAMOS EN MOVIE  - CARGANDO DATOS
          </div>;
-
     }
 }
+
 export default connect((state) => ({
       credentials:state.credentials, 
       movie:state.movie,

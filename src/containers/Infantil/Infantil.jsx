@@ -21,7 +21,7 @@ const Infantil = (props) => {
     const selectMovie = async (movie) => {
       try{
         props.dispatch({type:GETMOVIE,payload: movie});
-        history.push('/movie');
+        history.push('/play');
     }catch (err){
          console.log(err);      
          }
@@ -52,7 +52,6 @@ const Infantil = (props) => {
     }  
   }
 
-
   const nextSearch = async () => {
     console.log("estoy en NextSearch");
     let body={
@@ -65,7 +64,6 @@ const Infantil = (props) => {
     await addPages(numPages);  
     await setDataMovies(dataMovies.concat(res.data.results));
   }
-
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w780"
