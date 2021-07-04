@@ -1,7 +1,6 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-// import './Popular.css';
+import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { connect } from 'react-redux';
 import { GETMOVIE } from '../../redux/types';
@@ -11,16 +10,12 @@ const Infantil = (props) => {
   let history = useHistory();
 
     //hooks
-    const [movieData, setMovieData] = useState([]);  
-  
+    const [dataMovies, setDataMovies] = useState([]); 
+    const [numPages, setNumPages] = useState(1); 
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
-      findPopular();
+      findFamiliar();
     }, []);
-  
-    //Equivalente a componentDidUpdate en componentes de clase
-    useEffect(() => {
-    });
   
     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
@@ -31,39 +26,65 @@ const Infantil = (props) => {
          console.log(err);      
          }
     }
-  
-    const findPopular = async () => {  
-    try{
-        //Get familiar movies  
-        let body={
-            genre : "10751" 
-          }        
-        let res = await axios.post('http://localhost:3005/movies/genre',body);     
-      setMovieData(res.data.results); 
-  }catch (err){      
+
+    const addPages = async (num) => {
+      num = num + 1;
+      console.log("addPages, el numero vale : ", num);
+      await setNumPages(num);
+      return;
   }
 
-  
-}
+    const findFamiliar = async () => {  
+      setNumPages(1);
+      setDataMovies([]);
+      let body={
+          genre : "10751",
+          num : numPages  
+        }     
+
+    try{
+        console.log("Entro en findFamiliar");
+        let res = await axios.post('http://localhost:3005/movies/genre',body);  
+        await addPages(numPages);
+   
+        await setDataMovies(dataMovies.concat(res.data.results));
+      }catch (err){      
+    }  
+  }
+
+
+  const nextSearch = async () => {
+    console.log("estoy en NextSearch");
+    let body={
+      genre : "10751",
+      num : numPages  
+    }      
+
+    console.log("Hola", dataMovies);
+    let res = await axios.post('http://localhost:3005/movies/genre',body);   
+    await addPages(numPages);  
+    await setDataMovies(dataMovies.concat(res.data.results));
+  }
+
+
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w780"
 
-  // if (props.getroomusers[0]?._id) {
-    if (movieData[0]?.id) {
+    if (dataMovies[0]?.id) {
 
       return (
-        <div className="infantilBoxMovies"> <h1>PARA LOS MÁS PEQUES DE LA CASA</h1>
+        <div className="infantilBoxMovies">
+          <InfiniteScroll dataLength={dataMovies.length} next={()=>nextSearch()} hasMore={true} loader={<h4>Loading...</h4>}>
             <div className="infantilBoxCard">
-              {movieData.map((act, index) => (
+              {dataMovies.map((act, index) => (
                 <div className="infantilCard" onClick={()=> selectMovie(act)} key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
-                  {/* <p className="datosCard">Fin: {moment(act.dateEnd).format('LLL')}</p>
-                  <p className="datosCard">Entrenador: {act.nameCoach}</p>
-                  <p className="datosCard">Capacidad: {act.members.length}/{act.maxMember}</p> */}
+                  <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="posterInfantil"/>
                 </div>
                    ))}
-
             </div>
+            </InfiniteScroll>
+            <div id="visor"></div>
+
         </div>  
       );
     } else {
