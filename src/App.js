@@ -9,13 +9,14 @@ import Movie from './containers/Movie/Movie';
 import Search from './containers/Search/Search';
 import Infantil from './containers/Infantil/Infantil';
 import SelectProfile from './containers/SelectProfile/SelectProfile';
+import Play from './containers/Play/Play';
 
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-
+      
         <Navbar/>
 
             <Switch>
@@ -27,6 +28,7 @@ function App() {
               <Route path="/search" exact component={Search}/>
               <Route path="/infantil" exact component={Infantil}/>
               <Route path="/select" exact component={SelectProfile}/>
+              <Route path="/play" exact component={Play}/>
             </Switch>
         
       </BrowserRouter>

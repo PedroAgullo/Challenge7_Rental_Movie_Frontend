@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
+import { GETMOVIE, TRAILER } from '../../redux/types';
 import {useHistory} from "react-router";
 
 const Popular = (props) => {
@@ -17,7 +17,14 @@ const Popular = (props) => {
  
     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
+
+      let body = {
+        id: movie.id
+      } 
+
       try{
+        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        await props.dispatch({type:TRAILER,payload:res2.data});
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/movie');
     }catch (err){
@@ -61,5 +68,6 @@ const Popular = (props) => {
 
 export default connect((state) => ({
   credentials:state.credentials, 
-  getroomusers:state.getroomusers
+  movie:state.movie, 
+  trailer:state.trailer
   }))(Popular);

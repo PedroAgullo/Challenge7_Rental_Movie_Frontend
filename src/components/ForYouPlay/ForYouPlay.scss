@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: scroll;
 }
 
 .recomCard {
@@ -14,23 +13,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 0.2em solid yellow;    
     border-radius: 1em;
     transition: 0.3s;
     font-size: 0.8em;
-    /* box-shadow:  5px 5px 5px 2px grey; */
     margin: 1em;
-    background-color: darkgreen;
     overflow: hidden;
+    
+    &:hover{
+        cursor: pointer;
+    }
 }
 
-.recomCard:hover{    
-    cursor: pointer;
-    transition: 0.3s;
-    /* box-shadow: 5px 5px 5px 2px grey; */
-    /* box-shadow: 3px 3px 3px 2px grey; */
-    border: 0.2em solid red; 
-}
+
 
 
 .recomBoxCard {
