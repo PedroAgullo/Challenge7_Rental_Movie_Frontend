@@ -7,6 +7,7 @@ import DataMyMovies from '../../components/DataMyMovies/DataMyMovies';
 import DataOrderAdmin from '../../components/DataOrderAdmin/DataOrderAdmin';
 import DataProfileAdmin from '../../components/DataProfileAdmin/DataProfileAdmin';
 import Stats from '../../components/Stats/Stats';
+import Configuracion from '../../components/Configuracion/Configuracion';
 
 const Profile = (props) => {
 
@@ -36,6 +37,10 @@ const Profile = (props) => {
             case 'stats':
 
                 return <Stats/>
+
+            case 'configuracion':
+
+                return <Configuracion/>
 
             default:
 

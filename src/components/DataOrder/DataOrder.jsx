@@ -1,7 +1,5 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-// import './DataOrder.css';
 import axios from "axios";
 import moment from "moment";
 import { connect } from 'react-redux';

@@ -1,5 +1,7 @@
 =========== USUARIO CREADO DE 0===========
 
+-1 PAGINA HOME DINÁMICA DEPENDIENDO DE LOS GUSTOS DEL USUARIO.
+
 0.- Intentamos sin hacer login comprar o ver alguna película. Nos tiene que redirigir siempre a register o login.
 
 1.- Crear usuario nuevo. Comprabar envío y activación de cuenta por email. (pedro.agullo.marco@gmail.com)

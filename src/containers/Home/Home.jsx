@@ -13,6 +13,7 @@ const Home = (props) => {
     if (props.credentials?.token !== '') {
         return (
 //RETURN PERSONALIZADO CON RECOMENDACIONES POR ULTIMA PELICULA VISTA Y BUSCADA
+
             <div className="HomeDiv">
                 <ForYouPlay/>
                 <TopRated/>
@@ -20,6 +21,7 @@ const Home = (props) => {
                 <Novedades/>
                 <Wellcome/>
         </div>
+        
         );
     }else if (props.credentials?.token === ''){
         return(

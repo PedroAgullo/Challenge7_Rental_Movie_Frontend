@@ -39,7 +39,7 @@ const Menulateral = (props) => {
 
         break;
 
-      case "subscription":
+      case "configuracion":
         props.dispatch({ type: CAMBIADATOS, payload: info });
 
         break;
@@ -89,7 +89,7 @@ const Menulateral = (props) => {
               <FontAwesomeIcon className="iconAdmin" icon={faStar}/>
               <span class="tooltip">Favoritos</span>
             </li>
-            <li onClick={() => cambiaDatos("subscription")}>
+            <li onClick={() => cambiaDatos("configuracion")}>
             <FontAwesomeIcon className="iconAdmin" icon={faCog}/>
             <span class="tooltip">Configuración</span>
             </li>
