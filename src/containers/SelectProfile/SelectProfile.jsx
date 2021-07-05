@@ -1,8 +1,6 @@
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
 import {useHistory} from "react-router";
 import infantil from '../../images/infantilProfile.jpg';
 import adulto from '../../images/adultProfile.jpg';
@@ -41,5 +39,4 @@ const SelectProfile = (props) => {
 
 export default connect((state) => ({
   credentials:state.credentials, 
-  getroomusers:state.getroomusers
   }))(SelectProfile);

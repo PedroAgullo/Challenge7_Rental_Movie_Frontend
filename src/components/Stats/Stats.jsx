@@ -1,11 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import {useHistory} from "react-router";
-// import './Stats.css';
 import axios from "axios";
-import { Popconfirm, message, Button } from 'antd';
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
 import { Column } from '@ant-design/charts';
 
 
@@ -20,10 +16,6 @@ const Stats = (props) => {
       cantidad();
     }, []);
   
-    //Equivalente a componentDidUpdate en componentes de clase
-    useEffect(() => {
-    });
-
   const cantidad = async () => {
     try {
       let token = props.credentials.token;

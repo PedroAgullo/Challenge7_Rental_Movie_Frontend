@@ -14,7 +14,6 @@ const Movie = (props) => {
 
     //hooks
     const [movieData, setMovieData] = useState([]);  
-    const [similarMovie, setSimilarMovie] = useState([]);
 
     useEffect(() => {
         findMovie();
@@ -47,7 +46,6 @@ const Movie = (props) => {
             genre = props.movie.genres[0].id;
         }
 
-
         let bodyMovie = {
             idUser : idUser,
             customerId : idUser,
@@ -59,25 +57,17 @@ const Movie = (props) => {
             numRent: 1,
             type: opcion,
             genre : genre,
-            // genre : props.movie?.genre_ids[0],
-            // genre : props.movie.genres[0]?.id,
             poster_path : props.movie.poster_path
           }
-
-
-console.log(bodyMovie);
 
         switch (opcion){
 
             case "Compra" :
                 try{
 
-                    console.log("datos que le pasamos a axios",bodyOrder);
-                    let res = await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
-                    console.log("Resultado de la compra: ", res.data);
+                    await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
               
-                    let res2 = await axios.post('http://localhost:3005/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
-                    console.log("Añadimos +1 a numBuy: ", res2.data);                   
+                    await axios.post('http://localhost:3005/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                     notification.success({message:'Película comprada.',description: "Ve a tu perfil, mis películas para verla."});
 
                 }catch (err){      
@@ -87,13 +77,8 @@ console.log(bodyMovie);
 
             case "Alquiler" :
                 try{
-
-                    console.log("datos que le pasamos a axios",bodyOrder);
-                    let res = await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
-                    console.log("Resultado de la compra: ", res.data);
-              
-                    let res2 = await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
-                    console.log("Añadimos +1 a numRent: ", res2.data)
+                    await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});              
+                    await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                     notification.success({message:'Pelicula alquilada.',description: "Ve a tu perfil/mis peliculas para poder verla."});
                
                 }catch (err){      

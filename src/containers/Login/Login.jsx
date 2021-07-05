@@ -62,8 +62,10 @@ const Login = (props) => {
                 props.dispatch({type:LOGIN,payload:data});
                 if (res.data.customer.admin){
                     history.push("/profile");
-                }else {
+                }else if(res.data.customer.premium === true) {
                     history.push("/select");
+                }else {
+                    history.push("/");
                 }                               
 
             } catch (err) {      
@@ -83,7 +85,7 @@ const Login = (props) => {
                         <label for="email" class="form__label">Email</label>
                     </div>
                     <div class="form">
-                        <input type="password" id="email" class="form__input" name="password" autocomplete="off" placeholder=" "  onChange={updateCredentials}></input>
+                        <input type="password" id="password" class="form__input" name="password" autocomplete="off" placeholder=" "  onChange={updateCredentials}></input>
                         <label for="email" class="form__label">Password</label>
                     </div>                    
                     <div className = "sendButton" onClick={()=>logeame()}>Acción!</div>

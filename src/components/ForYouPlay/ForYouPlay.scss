@@ -1,14 +1,16 @@
 .RecomBoxMovies{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     flex-wrap: nowrap;
+    background-color: #060d17;
+    margin-bottom: 1em;
 }
 
-.recomCard {
+.playCard {
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,21 +26,19 @@
     }
 }
 
-
-
-
-.recomBoxCard {
+.playBoxCard {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;  
     height: auto;
-    width: 60vw;
+    width: auto;
     flex-wrap: nowrap;
+    margin-bottom: 1em;
 }
 
 .poster{
     height: 20vh;
-    width: 10vw;
+    width: 8.7vw;
 }

@@ -68,5 +68,6 @@ const Novedades = (props) => {
 
 export default connect((state) => ({
   credentials:state.credentials, 
-  movie:state.movie 
+  movie:state.movie,
+  trailer:state.trailer
   }))(Novedades);

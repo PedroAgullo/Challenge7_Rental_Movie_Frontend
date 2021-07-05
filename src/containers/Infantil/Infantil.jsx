@@ -7,11 +7,13 @@ import { GETMOVIE, TRAILER } from '../../redux/types';
 import {useHistory} from "react-router";
 
 const Infantil = (props) => {
+  
   let history = useHistory();
 
     //hooks
     const [dataMovies, setDataMovies] = useState([]); 
     const [numPages, setNumPages] = useState(1); 
+
     //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
       findFamiliar();

@@ -20,13 +20,11 @@
     font-size: 0.8em;
     margin: 1em;
     overflow: hidden;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
-.popularCard:hover{    
-    cursor: pointer;
-    transition: 0.3s;
-    border: 0.2em solid yellow;    
-}
 
 .popularBoxCard {
     display: flex;

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {connect} from 'react-redux';
 import axios from 'axios';
 import { GETMOVIE, TRAILER } from '../../redux/types';
@@ -204,9 +204,6 @@ const Search = (props) => {
             <div className="searchBar">
                 <h3>Buscar por:</h3><select id="opcion" onChange={()=>searchMovie(document.getElementById("opcion").value)} className="inputSearch" type="select" name="subscription" required="true" placeholder="Abono"  lenght='30'>
                             <option value="all">Todas las peliculas</option>
-                            <option value="topRated">Mejor valoradas</option>
-                            <option value="novedades">Novedades</option>
-                            <option value="popular">Populares</option>                            
                             <option value="28">Acción</option>
                             <option value="12">Aventura</option>
                             <option value="16">Animacion</option>
@@ -226,6 +223,9 @@ const Search = (props) => {
                             <option value="53">Thriller</option>
                             <option value="10752">Guerra</option>
                             <option value="37">Western</option>                            
+                            <option value="topRated">Mejor valoradas</option>
+                            <option value="novedades">Novedades</option>
+                            <option value="popular">Populares</option>                            
                         </select>  
             <input type="text" id="movieName" onChange={()=>searchMovie("all")}/>
                         

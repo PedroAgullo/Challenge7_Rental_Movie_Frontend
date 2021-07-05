@@ -1,14 +1,14 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
 import {useHistory} from "react-router";
 import axios from "axios";
 import { connect } from 'react-redux';
-import { GETMOVIE } from '../../redux/types';
+import { GETMOVIE, TRAILER } from '../../redux/types';
 import {notification} from 'antd';
 
 const ForYouSearch = (props) => {
-  
+  let history = useHistory();
+
   let history = useHistory();
     //hooks
     const [movieData, setMovieData] = useState([]);  
@@ -18,16 +18,18 @@ const ForYouSearch = (props) => {
       findRecommendations();
     }, []);
   
-    //Equivalente a componentDidUpdate en componentes de clase
-    useEffect(() => {
-    });
-  
-    //Guarda la movie en redux y nos lleva a la vista de película.
+     //Guarda la movie en redux y nos lleva a la vista de película.
     const selectMovie = async (movie) => {
+
+      let body = {
+        id: movie.id
+      } 
+
       try{
+        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        await props.dispatch({type:TRAILER,payload:res2.data});
         await props.dispatch({type:GETMOVIE,payload: movie});
-        await findRecommendations();
-        // history.push('/movie');
+        history.push('/movie');
 
     }catch (err){
          console.log(err);      
@@ -40,13 +42,14 @@ const ForYouSearch = (props) => {
     let body = {
       id: props.movie.id
     } 
-      console.log("Antes del axios en redommendations", body);
 
     try{
-
       let res = await axios.post('http://localhost:3005/movies/recommendations', body);
-      console.log("Recommendations",res.data.results);
-      setMovieData(res.data.results); 
+      let resultado = [];
+      for(let x=0; x<10; x++){
+        resultado.push(res.data.results[x]);
+      }
+      setMovieData(resultado);
     }catch (err){      
       notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
       // .response.data.message
@@ -55,7 +58,7 @@ const ForYouSearch = (props) => {
   }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
-  const size = "w500"
+  const size = "w780"
     if (movieData[0]?.id) {
       return (
         <div className="recomBoxMovies"> <h1>BASADAS EN TU ÚLTIMA BÚSQUEDA</h1>

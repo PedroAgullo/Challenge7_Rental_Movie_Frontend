@@ -2,42 +2,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 
 
-.card {
-   /*  height: 30vh;
-    width: 15vw;
+.cardDataRoom {
+    height: 27vh;
+    width: 10vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 0.2em solid grey;    
     border-radius: 1em;
     transition: 0.3s;
     font-size: 0.8em;
-    box-shadow:  5px 5px 5px 2px grey;
-    margin-right: 1em;
-    background-color: #F0EC57; */
-    height: 15vh;
-    width: 7vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 0.2em solid grey;    
-    border-radius: 1em;
-    transition: 0.3s;
-    font-size: 0.8em;
-    box-shadow:  5px 5px 5px 2px grey;
-    margin-right: 1em;    
-    margin-bottom: 1em;
-    padding: 1em;
-}
+    margin: 1em;
+    background: darkgrey;
 
-.card:hover{
-    background-color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 5px 5px 5px 2px grey, 8px 8px 8px 5px grey;
+    &:hover{
+        cursor: pointer;
+    }
 }
+//     height: 15vh;
+//     width: 7vw;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     border: 0.2em solid grey;    
+//     border-radius: 1em;
+//     transition: 0.3s;
+//     font-size: 0.8em;
+//     box-shadow:  5px 5px 5px 2px grey;
+//     margin-right: 1em;    
+//     margin-bottom: 1em;
+//     padding: 1em;
+//     &:hover{
+//         background-color: white;
+//         cursor: pointer;
+//         transition: 0.3s;
+//         box-shadow: 5px 5px 5px 2px grey, 8px 8px 8px 5px grey;
+//     }
+// }
+
 
 .nombre{
     font-weight: bold;
@@ -53,15 +56,12 @@
     flex-wrap: wrap;  
     height: auto;
     width: auto;
-
 }
 
 .datosCard {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
-    /* max-width: fit-content; */
-    width: fit-content;
-    
+    width: fit-content;    
 }
 
 .nombreDataRoom {
@@ -70,18 +70,10 @@
     text-align: center;
 }
 
-.spinner {
-    height: 80vh;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .posterDataMovie{
-    height: 14vh;
-    width: 6vw;
+    height: 27vh;
+    width: 10vw;
+    border-radius: 1em;
 }
 
 
@@ -91,11 +83,3 @@
       font-size: 15px;
     }
   }
-
-
-
-
-
-
-
-  /* A partir de aquí el spinner */

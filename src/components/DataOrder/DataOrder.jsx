@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 // import './DataOrder.css';
 import axios from "axios";
 import moment from "moment";
-import { message } from 'antd';
 import { connect } from 'react-redux';
 import {notification} from 'antd';
 

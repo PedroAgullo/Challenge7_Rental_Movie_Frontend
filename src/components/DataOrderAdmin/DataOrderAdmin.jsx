@@ -20,11 +20,6 @@ const DataOrderAdmin = (props) => {
       findOderByType("All")
     }, []);
   
-    //Equivalente a componentDidUpdate en componentes de clase
-    useEffect(() => {
-    });
-  
-
     // Borra order.
     const deleteOrder = async (orderId) => {
       try{
