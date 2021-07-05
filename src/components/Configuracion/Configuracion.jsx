@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Premiumfoto from '../../images/Premium.jpg';
 import {notification} from 'antd';
 import axios from "axios";
+import {LOGIN} from '../../redux/types'
 
 const Configuracion = (props) => {
 
@@ -46,7 +47,8 @@ const Configuracion = (props) => {
         }
 
         try{
-            await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
+            let res = await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
+            console.log(res.data);
             notification.success({message:'Compra realizada.',description: "A partir de ahora puedes acceder a todas las ventajas de ser Premium."})
         }catch (err){      
         //   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
@@ -61,9 +63,21 @@ const Configuracion = (props) => {
           premium: true
         }
         try{
-            await axios.post('http://localhost:3005/customer/premium',body,{headers:{'authorization':'Bearer ' + token}});
+           let res2 = await axios.post('http://localhost:3005/customer/premium',body,{headers:{'authorization':'Bearer ' + token}});
+          console.log("REsultado cambio premium:", res2.data);
+           
+          let data = {
+            token : props.credentials.token,
+            user : (res2.data),
+            idUser: props.credentials.idUser,
+          }
+          console.log(data);
+          props.dispatch({type:LOGIN,payload:data});  
+
+
         }catch (err){      
         }  
+
     }
 
     if (boton === "subscripcion") {
@@ -71,16 +85,14 @@ const Configuracion = (props) => {
             <div className="nombreDataRoom"> 
                 <div className="tipoDatosConfig">
                   <div className="botonDatosConfig" onClick={()=>setBoton("subscripcion")}>Subscripcion</div>
-                  <div className="botonDatosConfig" onClick={()=>setBoton("pago")}>Met.Pago</div>
+                  <div className="botonDatosConfig" >Met.Pago</div>
                   <div className="botonDatosConfig" onClick={()=>setBoton("infantil")}>Ctrl.Parental</div>
                 </div>
 
                 <div className="boxCardDataRoom">
                     <img src={Premiumfoto} id="fotopremium"alt="Premium" className="fotoWellcome" onClick=""/> 
-                    <div className="botonDatosConfig" onClick={()=>compraPremium(25)}>Comprar</div>
-               
-                </div>
-                
+                    <div className="botonDatosConfig" onClick={()=>compraPremium(25)}>Comprar</div>               
+                </div>                
             </div>  
     );
       } else if(boton === "infantil") {
@@ -89,7 +101,7 @@ const Configuracion = (props) => {
               <div className="nombreDataRoom"> 
               <div className="tipoDatosConfig">
                   <div className="botonDatosConfig" onClick={()=>setBoton("subscripcion")}>Subscripcion</div>
-                  <div className="botonDatosConfig" onClick={()=>setBoton("pago")}>Met.Pago</div>
+                  <div className="botonDatosConfig" >Met.Pago</div>
                   <div className="botonDatosConfig" onClick={()=>setBoton("infantil")}>Ctrl.Parental</div>
                 </div>                
                     <h3>Desde aquí puedes activar o desactivar el perfin infaltil.</h3>

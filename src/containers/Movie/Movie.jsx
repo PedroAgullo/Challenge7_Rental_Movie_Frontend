@@ -107,16 +107,16 @@ const Movie = (props) => {
     }
 
     const verPeli = async () => {
+        let error = 0
         if (props.credentials?.token === "" || props.credentials?.token === undefined) {
-
             notification.warning({message:'Atención',description: "Tienes que hacer login o registrarte para poder ver una película."});
-            return;
-        
+            error = error +1;
+            return;        
         }
-        else if (props.credentials.user.premium=== true){
+        else if (props.credentials.user.premium===true){
                 history.push("/play"); 
                 return;           
-        }
+        }     
 
         try {            
             let token = props.credentials.token;
@@ -133,6 +133,8 @@ const Movie = (props) => {
                 if(movie.movieId === props.movie.id){
                     history.push("/play"); 
                     return;
+                }else {
+                    error = error +1;
                 }
             });
 
@@ -154,13 +156,19 @@ const Movie = (props) => {
                 if(movie.movieId === props.movie.id &&  (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')) <2  ){
                     history.push("/play"); 
                     return;
+                }else {
+                    error = error +1;
                 }
             });
 
         } catch (err) {            
             
         }
-        notification.warning({message:'Atención',description: "Tienes que comprar/alquilar o ser premium para ver la película."});
+        // if (error === 0){
+        //     notification.warning({message:'Atención',description: "Tienes que comprar/alquilar o ser premium para ver la película."});
+        // }
+
+
     }
 
   const baseImgUrl = "https://image.tmdb.org/t/p"

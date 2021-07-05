@@ -40,7 +40,7 @@ const DataProfileAdmin = (props) => {
         country: datosUser.country,
         city: datosUser.city,
         dni: datosUser.dni,
-        telephone: datosUser.telephone,        
+        phone: datosUser.phone,        
     });
 
     useEffect(() => {
@@ -254,7 +254,7 @@ const DataProfileAdmin = (props) => {
             
 
             break;
-            case 'telephone':
+            case 'phone':
                 if(datosUser.phone.length < 1){
                     setErrors({...errors, ePhone: 'El campo telefono no puede estar vacío.'});
                 }else if (datosUser.phone.length < 9){
@@ -285,6 +285,7 @@ const DataProfileAdmin = (props) => {
         let token = props.credentials.token;
     
         let body = {
+            id: props.credentials.idUser,
             name : datosUser.name,
             lastName1: datosUser.lastName1,
             lastName2: datosUser.lastName2,
@@ -295,25 +296,18 @@ const DataProfileAdmin = (props) => {
             country: datosUser.country,
             city: datosUser.city,
             dni: datosUser.dni,
-            telephone: datosUser.telephone,
+            phone: datosUser.phone,
             subscription: datosUser.subscription        
         }
 
         try {
-            let res = await axios.post('http://localhost:3005/user',body,{headers:{'authorization':'Bearer ' + token}});
-            notification.success({message:'Atencion.',description: "Nuevo coach creado correctamente."});
+            let res = await axios.post('http://localhost:3005/customer/modify',body,{headers:{'authorization':'Bearer ' + token}});
+
 
         } catch (err) {
-            var errorText = err.response.data.message;
-            if (errorText.includes("email")){
-                notification.warning({message:'Atencion.',description: "El email ya existe en la base de datos."});
 
-            }else if (errorText.includes("dni")){
-                notification.warning({message:'Atencion.',description: "El dni ya existe en la base de datos"});
-
-            }else{
                 notification.error({message:'Atencion.',description: "Tenemos problemas en la base de datos. Póngase en contacto con el administrador."});
-            }
+            
         }        
     }
 
@@ -321,13 +315,12 @@ const DataProfileAdmin = (props) => {
         return (
             <div>
                 <div className="tipoDatos">
-                    {/* <div className="botonDatos" onClick={()=>findOderByType("All")}>Nuevo</div> */}
                     <div className="botonDatos" onClick={(()=>saveData())}>Guardar</div>
                     <div className="botonDatos" onClick={(()=>findUser(2))}>Buscar</div>
 
                     <div className="userSearch">
                          Buscar por : 
-                         <select id="op" className="inputBase" value="" type="select" name="subscription" required="true" placeholder="Abono"  lenght='30'>
+                         <select id="op" className="inputBase"  type="select" name="subscription" required="true" placeholder=""  lenght='30'>
                             <option value="EMAIL">EMAIL</option>
                             <option value="DNI">DNI</option>
                             <option value="ID">ID</option>
@@ -337,9 +330,7 @@ const DataProfileAdmin = (props) => {
                 </div>
 
                 <div className="boxDataProfileUser">
-                    <div className="infoUser1">
-                        <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
-                    </div>
+
                     
                     <div className= "infoUser2Titulos">
                         <div className="titulosInfoUser">Nombre:</div>
@@ -347,7 +338,6 @@ const DataProfileAdmin = (props) => {
                         <div className="titulosInfoUser">Segundo apellido:</div>
                         <div className="titulosInfoUser">Email:</div>
                         <div className="titulosInfoUser">Password:</div>
-                        <div className="titulosInfoUser">Suscripcion:</div>
                     </div>
 
                     <div className="infoUser2">
@@ -380,8 +370,8 @@ const DataProfileAdmin = (props) => {
                         <div>{errors.eCountry}</div>
                         <input className="inputBaseUser"   type="text" name="dni" onChange={updateFormulario} onBlur={()=>checkError("dni")}  size="34" maxlenght='9' ></input>
                         <div>{errors.eDni}</div>
-                        <input className="inputBaseUser"  type="text" name="telephone"  onChange={updateFormulario} onBlur={()=>checkError("telephone")} size="34" lenght='9'></input>
-                        <div>{errors.eTelephone}</div>
+                        <input className="inputBaseUser"  type="text" name="phone"  onChange={updateFormulario} onBlur={()=>checkError("phone")} size="34" lenght='9'></input>
+                        <div>{errors.Phone}</div>
                         <input className="inputBaseUser"   type="date" name="birthday" onChange={updateFormulario} onBlur={()=>checkError("birthday")} ></input>
                         <div>{errors.eBirthday}</div>
                     </div>
@@ -396,12 +386,9 @@ const DataProfileAdmin = (props) => {
         return (
             <div>
                 <div className="tituloDataProfile"><h1>Editar usuario</h1></div>
-                <div className="boxDataProfileUser">
+                <div className="botonDatos" onClick={(()=>saveData())}>Guardar</div>
 
-                    <div className="infoUser1">
-                    <div className="fotoUser"><img id="foto" src={PhotoProfile} alt="Profile photo" /></div>
-                        <div className="empty"><button onClick={(()=>updateUser(1))}>Guardar</button></div>
-                    </div>
+                <div className="boxDataProfileUser">
 
                     <div className= "infoUser2Titulos">
                         <div className="titulosInfoUser">Nombre:</div>
@@ -437,8 +424,8 @@ const DataProfileAdmin = (props) => {
                         <input className="inputBaseUser" placeholder={datosUser.country} type="text" name="country" onChange={updateFormulario} onBlur={()=>checkError("country")}  size="34" lenght='30'></input>
                         <div>{errors.eCountry}</div>
                         <input className="inputBaseUser" value={datosUser.dni} readonly="readonly" type="text" name="dni"  size="34" maxlenght='9' ></input>
-                        <input className="inputBaseUser" placeholder={datosUser.telephone} type="text" name="telephone" onChange={updateFormulario} onBlur={()=>checkError("telephone")}  size="34" lenght='9'></input>
-                        <div>{errors.eTelephone}</div>
+                        <input className="inputBaseUser" placeholder={datosUser.phone} type="text" name="phone" onChange={updateFormulario} onBlur={()=>checkError("phone")}  size="34" lenght='9'></input>
+                        <div>{errors.ePhone}</div>
                         <input className="inputBaseUser" value={moment(datosUser.birthday).format('LL')} readonly="readonly" type="text" name="birthday" ></input>
                     </div>
                 </div>

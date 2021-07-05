@@ -4,6 +4,7 @@ import Popular from '../../components/Popular/Popular';
 import Novedades from '../../components/Novedades/Novedades';
 import Wellcome from '../../components/Wellcome/Wellcome';
 import ForYouPlay from '../../components/ForYouPlay/ForYouPlay';
+import ForYouSearch from '../../components/ForYouSearch/ForYouSearch';
 import { connect } from 'react-redux';
 
 
@@ -17,6 +18,7 @@ const Home = (props) => {
             <div className="HomeDiv">
                 <ForYouPlay/>
                 <TopRated/>
+                <ForYouSearch/>
                 <Popular/>
                 <Novedades/>
                 <Wellcome/>

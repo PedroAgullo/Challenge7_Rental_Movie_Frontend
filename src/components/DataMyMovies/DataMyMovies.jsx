@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import {notification} from 'antd';
 import {useHistory} from "react-router";
 import { GETMOVIE, TRAILER } from '../../redux/types';
+import { act } from "react-dom/cjs/react-dom-test-utils.development";
 
 
 const DataMyMovies = (props) => {
@@ -19,7 +20,6 @@ const DataMyMovies = (props) => {
       findOrders();
     }, []);
   
-    //CANCELA LA CLASE
     const playMovie = async (movieId) => {
       try {
           let token = props.credentials.token
@@ -50,11 +50,25 @@ const DataMyMovies = (props) => {
       }
       let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
+      let prueba = [];
+      prueba = res.data;
+       console.log(prueba.lenght);
+
+      console.log(res.data.lenght);
+
+      for (let x =0; x<res.data.lenght; x++){
+
+        if (res.data.type === 'Premium'){
+          res.data[x].splice(x,1);
+        }
+      }
+
     //  props.dispatch({type:GETORDER,payload: res.data});
 
     
         setOrders(res.data);; 
     }catch (err){     
+        console.log(err) ;
         notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
     }
   
@@ -67,10 +81,10 @@ const DataMyMovies = (props) => {
       return (
         <div className="nombreDataRoom"> <h1>MIS PELICULAS</h1>
 
-            <div className="boxCardDataRoom">
+            <div className="boxCardDataRoom" >
               {orders.map((act, index) => (
-                <div className="cardDataRoom" key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie" onClick={()=>playMovie(act.movieId)}/> 
+                <div className="cardDataRoom" id={act.type} key={index}>
+                    <img src={`${baseImgUrl}/${size}${act.photoMovie}`}  alt="poster" className="posterDataMovie" id={act.type} onClick={()=>playMovie(act.movieId)}/> 
                 </div>
                    ))}
 

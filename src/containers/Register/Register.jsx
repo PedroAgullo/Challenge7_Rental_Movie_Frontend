@@ -144,6 +144,8 @@ const Register = () => {
             dni: datosUser.dni,
             phone: datosUser.phone,
             subscription: datosUser.subscription,
+            lastSearch: 300,
+            lastPlay:90
         }
 
 

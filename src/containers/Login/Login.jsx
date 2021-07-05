@@ -70,7 +70,6 @@ const Login = (props) => {
 
             } catch (err) {      
                     notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          
-                    notification.warning({message:'Atencion.',description: "Usuario o password incorrecto."});              
             }
     }
 

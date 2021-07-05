@@ -9,7 +9,6 @@ import {notification} from 'antd';
 const ForYouSearch = (props) => {
   let history = useHistory();
 
-  let history = useHistory();
     //hooks
     const [movieData, setMovieData] = useState([]);  
   
@@ -56,18 +55,18 @@ const ForYouSearch = (props) => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p"
   const size = "w780"
-    if (movieData[0]?.id) {
-      return (
-        <div className="recomBoxMovies"> <h1>BASADAS EN TU ÚLTIMA BÚSQUEDA</h1>
-            <div className="recomBoxCard">
-              {movieData.map((act, index) => (
-                <div className="recomCard" onClick={()=> selectMovie(act)} key={index}>
-                    <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
-                </div>
-                   ))}
-            </div>
-        </div>  
-      );
+  if (movieData[0]?.id) {
+    return (
+      <div className="playBoxMovies"> <h2>BASADAS EN TU ÚLTIMA BÚSQUEDA</h2>
+          <div className="playBoxCard">
+            {movieData.map((act, index) => (
+              <div className="playCard" onClick={()=> selectMovie(act)} key={index}>
+                  <img src={`${baseImgUrl}/${size}${act.poster_path}`}  alt="poster" className="poster"/>
+              </div>
+                 ))}
+          </div>
+      </div>  
+    );
     } else {
       return <div>
           BASADAS EN TU ÚLTIMA BÚSQUEDA - CARGANDO DATOS</div>;
