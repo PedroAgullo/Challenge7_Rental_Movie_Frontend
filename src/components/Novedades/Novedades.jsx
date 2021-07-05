@@ -29,7 +29,6 @@ const Novedades = (props) => {
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/movie');
     }catch (err){
-         console.log(err);      
          }
     }
   

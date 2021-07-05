@@ -28,14 +28,12 @@ const Search = (props) => {
             props.dispatch({type:GETMOVIE,payload: res.data});
             history.push('/movie');
       }catch (err){
-           console.log(err);      
            }            
     }
 
 
     const addPages = async (num) => {
         num = num + 1;
-        console.log("addPages, el numero vale : ", num);
         await setNumPages(num);
         return;
     }
@@ -123,13 +121,8 @@ const Search = (props) => {
             case "all":
                 
                 try {
-                    console.log("Body del nextSearch opcion All: ", body);
                     let res = await axios.post('http://localhost:3005/movies/title',body);
-                    console.log(res.data.results);   
-                    console.log("El numPages vale: ", numPages);
                     addPages(numPages);
-
-                    console.log(dataMovies);
                     setDataMovies(dataMovies.concat(res.data.results));
                 } catch (error) {            
                 }        
@@ -139,10 +132,7 @@ const Search = (props) => {
                 
                     try {
                         let res = await axios.get('http://localhost:3005/movies/', body);
-                        console.log(res.data.results);   
-                        console.log("El numPages vale: ", numPages);
-                        addPages(numPages);
-    
+                        addPages(numPages);    
                         setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
                     }        
@@ -151,13 +141,8 @@ const Search = (props) => {
                 case "novedades":
                 
                     try {
-                        console.log("Body del nextSearch opcion All: ", body);
                         let res = await axios.get('http://localhost:3005/movies/soon',body);     
-                        console.log(res.data.results);   
-                        console.log("El numPages vale: ", numPages);
-                        addPages(numPages);
-    
-                        console.log(dataMovies);
+                        addPages(numPages);    
                         setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
                     }        
@@ -166,13 +151,9 @@ const Search = (props) => {
                 case "popular":
                 
                     try {
-                        console.log("Body del nextSearch opcion All: ", body);
                         let res = await axios.get('http://localhost:3005/movies/popular',body);
-                        console.log(res.data.results);   
-                        console.log("El numPages vale: ", numPages);
                         addPages(numPages);
     
-                        console.log(dataMovies);
                         setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
                     }        
@@ -181,13 +162,8 @@ const Search = (props) => {
             default:
 
                   try {
-                      console.log("Entro en genre", body);
                       let res2 = await axios.post('http://localhost:3005/movies/genre',body);
-                      console.log("El numPages vale: ", numPages);
-
-                      console.log(res2.data.results);
                       addPages(numPages);
-
                       setDataMovies(dataMovies.concat(res2.data.results));
                     } catch (error) {
               

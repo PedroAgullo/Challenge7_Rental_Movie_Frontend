@@ -52,7 +52,6 @@ const DataProfileAdmin = (props) => {
     const findUser = async (info) => {
         let opc= document.getElementById("op").value;
         let dato = document.getElementById("dataSearch").value;
-        console.log("Datos del campo que hay vacío", dato);
         if (dato === "") 
         {
             notification.warning({message:'Atención.',description: "El campo de búsqueda no puede estar vacío" });            
@@ -69,20 +68,17 @@ const DataProfileAdmin = (props) => {
         switch (opc){
             case 'EMAIL':
                 
-                console.log("Email : ", body);
                 let res = await axios.post('http://localhost:3005/customer/email',body,{headers:{'authorization':'Bearer ' + token}});
                     if (res.data === null){
                         notification.warning({message:'Atención.',description: "Email del usuario no encontrado" });
                     return;
                 }                
-                console.log(res.data);                
                 setDatosUser(res.data);
                 setProfile(info);
 
             break;
 
             case 'DNI':                
-                console.log("DNI",body);
                 let resDNI = await axios.post('http://localhost:3005/customer/dni',body,{headers:{'authorization':'Bearer ' + token}});                
                 
                 if (resDNI.data === null){
@@ -90,19 +86,16 @@ const DataProfileAdmin = (props) => {
                 return;
                 }  
 
-                console.log(resDNI.data);
                 setDatosUser(resDNI.data);
                 setProfile(info);
             break;
 
             case 'ID':
-                console.log("id", body);
                 let resID = await axios.post('http://localhost:3005/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
                 if (resID.data === null){
                     notification.warning({message:'Atención.',description: "Id del usuario no encontrado" });
                 return;
                 }  
-                console.log(resID.data);
                 setDatosUser(resID.data);
                 setProfile(info);
             break;
@@ -306,7 +299,6 @@ const DataProfileAdmin = (props) => {
             subscription: datosUser.subscription        
         }
 
-        console.log("Body que le pasamos a axios", body);
         try {
             let res = await axios.post('http://localhost:3005/user',body,{headers:{'authorization':'Bearer ' + token}});
             notification.success({message:'Atencion.',description: "Nuevo coach creado correctamente."});

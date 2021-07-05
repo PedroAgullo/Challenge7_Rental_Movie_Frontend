@@ -17,7 +17,6 @@ const DataOrder = (props) => {
     }, []);
 
     const findOderByType = async (opc) => {
-      console.log("Entro en cambiaDAtos. OPC:", opc);
 
       let token = props.credentials.token;
       let body = {
@@ -27,15 +26,12 @@ const DataOrder = (props) => {
         type: opc        
       }
 
-      console.log("El ritmo in the body: ", body);
       switch(opc){
         case "All" : 
         try{
               let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});      
-              console.log("Datos devueltos del backend: ", res.data);
               setOrders(res.data); 
             }catch (err){     
-              console.log(err) ;
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
             }  
           return;
@@ -43,10 +39,8 @@ const DataOrder = (props) => {
         default : 
             try{
               let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
-              console.log("Datos devueltos del backend: ", res.data);
               setOrders(res.data); 
             }catch (err){     
-              console.log(err) ;
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
             }              
           return;

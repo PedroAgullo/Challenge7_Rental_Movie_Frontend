@@ -11,7 +11,6 @@ const Wellcome = (props) => {
     let history = useHistory();
 
     let buyPremium = () => {
-        console.log("token: ",props.credentials?.token);
         if (props.credentials?.token === "" || props.credentials?.token === undefined) {
             notification.warning({message:'Registrate o haz login',description: "Para acceder a las ventajas de ser premium, regístrate o haz login." });   
         }else{

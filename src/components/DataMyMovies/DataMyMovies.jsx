@@ -22,7 +22,6 @@ const DataMyMovies = (props) => {
     //CANCELA LA CLASE
     const playMovie = async (movieId) => {
       try {
-          console.log("Entro en playMovie:");
           let token = props.credentials.token
           let body={
             id : movieId,
@@ -32,7 +31,6 @@ const DataMyMovies = (props) => {
         let res2 = await axios.post('http://localhost:3005/movies/video',body); 
         await props.dispatch({type:TRAILER,payload:res2.data});
         let res = await axios.post('http://localhost:3005/movies/id',body,{headers:{'authorization':'Bearer ' + token}});
-          console.log("Resultado: ", res.data);
 
         props.dispatch({type:GETMOVIE,payload: res.data});
         history.push('/movie');
@@ -50,17 +48,13 @@ const DataMyMovies = (props) => {
         customerId : idUser,
         idUser: idUser        
       }
-      console.log()
       let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
-      console.log("Datos devueltos del backend: ", res.data);
     //  props.dispatch({type:GETORDER,payload: res.data});
-    console.log('datos de mis pedidos: ', res.data);
 
     
         setOrders(res.data);; 
     }catch (err){     
-        console.log(err) ;
         notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
     }
   
@@ -85,7 +79,7 @@ const DataMyMovies = (props) => {
       );
     } else {
       return <div>
-            ESTAMOS EN MIS PEDIDOS (SIN DATOS)         
+          <h1>NO TIENES PELICULAS </h1>
         </div>        
 
     }

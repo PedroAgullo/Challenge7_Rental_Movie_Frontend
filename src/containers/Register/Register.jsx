@@ -146,8 +146,6 @@ const Register = () => {
             subscription: datosUser.subscription,
         }
 
-        console.log("Datos datosUser: ", datosUser);
-        console.log("Datos variable user: ", user);      
 
        try{
             await axios.post(("http://localhost:3005/customer"), user);  
@@ -156,7 +154,6 @@ const Register = () => {
             history.push('/login');
         
         }catch(err){
-           console.log("Prueab: ", err.response);
              var errorText = err.response.data.mensaje;
             if (errorText?.includes("email")){
                 notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});          

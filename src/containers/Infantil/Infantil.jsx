@@ -38,7 +38,6 @@ const Infantil = (props) => {
 
     const addPages = async (num) => {
       num = num + 1;
-      console.log("addPages, el numero vale : ", num);
       await setNumPages(num);
       return;
   }
@@ -52,7 +51,6 @@ const Infantil = (props) => {
         }     
 
     try{
-        console.log("Entro en findFamiliar");
         let res = await axios.post('http://localhost:3005/movies/genre',body);  
         await addPages(numPages);
    
@@ -62,13 +60,11 @@ const Infantil = (props) => {
   }
 
   const nextSearch = async () => {
-    console.log("estoy en NextSearch");
     let body={
       genre : "10751",
       num : numPages  
     }      
 
-    console.log("Hola", dataMovies);
     let res = await axios.post('http://localhost:3005/movies/genre',body);   
     await addPages(numPages);  
     await setDataMovies(dataMovies.concat(res.data.results));

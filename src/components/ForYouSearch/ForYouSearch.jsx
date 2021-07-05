@@ -32,13 +32,11 @@ const ForYouSearch = (props) => {
         history.push('/movie');
 
     }catch (err){
-         console.log(err);      
          }      
 
     }
   
   const findRecommendations = async () => { 
-    console.log("Estoy entrando.");
     let body = {
       id: props.movie.id
     } 
@@ -52,7 +50,6 @@ const ForYouSearch = (props) => {
       setMovieData(resultado);
     }catch (err){      
       notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
-      // .response.data.message
     }
   
   }

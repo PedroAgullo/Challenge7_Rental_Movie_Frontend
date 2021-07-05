@@ -99,7 +99,6 @@ const Movie = (props) => {
                 id: props.movie.id
             }
 
-            console.log("Estoy en findmovie de Movie. body: ", body);
             let res = await axios.post('http://localhost:3005/movies/id',body);             
             setMovieData(res); 
 
@@ -129,7 +128,6 @@ const Movie = (props) => {
             }
 
             let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
-            console.log("compas que tiene el usuario.", res.data);
 
             res.data.map((movie) =>{
                 if(movie.movieId === props.movie.id){
@@ -151,10 +149,8 @@ const Movie = (props) => {
             }
 
             let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
-            console.log("compas que tiene el usuario.", res.data);
 
             res.data.map((movie) =>{
-                console.log("dias de diferencia: ", movie.createdAt, (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')))
                 if(movie.movieId === props.movie.id &&  (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')) <2  ){
                     history.push("/play"); 
                     return;

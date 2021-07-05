@@ -179,7 +179,6 @@ const DataProfile = (props) => {
                 let address = datosUser.address;
                 let city = datosUser.city;
                 let phone = datosUser.phone;
-                console.log(idUser)
         
                 let body = {
                     id : idUser,
@@ -191,10 +190,8 @@ const DataProfile = (props) => {
                     postalcode: datosUser.postalCode  
                 }
 
-                console.log(body, "Datos de body que pasamos");
 
                 let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
-                console.log(res.data);
 
                 let data = {
                     token: token,
@@ -202,7 +199,6 @@ const DataProfile = (props) => {
                     idUser: idUser,
                     perfil: "user"
                 }
-                console.log("Datos qeu devuelve axios : ", data);
 
                 props.dispatch({type:UPDATE,payload:data});
                 notification.success({message:'Atencion.',description: "Datos actualizados correctamente."});

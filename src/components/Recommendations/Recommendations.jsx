@@ -23,10 +23,8 @@ const Recommendations = (props) => {
       let body = {
         id: movie.id
       } 
-      console.log("Selecto movie en recommendations:" , body);
 
       try{
-        console.log("Selecto")
         let res2 = await axios.post('http://localhost:3005/movies/video',body); 
         let res = await axios.post('http://localhost:3005/movies/id', body); 
         let res3 = await axios.post('http://localhost:3005/movies/recommendations', body);
@@ -39,7 +37,6 @@ const Recommendations = (props) => {
         setMovieData(resultado); 
 
     }catch (err){
-         console.log(err);      
          }      
     }
   
@@ -55,8 +52,8 @@ const Recommendations = (props) => {
           resultado.push(res.data.results[x]);
         }
       setMovieData(resultado); 
-    }catch (err){      
-      notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
+    }catch (err){   
+
     }  
   }
 

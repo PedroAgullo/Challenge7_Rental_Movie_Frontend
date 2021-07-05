@@ -12,9 +12,27 @@ const Configuracion = (props) => {
     useEffect(() => {
     }, []);
     
+
+    const infantilChange = async (opc) => {
+
+        let idUser = props.credentials.idUser;
+        let token = props.credentials.token;
+
+        let body = {
+          idUser : idUser,
+          customerId : idUser,
+          infantil: opc
+        }
+        try{
+            await axios.post('http://localhost:3005/customer/infantil',body,{headers:{'authorization':'Bearer ' + token}});
+            notification.success({message:'Cambio realizado.',description: "Cambios realizados correctamente."});
+        }catch (err){      
+        //   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
+        }      
+    }
+
     const compraPremium = async (precio) => {
 
-        console.log (props.credentials.idUser);
         let idUser = props.credentials.idUser;
         let token = props.credentials.token;
         let bodyOrder = {
@@ -32,7 +50,20 @@ const Configuracion = (props) => {
             notification.success({message:'Compra realizada.',description: "A partir de ahora puedes acceder a todas las ventajas de ser Premium."})
         }catch (err){      
         //   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
-        }           
+        }   
+        
+        
+
+          let body = {
+          idUser : idUser,
+          customerId : idUser,
+          id: idUser,
+          premium: true
+        }
+        try{
+            await axios.post('http://localhost:3005/customer/premium',body,{headers:{'authorization':'Bearer ' + token}});
+        }catch (err){      
+        }  
     }
 
     if (boton === "subscripcion") {
@@ -52,7 +83,7 @@ const Configuracion = (props) => {
                 
             </div>  
     );
-      } else {
+      } else if(boton === "infantil") {
            return (
             <div>
               <div className="nombreDataRoom"> 
@@ -60,16 +91,16 @@ const Configuracion = (props) => {
                   <div className="botonDatosConfig" onClick={()=>setBoton("subscripcion")}>Subscripcion</div>
                   <div className="botonDatosConfig" onClick={()=>setBoton("pago")}>Met.Pago</div>
                   <div className="botonDatosConfig" onClick={()=>setBoton("infantil")}>Ctrl.Parental</div>
-                </div>
-  
-                <div>        
-                   NO HAY PEDIDOS DE ESTE TIPO.
+                </div>                
+                    <h3>Desde aquí puedes activar o desactivar el perfin infaltil.</h3>
+                <div className="botonPremium">        
+                    <div className="botonDatosConfig" onClick={()=>infantilChange(true)}>Activar</div>
+                    <div className="botonDatosConfig" onClick={()=>infantilChange(false)}>Desactivar</div>
                  </div>        
               </div>
             </div>            
-          )     
-  
-      }
+          )    
+        }
 }
 export default connect((state) => ({
     credentials: state.credentials,

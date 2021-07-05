@@ -62,7 +62,6 @@ const Stats = (props) => {
       setEstadisticas(data);
 
     } catch (err) {
-      console.log(err)
     }
   }
 
@@ -112,7 +111,6 @@ const Stats = (props) => {
       setEstadisticas(data);
 
     } catch (err) {
-      console.log(err)
     }
   }
 

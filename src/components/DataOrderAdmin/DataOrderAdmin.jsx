@@ -29,7 +29,6 @@ const DataOrderAdmin = (props) => {
         const body = {
           id : orderId
         }
-        console.log("DeleteOrder, body: ", body);
 
         let res = await axios.post('http://localhost:3005/order/delete',body,{headers:{'authorization':'Bearer ' + token}});      
         message.info('Pedido eliminado.');
@@ -41,7 +40,6 @@ const DataOrderAdmin = (props) => {
 
     //Encuentra pedido por tipo (compra, alquiler, premiun, todos);
     const findOderByType = async (opc) => {
-      console.log("Entro en cambiaDAtos. OPC:", opc);
 
       let token = props.credentials.token;
       let body = {
@@ -49,15 +47,12 @@ const DataOrderAdmin = (props) => {
         idUser: props.credentials.idUser,
         type: opc        
       }
-      console.log("El ritmo in the body: ", body);
       switch(opc){
         case "All" : 
         try{
               let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
-              console.log("Datos devueltos del backend: ", res.data);
               setOrders(res.data); 
             }catch (err){     
-              console.log(err) ;
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
             }  
           return;
@@ -65,40 +60,17 @@ const DataOrderAdmin = (props) => {
         default : 
             try{
               let res = await axios.post('http://localhost:3005/order/type',body,{headers:{'authorization':'Bearer ' + token}});      
-              console.log("Datos devueltos del backend: ", res.data);
               setOrders(res.data); 
             }catch (err){     
-              console.log(err) ;
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
             }              
           return;
       }
     }
 
-
-    // const findAllOrders = async () => {  
-    //   try{
-    //     let idUser = props.credentials.idUser;
-    //     let token = props.credentials.token;
-      
-    //     let body = {
-    //       customerId : idUser,
-    //       idUser: idUser        
-    //     }
-
-    //     let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
-    //     console.log("Datos devueltos del backend: ", res.data);
-
-    //     setOrders(res.data); 
-    //   }catch (err){     
-    //       console.log(err) ;
-    //       notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-    //   }  
-    // }
     
     const baseImgUrl = "https://image.tmdb.org/t/p"
     const size = "w200"
-    console.log("Datos del Hook orders:", orders);
    if (orders[0]?.id) {
       return (
         <div className="nombreDataRoom"> 
