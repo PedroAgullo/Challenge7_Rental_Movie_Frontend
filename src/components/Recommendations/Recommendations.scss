@@ -1,0 +1,42 @@
+.RecomBoxMovies{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+.recomCard {
+    height: 18vh;
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1em;
+    transition: 0.3s;
+    font-size: 0.8em;
+    margin: 1em;
+    overflow: hidden;
+    
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.recomBoxCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;  
+    height: auto;
+    width: 60vw;
+    flex-wrap: nowrap;
+}
+
+.poster{
+    height: 18vh;
+    width: 10vw;
+}

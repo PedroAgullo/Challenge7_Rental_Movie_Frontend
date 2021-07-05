@@ -1,0 +1,39 @@
+
+.SearchDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+    height: auto;
+    width: auto;
+    flex-wrap: wrap;
+    background: #060d17;
+    font-size: 1.2em ;
+    color: white;
+
+}
+
+
+.box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+    height: auto;
+    width: auto;
+    flex-wrap: wrap;
+    background: #060d17;
+    color: white;
+    margin: 1em;
+}
+
+.fotoWellcome{
+    height: 10em;
+    width: 10em;  
+    margin: 0.5em;  
+    border-radius: 1em;
+}
+
+#fotopremium:hover{
+    cursor: pointer;
+}
