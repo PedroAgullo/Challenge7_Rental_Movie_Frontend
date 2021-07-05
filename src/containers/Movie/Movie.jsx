@@ -71,25 +71,29 @@ const Movie = (props) => {
                     notification.success({message:'Película comprada.',description: "Ve a tu perfil, mis películas para verla."});
 
                 }catch (err){      
-                  notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
                 }
                 return;
 
             case "Alquiler" :
-                try{
-                    await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});              
-                    await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
-                    notification.success({message:'Pelicula alquilada.',description: "Ve a tu perfil/mis peliculas para poder verla."});
-               
-                }catch (err){      
-                  notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
-                }
-                return;
+                if (props.credentials.user.premium===true){
+                    notification.warning({message:'Atencion.',description: "Tienes una suscripción Premium activa. Puedes ver la película sin alquilarla."});
+                    return;
+                }else{
 
+                    try{
+                        await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});              
+                        await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
+                        notification.success({message:'Pelicula alquilada.',description: "Ve a tu perfil/mis peliculas para poder verla."});
+                        
+                    }catch (err){      
+                    }
+                    return;
+                }
+                    
             default:
                 notification.warning({message:'Atencion.',description: "Ha ocurrido un error. Póngase en contacto con el administrador."});
                 return;
-        }
+               }
     }
 
     const findMovie = async () => {

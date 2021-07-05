@@ -79,7 +79,7 @@ const DataMyMovies = (props) => {
 
     if (orders[0]?.id) {
       return (
-        <div className="nombreDataRoom"> <h1>MIS PELICULAS</h1>
+        <div className="nombreDataRoom"> MIS PELICULAS
 
             <div className="boxCardDataRoom" >
               {orders.map((act, index) => (
