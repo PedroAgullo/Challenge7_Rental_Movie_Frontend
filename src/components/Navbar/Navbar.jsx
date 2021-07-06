@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../images/Logo4.jpg';
+// import Logo from '../../images/Logo4.jpg';
 import Avatar from '../../images/Avatar1.jpg';
 import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';
@@ -52,7 +52,7 @@ const Navbar = (props) => {
       <div className="nav">
         <div className="logo">
           <div>
-            <NavLink to="/"><img className="img" src={Logo} alt="logo"/></NavLink>
+            <NavLink to="/"><img className="img" src="" alt="logo"/></NavLink>
           </div>
             <div className="searchBox">
               <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/search"><FontAwesomeIcon  icon={faSearch}/>Buscador</NavLink>
