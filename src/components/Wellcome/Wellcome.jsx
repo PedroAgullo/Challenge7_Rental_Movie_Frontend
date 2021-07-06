@@ -1,8 +1,8 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import Premiumfoto from '../../images/Premium.jpg';
-import Logo1 from '../../images/Logo4.jpg';
+// import Premiumfoto from '../../images/Premium.jpg';
+// import Logo1 from '../../images/Logo4.jpg';
 import {notification} from 'antd';
 import {useHistory} from "react-router";
 
@@ -22,7 +22,7 @@ const Wellcome = (props) => {
         <div className="SearchDiv">
             <div className="box">
                 <div>
-                    <img src={Logo1} alt="Logo" className="fotoWellcome"/>
+                    <img src="" alt="Logo" className="fotoWellcome"/>
                 </div>
                 <div>
                     <p>Bienvenidos a "El Séptimo Arte". Tu servicio de video bajo de manda.</p>
@@ -33,7 +33,7 @@ const Wellcome = (props) => {
 
             <div className="box">
                 <div>
-                    <img src={Premiumfoto} id="fotopremium"alt="Premium" className="fotoWellcome" onClick={()=>buyPremium()}/>
+                    <img src="" id="fotopremium"alt="Premium" className="fotoWellcome" onClick={()=>buyPremium()}/>
                 </div>
                 <div>
                     <p>Con nuestra subscripción Premium  accederás a todas nuestras películas.</p> 
