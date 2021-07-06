@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // import Logo from '../../images/Logo4.jpg';
-import Avatar from '../../images/Avatar1.jpg';
+// import Avatar from '../../images/Avatar1.jpg';
 import { connect } from 'react-redux';
 import { LOGOUT, LOGOUTROOM, LOGOUTTIPODATOS, PROFILE, DELETE} from '../../redux/types';
 import { useHistory } from 'react-router-dom';
@@ -76,7 +76,7 @@ const Navbar = (props) => {
       <div className="nav">
         <div className="logo">
           <div>
-            <NavLink to="/"><img className="img" src={Logo} alt="logo"/></NavLink>
+            <NavLink to="/"><img className="img" src="" alt="logo"/></NavLink>
           </div>
             <div className="searchBox">
               <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/search"><FontAwesomeIcon  icon={faSearch}/>Buscador</NavLink>
@@ -89,7 +89,7 @@ const Navbar = (props) => {
               <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} onClick={()=>logOut()} to="/"><FontAwesomeIcon icon={faSignOutAlt}/>Logout</NavLink>
             </div>
             <div className="NavLink" activeClassName="selected">
-              <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/profile" ><div className="fotoUser"><img id="fotoNavBar" src={Avatar} onClick={() => cambiaDatos("profile")} alt="Profile photo" /></div>
+              <NavLink style={{ color: 'inherit', textDecoration: 'inherit' }} to="/profile" ><div className="fotoUser"><img id="fotoNavBar" src="" onClick={() => cambiaDatos("profile")} alt="Profile photo" /></div>
               </NavLink>
             </div>
           </div>
