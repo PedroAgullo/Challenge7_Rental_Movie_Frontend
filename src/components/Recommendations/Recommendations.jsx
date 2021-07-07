@@ -25,9 +25,9 @@ const Recommendations = (props) => {
       } 
 
       try{
-        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
-        let res = await axios.post('http://localhost:3005/movies/id', body); 
-        let res3 = await axios.post('http://localhost:3005/movies/recommendations', body);
+        let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body); 
+        let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/id', body); 
+        let res3 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/recommendations', body);
         props.dispatch({type:TRAILER,payload:res2.data});
         props.dispatch({type:GETMOVIE,payload: res.data});
         let resultado = [];
@@ -46,7 +46,7 @@ const Recommendations = (props) => {
     } 
 
     try{
-      let res = await axios.post('http://localhost:3005/movies/recommendations', body);
+      let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/recommendations', body);
       let resultado = [];
         for(let x=0; x<8; x++){
           resultado.push(res.data.results[x]);

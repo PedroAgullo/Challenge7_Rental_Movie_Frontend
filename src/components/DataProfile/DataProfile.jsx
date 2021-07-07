@@ -191,7 +191,7 @@ const DataProfile = (props) => {
                 }
 
 
-                let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
+                let res = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
 
                 let data = {
                     token: token,

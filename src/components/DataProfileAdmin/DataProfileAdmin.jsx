@@ -68,7 +68,7 @@ const DataProfileAdmin = (props) => {
         switch (opc){
             case 'EMAIL':
                 
-                let res = await axios.post('http://localhost:3005/customer/email',body,{headers:{'authorization':'Bearer ' + token}});
+                let res = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/email',body,{headers:{'authorization':'Bearer ' + token}});
                     if (res.data === null){
                         notification.warning({message:'Atención.',description: "Email del usuario no encontrado" });
                     return;
@@ -79,7 +79,7 @@ const DataProfileAdmin = (props) => {
             break;
 
             case 'DNI':                
-                let resDNI = await axios.post('http://localhost:3005/customer/dni',body,{headers:{'authorization':'Bearer ' + token}});                
+                let resDNI = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/dni',body,{headers:{'authorization':'Bearer ' + token}});                
                 
                 if (resDNI.data === null){
                     notification.warning({message:'Atención.',description: "DNI del usuario no encontrado" });
@@ -91,7 +91,7 @@ const DataProfileAdmin = (props) => {
             break;
 
             case 'ID':
-                let resID = await axios.post('http://localhost:3005/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
+                let resID = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/id',body,{headers:{'authorization':'Bearer ' + token}});
                 if (resID.data === null){
                     notification.warning({message:'Atención.',description: "Id del usuario no encontrado" });
                 return;
@@ -115,7 +115,7 @@ const DataProfileAdmin = (props) => {
         }
 
            try {
-            let res = await axios.post('http://localhost:3005/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/update',body,{headers:{'authorization':'Bearer ' + token}});
 
             let data = {
                token: props.credentials.token,
@@ -301,7 +301,7 @@ const DataProfileAdmin = (props) => {
         }
 
         try {
-            let res = await axios.post('http://localhost:3005/customer/modify',body,{headers:{'authorization':'Bearer ' + token}});
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/modify',body,{headers:{'authorization':'Bearer ' + token}});
 
 
         } catch (err) {

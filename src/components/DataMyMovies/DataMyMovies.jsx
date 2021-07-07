@@ -28,9 +28,9 @@ const DataMyMovies = (props) => {
             customerId : props.credentials.user.id
           }
 
-        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body); 
         await props.dispatch({type:TRAILER,payload:res2.data});
-        let res = await axios.post('http://localhost:3005/movies/id',body,{headers:{'authorization':'Bearer ' + token}});
+        let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/id',body,{headers:{'authorization':'Bearer ' + token}});
 
         props.dispatch({type:GETMOVIE,payload: res.data});
         history.push('/movie');
@@ -48,7 +48,7 @@ const DataMyMovies = (props) => {
         customerId : idUser,
         idUser: idUser        
       }
-      let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});
+      let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/user',body,{headers:{'authorization':'Bearer ' + token}});
      
       let prueba = [];
       prueba = res.data;

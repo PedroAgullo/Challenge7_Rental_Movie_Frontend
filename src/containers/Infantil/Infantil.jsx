@@ -27,7 +27,8 @@ const Infantil = (props) => {
       } 
 
       try{
-        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        // let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body); 
+        let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body); 
         await props.dispatch({type:TRAILER,payload:res2.data});
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/play');
@@ -51,7 +52,8 @@ const Infantil = (props) => {
         }     
 
     try{
-        let res = await axios.post('http://localhost:3005/movies/genre',body);  
+        // let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);  
+        let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);  
         await addPages(numPages);
    
         await setDataMovies(dataMovies.concat(res.data.results));
@@ -65,7 +67,8 @@ const Infantil = (props) => {
       num : numPages  
     }      
 
-    let res = await axios.post('http://localhost:3005/movies/genre',body);   
+    // let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);   
+    let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);   
     await addPages(numPages);  
     await setDataMovies(dataMovies.concat(res.data.results));
   }

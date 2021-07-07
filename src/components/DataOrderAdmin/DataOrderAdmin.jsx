@@ -30,7 +30,7 @@ const DataOrderAdmin = (props) => {
           id : orderId
         }
 
-        let res = await axios.post('http://localhost:3005/order/delete',body,{headers:{'authorization':'Bearer ' + token}});      
+        let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/delete',body,{headers:{'authorization':'Bearer ' + token}});      
         message.info('Pedido eliminado.');
         findOderByType("All");
      }catch (err){
@@ -50,7 +50,7 @@ const DataOrderAdmin = (props) => {
       switch(opc){
         case "All" : 
         try{
-              let res = await axios.post('http://localhost:3005/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
+              let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/all',body,{headers:{'authorization':'Bearer ' + token}});      
               setOrders(res.data); 
             }catch (err){     
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
@@ -59,7 +59,7 @@ const DataOrderAdmin = (props) => {
 
         default : 
             try{
-              let res = await axios.post('http://localhost:3005/order/type',body,{headers:{'authorization':'Bearer ' + token}});      
+              let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/type',body,{headers:{'authorization':'Bearer ' + token}});      
               setOrders(res.data); 
             }catch (err){     
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});

@@ -27,7 +27,7 @@ const DataOrder = (props) => {
       switch(opc){
         case "All" : 
         try{
-              let res = await axios.post('http://localhost:3005/order/user',body,{headers:{'authorization':'Bearer ' + token}});      
+              let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/user',body,{headers:{'authorization':'Bearer ' + token}});      
               setOrders(res.data); 
             }catch (err){     
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});
@@ -36,7 +36,7 @@ const DataOrder = (props) => {
 
         default : 
             try{
-              let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+              let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
               setOrders(res.data); 
             }catch (err){     
               notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});

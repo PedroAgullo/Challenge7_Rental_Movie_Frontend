@@ -21,8 +21,8 @@ const Search = (props) => {
           } 
 
         try{      
-            let res2 = await axios.post('http://localhost:3005/movies/video',body);
-            let res = await axios.post('http://localhost:3005/movies/id', body); 
+            let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body);
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/id', body); 
 
             props.dispatch({type:TRAILER,payload:res2.data});
             props.dispatch({type:GETMOVIE,payload: res.data});
@@ -58,7 +58,7 @@ const Search = (props) => {
             case "all":
                 
                 try {
-                    let res = await axios.post('http://localhost:3005/movies/title',body);
+                    let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/title',body);
                     await addPages(numPages);
                     await setDataMovies(dataMovies.concat(res.data.results));
                 } catch (error) {            
@@ -68,7 +68,7 @@ const Search = (props) => {
                 case "topRated":
                 
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/');
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/');
                         await addPages(numPages);
                         await setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
@@ -78,7 +78,7 @@ const Search = (props) => {
                 case "novedades":
                 
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/soon');     
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/soon');     
                         await addPages(numPages);
                         await setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
@@ -88,7 +88,7 @@ const Search = (props) => {
                 case "popular":
             
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/popular');
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/popular');
                         await addPages(numPages);
                         await setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
@@ -97,7 +97,7 @@ const Search = (props) => {
 
             default:
                   try {
-                      let res2 = await axios.post('http://localhost:3005/movies/genre',body);
+                      let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);
                       addPages(numPages);
                       setDataMovies(res2.data.results);
                   } catch (error) {
@@ -121,7 +121,7 @@ const Search = (props) => {
             case "all":
                 
                 try {
-                    let res = await axios.post('http://localhost:3005/movies/title',body);
+                    let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/title',body);
                     addPages(numPages);
                     setDataMovies(dataMovies.concat(res.data.results));
                 } catch (error) {            
@@ -131,7 +131,7 @@ const Search = (props) => {
                 case "topRated":
                 
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/', body);
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/', body);
                         addPages(numPages);    
                         setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
@@ -141,7 +141,7 @@ const Search = (props) => {
                 case "novedades":
                 
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/soon',body);     
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/soon',body);     
                         addPages(numPages);    
                         setDataMovies(dataMovies.concat(res.data.results));
                     } catch (error) {            
@@ -151,7 +151,7 @@ const Search = (props) => {
                 case "popular":
                 
                     try {
-                        let res = await axios.get('http://localhost:3005/movies/popular',body);
+                        let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/popular',body);
                         addPages(numPages);
     
                         setDataMovies(dataMovies.concat(res.data.results));
@@ -162,7 +162,7 @@ const Search = (props) => {
             default:
 
                   try {
-                      let res2 = await axios.post('http://localhost:3005/movies/genre',body);
+                      let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/genre',body);
                       addPages(numPages);
                       setDataMovies(dataMovies.concat(res2.data.results));
                     } catch (error) {

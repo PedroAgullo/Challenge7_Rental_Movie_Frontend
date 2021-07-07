@@ -65,9 +65,9 @@ const Movie = (props) => {
             case "Compra" :
                 try{
 
-                    await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
+                    await axios.post('https://elseptimoartebackend.herokuapp.com/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
               
-                    await axios.post('http://localhost:3005/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
+                    await axios.post('https://elseptimoartebackend.herokuapp.com/movies/buy',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                     notification.success({message:'Película comprada.',description: "Ve a tu perfil, mis películas para verla."});
 
                 }catch (err){      
@@ -81,8 +81,8 @@ const Movie = (props) => {
                 }else{
 
                     try{
-                        await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});              
-                        await axios.post('http://localhost:3005/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
+                        await axios.post('https://elseptimoartebackend.herokuapp.com/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});              
+                        await axios.post('https://elseptimoartebackend.herokuapp.com/movies/rent',bodyMovie,{headers:{'authorization':'Bearer ' + token}});
                         notification.success({message:'Pelicula alquilada.',description: "Ve a tu perfil/mis peliculas para poder verla."});
                         
                     }catch (err){      
@@ -103,7 +103,7 @@ const Movie = (props) => {
                 id: props.movie.id
             }
 
-            let res = await axios.post('http://localhost:3005/movies/id',body);             
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/id',body);             
             setMovieData(res); 
 
         }catch (err){      
@@ -131,7 +131,7 @@ const Movie = (props) => {
               type: "compra"    
             }
 
-            let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
 
             res.data.map((movie) =>{
                 if(movie.movieId === props.movie.id){
@@ -154,7 +154,7 @@ const Movie = (props) => {
               type: "alquiler"    
             }
 
-            let res = await axios.post('http://localhost:3005/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/idtype',body,{headers:{'authorization':'Bearer ' + token}});      
 
             res.data.map((movie) =>{
                 if(movie.movieId === props.movie.id &&  (moment().diff(moment(movie.createdAt).format('MM/DD/YYYY'), 'days')) <2  ){

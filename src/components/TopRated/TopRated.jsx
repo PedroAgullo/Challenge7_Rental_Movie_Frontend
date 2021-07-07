@@ -23,7 +23,7 @@ const TopRated = (props) => {
       } 
 
       try{
-        let res2 = await axios.post('http://localhost:3005/movies/video',body); 
+        let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/movies/video',body); 
         await props.dispatch({type:TRAILER,payload:res2.data});
         props.dispatch({type:GETMOVIE,payload: movie});
         history.push('/movie');
@@ -33,7 +33,7 @@ const TopRated = (props) => {
   
     const findTopRated = async () => {  
     try{
-      let res = await axios.get('http://localhost:3005/movies/');
+      let res = await axios.get('https://elseptimoartebackend.herokuapp.com/movies/');
       let resultado = [];
       for(let x=0; x<10; x++){
         resultado.push(res.data.results[x]);

@@ -20,7 +20,7 @@ const Stats = (props) => {
     try {
       let token = props.credentials.token;
 
-      let res = await axios.post('http://localhost:3005/order/all',{headers:{'authorization':'Bearer ' + token}});
+      let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/all',{headers:{'authorization':'Bearer ' + token}});
 
     let numRent = 0;
     let numBuy = 0;
@@ -69,7 +69,7 @@ const Stats = (props) => {
     try {
       let token = props.credentials.token;
 
-    let res = await axios.post('http://localhost:3005/order/all',{headers:{'authorization':'Bearer ' + token}});
+    let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order/all',{headers:{'authorization':'Bearer ' + token}});
 
     let numRent = 0;
     let numBuy = 0;

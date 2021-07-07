@@ -150,7 +150,7 @@ const Register = () => {
 
 
        try{
-            await axios.post(("http://localhost:3005/customer"), user);  
+            await axios.post(("https://elseptimoartebackend.herokuapp.com/customer"), user);  
         
             notification.success({message:'Usuario registrado.',description: "Te hemos enviado un email para activar la cuenta." });        
             history.push('/login');

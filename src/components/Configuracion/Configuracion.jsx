@@ -25,7 +25,7 @@ const Configuracion = (props) => {
           infantil: opc
         }
         try{
-            await axios.post('http://localhost:3005/customer/infantil',body,{headers:{'authorization':'Bearer ' + token}});
+            await axios.post('https://elseptimoartebackend.herokuapp.com/customer/infantil',body,{headers:{'authorization':'Bearer ' + token}});
             notification.success({message:'Cambio realizado.',description: "Cambios realizados correctamente."});
         }catch (err){      
         //   notification.warning({message:'Atencion.',description: JSON.stringify(err.response.data.message)});                  
@@ -47,7 +47,7 @@ const Configuracion = (props) => {
         }
 
         try{
-            let res = await axios.post('http://localhost:3005/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
+            let res = await axios.post('https://elseptimoartebackend.herokuapp.com/order',bodyOrder,{headers:{'authorization':'Bearer ' + token}});
             console.log(res.data);
             notification.success({message:'Compra realizada.',description: "A partir de ahora puedes acceder a todas las ventajas de ser Premium."})
         }catch (err){      
@@ -63,7 +63,7 @@ const Configuracion = (props) => {
           premium: true
         }
         try{
-           let res2 = await axios.post('http://localhost:3005/customer/premium',body,{headers:{'authorization':'Bearer ' + token}});
+           let res2 = await axios.post('https://elseptimoartebackend.herokuapp.com/customer/premium',body,{headers:{'authorization':'Bearer ' + token}});
           console.log("REsultado cambio premium:", res2.data);
            
           let data = {
