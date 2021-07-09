@@ -48,7 +48,6 @@ const ForYouPlay = (props) => {
       }
       setMovieData(resultado); 
     }catch (err){      
-      notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
     }
   
   }
