@@ -2,8 +2,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import {useHistory} from "react-router";
-// import infantil from '../../images/infantilProfile.jpg';
-// import adulto from '../../images/adultProfile.jpg';
+import Infantil from '../../images/infantilProfile.jpg';
+import Adulto from '../../images/adultProfile.jpg';
 
 const SelectProfile = (props) => {
   let history = useHistory();
@@ -24,11 +24,11 @@ const SelectProfile = (props) => {
           <div className="fotoBox">
 
           <div className="fotoDiv">
-            <img className="fotoSelect" src="" alt="Perfil adulto" onClick={()=>changeProfile("adulto")}/>
+            <img className="fotoSelect" src={Adulto} alt="Perfil adulto" onClick={()=>changeProfile("adulto")}/>
             <h2>Perfil adulto</h2>
           </div>
           <div className="fotoDiv">
-            <img className="fotoSelect" src="" alt="Perfil infantil" onClick={()=>changeProfile("infantil")}/>
+            <img className="fotoSelect" src={Infantil} alt="Perfil infantil" onClick={()=>changeProfile("infantil")}/>
             <h2>Perfil infantil</h2>
           </div>
           </div>

@@ -1,7 +1,5 @@
 
-//Nos muestra las clases activas a las que está apuntado el usuario.
 import React, { useEffect, useState } from "react";
-// import './DataMyMovies.css';
 import axios from "axios";
 import { connect } from 'react-redux';
 import {notification} from 'antd';
@@ -12,13 +10,10 @@ import { act } from "react-dom/cjs/react-dom-test-utils.development";
 
 const DataMyMovies = (props) => {
     let history = useHistory();
+
     //hooks
     const [orders, setOrders] = useState([]);  
-  
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
-    useEffect(() => {
-      findOrders();
-    }, []);
+
   
     const playMovie = async (movieId) => {
       try {
@@ -63,9 +58,6 @@ const DataMyMovies = (props) => {
         }
       }
 
-    //  props.dispatch({type:GETORDER,payload: res.data});
-
-    
         setOrders(res.data);; 
     }catch (err){     
         console.log(err) ;

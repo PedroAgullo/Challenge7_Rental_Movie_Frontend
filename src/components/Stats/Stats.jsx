@@ -11,7 +11,6 @@ const Stats = (props) => {
     //hooks
     const [estadisticas, setEstadisticas] = useState([]);  
   
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
       cantidad();
     }, []);

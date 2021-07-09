@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
-// import Premiumfoto from '../../images/Premium.jpg';
+import Premiumfoto from '../../images/Premium.jpg';
 import {notification} from 'antd';
 import axios from "axios";
 import {LOGIN} from '../../redux/types'
@@ -90,7 +90,7 @@ const Configuracion = (props) => {
                 </div>
 
                 <div className="boxCardDataRoom">
-                    <img src="" id="fotopremium"alt="Premium" className="fotoWellcome" onClick=""/> 
+                    <img src={Premiumfoto} id="fotopremium"alt="Premium" className="fotoWellcome" onClick=""/> 
                     <div className="botonDatosConfig" onClick={()=>compraPremium(25)}>Comprar</div>               
                 </div>                
             </div>  

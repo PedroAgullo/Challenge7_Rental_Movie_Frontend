@@ -168,9 +168,7 @@ const Movie = (props) => {
         } catch (err) {            
             
         }
-        // if (error === 0){
-        //     notification.warning({message:'Atención',description: "Tienes que comprar/alquilar o ser premium para ver la película."});
-        // }
+
 
 
     }

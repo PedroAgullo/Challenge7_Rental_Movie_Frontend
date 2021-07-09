@@ -1,5 +1,4 @@
 
-// import PhotoProfile from '../../images/Avatar1.jpg';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import React, { useEffect, useState } from "react";

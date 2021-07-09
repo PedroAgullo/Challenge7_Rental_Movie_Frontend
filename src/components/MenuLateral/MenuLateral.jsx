@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import "./MenuLateral.css";
 import { connect } from "react-redux";
 import { CAMBIADATOS} from "../../redux/types";
 import { faStar, faAddressCard, faUsers, faShoppingCart, faFilm, faCog, faChartBar } from "@fortawesome/free-solid-svg-icons";

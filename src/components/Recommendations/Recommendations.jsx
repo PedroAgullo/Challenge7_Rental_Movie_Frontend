@@ -12,7 +12,6 @@ const Recommendations = (props) => {
     //hooks
     const [movieData, setMovieData] = useState([]);  
       
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
       findRecommendations();
     }, []);

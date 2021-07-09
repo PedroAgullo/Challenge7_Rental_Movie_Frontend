@@ -13,7 +13,6 @@ const ForYouPlay = (props) => {
     //hooks
     const [movieData, setMovieData] = useState([]);  
   
-    //Equivalente a componentDidMount en componentes de clase (este se ejecuta solo una vez)
     useEffect(() => {
       findRecommendations();
     }, []);
@@ -50,7 +49,6 @@ const ForYouPlay = (props) => {
       setMovieData(resultado); 
     }catch (err){      
       notification.warning({message:'Atencion.',description: JSON.stringify(err.response)});          
-      // .response.data.message
     }
   
   }
